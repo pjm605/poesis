@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Discover your stops</title>
+    <!-- Normalize -->
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <!-- Owl -->
+  <link rel="stylesheet" type="text/css" href="css/owl.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.1.0/css/font-awesome.min.css">
+  <!-- Elegant Icons -->
+  <link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
+  <!-- Main style -->
+  <link rel="stylesheet" type="text/css" href="css/cardio.css">
+
+   <script src="style/jquery-1.11.1.min.js"></script>
+  <script src="style/owl.carousel.min.js"></script>
+   <script src="style/bootstrap.min.js"></script>
+  <script src="style/wow.min.js"></script>
+  <script src="style/typewriter.js"></script>
+  <script src="style/jquery.onepagenav.js"></script>
+   <script src="style/main.js"></script> 
+
+    <script src="/angular/angular.js" defer></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js" defer></script>
+    <script src="/angular-messages/angular-messages.js" defer></script>
+    <script src="/js/module.js" defer></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1jBScre_5MyK4hAbp-2njCS044ozFEA8&libraries=places"></script>
+    <script src="/vsGoogleAutocomplete/dist/vs-google-autocomplete.js" defer></script>
+    <script src="/js/main/main.factory.js" defer></script>
+    <script src="/js/main/main.controllers.js" defer></script>
+    <script src="/js/result/result.controllers.js" defer></script>
+    <script src="/js/result/result.state.js" defer></script>
+    <script src="/js/activity/activity.controllers.js" defer></script>
+    <script src="/js/activity/activity.state.js" defer></script>
+
+
+     
+
+  </head>
+
+  <body ng-app="myApp"  ng-controller="MainCtrl">
+
+  <div class="preloader">
+  </div>
+
+    <header id="intro">
+    <div class="container">
+      <div class="table">
+        <div class="header-text">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h3 class="light white">Going on Vacation?</h3>
+              <h1 class="white typed">Discover Your Stops.</h1>
+              <span class="typed-cursor">|</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Header -->
+
+
+<section id="services" class="section section-padded">
+    <div class="container">
+      <div class="row text-center title">
+        <h2>Find Your Stops </h2>
+      </div> 
+              <!-- vs-google-autocomplete="{ types:['(cities)'] }" -->
+                    <div class="form-group">
+                      <label for="city">From</label>
+                      <input vs-google-autocomplete="{ types:['(cities)'] }"
+                             ng-model="fromCity" 
+                             type="text" 
+                             name="fromCity"
+                             id="fromCity"
+                             class="form-control" 
+                             placeholder="Enter city name">
+                      <!-- <span class="help-block"><b>Model: </b>{{fromCity}}</span> -->
+                    </div>
+
+                    <div class="form-group">
+                      <label for="city">To</label>
+                      <input vs-google-autocomplete="{ types:['(cities)'] }"
+                             ng-model="toCity" 
+                             type="text" 
+                             name="toCity"
+                             id="toCity"
+                             class="form-control" 
+                             placeholder="Enter city name">
+                      <!-- <span class="help-block"><b>Model: </b>{{toCity}}</span> -->
+                    </div>
+
+                    <button class="btn btn-blue ripple trial-button" ng-click="search(fromCity, toCity)">Search</button> 
+           
+    </div>
+     <!-- /.container -->
+
+</section>
+
+<section id="team" class="section gray-bg">
+  <div class="container">
+       <ui-view></ui-view> 
+     </div>
+</section>
+
+
+
+
+  </body>
+</html>

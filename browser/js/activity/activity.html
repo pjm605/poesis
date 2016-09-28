@@ -1,0 +1,61 @@
+
+<section id="team" class="section gray-bg">
+<a class="btn btn-blue" href="#" ng-click="goBack()">Back</a>
+    <div class="container">
+
+      <div class="row title text-center">
+        <h2 class="margin-top">{{ location }}</h2>
+        <h4 class="light muted">Things to Do! </h4>
+      </div>
+      
+
+      <p ng-show="isAvaiable">Nothing here!</p>
+
+      <div class="row">
+        <div class="col-md-4" ng-repeat="activity in activities | limitTo : 3">
+          <div class="team text-center">
+            <div class="cover" style="background:url({{activity.imageUrl}}); background-size:cover;">
+              <div class="overlay text-center">
+                <h3 class="white">  {{ activity.fromPrice }} </h3>
+                <h5 class="light light-white"> {{ activity.fromPriceLabel }} </h5>
+              </div>
+            </div>
+            <div class="title">
+              <h4> {{ activity.title }}  </h4>
+             
+            </div>
+            <a href="{{ activity.linkTo}}" data-toggle="modal"   class="btn btn-blue-fill">Explore</a>
+          </div>
+        </div>
+
+      </div>
+     <!--  row end -->
+     <div class="row">
+        <div class="col-md-4" ng-repeat="activity in activities | limitTo : 3 : 4">
+          <div class="team text-center">
+            <div class="cover" style="background:url({{activity.imageUrl}}); background-size:cover;">
+              <div class="overlay text-center">
+                <h3 class="white">  {{ activity.fromPrice }} </h3>
+                <h5 class="light light-white"> {{ activity.fromPriceLabel }} </h5>
+              </div>
+            </div>
+            <div class="title">
+              <h4> {{ activity.title }}  </h4>
+             
+            </div>
+            <a href="{{ activity.linkTo}}" data-toggle="modal"  class="btn btn-blue-fill">Explore</a>
+          </div>
+        </div>
+
+      </div>
+     <!--  row end -->
+
+
+    </div>
+    <!-- container end -->
+</section>
+
+
+
+
+

@@ -1,0 +1,23 @@
+{
+  "name": "travel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --watch server -e js,html app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-messages": "^1.5.8",
+    "angular-ui-router": "0.2.18",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jquery": "^3.1.0",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.10.2",
+    "unirest": "^0.5.1"
+  }
+}
