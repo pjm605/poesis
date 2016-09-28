@@ -1,4 +1,8 @@
 app.controller('MainCtrl', function($scope) {
-  // input is a variable on scope from the input box
-  console.log(input);
+  //console.log(input);
+  $scope.parent;
+  $scope.onSpace = function ($event) {
+    console.log("on space event triggered");
+    console.log(input);
+  }
 });
