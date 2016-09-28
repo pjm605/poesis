@@ -1,19 +1,11 @@
+var router = require('express').Router();
 var fs = require("fs");
-
 var dictionary = require('./cmudict.txt');
 
 function readTxtFile(file){
   return fs.readFileSync(file).toString();
 }
-
 var dictionaryFile = readTxtFile(dictionary);
-
-function findACount(str) {
-  if (/\d/gi.test(str)){
-    return str.match(/\d/gi).length;
-  }
-  return false;
-}
 
 function formatDictionary(dictionaryFile) {
 	var words = {};
@@ -29,12 +21,10 @@ function formatDictionary(dictionaryFile) {
 
 var words = formatDictionary(dictionaryFile);
 
-function phoneme(word) {
-	var phonemes = words[word.toLowerCase()];
-	if (/\d/gi.test(word)){
-		return phonemes[1].match(/(\d)/gi).length;
-	}
-	return null;
-}
+router.get('/', function(req, res, next) {
+	res.send(words);
+});
 
+
+module.exports = router;
 
