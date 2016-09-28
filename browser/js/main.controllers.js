@@ -1,3 +1,3 @@
 app.controller('MainCtrl', function($scope) {
-  // function that processes each word as it comes in
+  // input is a variable on scope from the input box
 });
