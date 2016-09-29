@@ -90,27 +90,27 @@ gulp.task('buildJS', ['lintJS'], function () {
 //     }, done);
 // });
 
-// gulp.task('buildCSS', function () {
+gulp.task('buildCSS', function () {
 
-//     var sassCompilation = sass();
-//     sassCompilation.on('error', console.error.bind(console));
+    var sassCompilation = sass();
+    sassCompilation.on('error', console.error.bind(console));
 
-//     return gulp.src('./public/sass/style.scss')
-//         .pipe(plumber({
-//             errorHandler: notify.onError('SASS processing failed! Check your gulp process.')
-//         }))
-//         .pipe(sourcemaps.init())
-//         .pipe(sassCompilation)
-//         .pipe(sourcemaps.write())
-//         .pipe(rename('style.css'))
-//         .pipe(gulp.dest('./public'));
-// });
+    return gulp.src('./browser/sass/style.scss')
+        .pipe(plumber({
+            errorHandler: notify.onError('SASS processing failed! Check your gulp process.')
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sassCompilation)
+        .pipe(sourcemaps.write())
+        .pipe(rename('style.css'))
+        .pipe(gulp.dest('./public'));
+});
 
 // Production tasks
 // --------------------------------------------------------------
 
 gulp.task('buildCSSProduction', function () {
-    return gulp.src('./browser/scss/main.scss')
+    return gulp.src('./browser/sass/style.scss')
         .pipe(sass())
         .pipe(rename('style.css'))
         .pipe(minifyCSS())
@@ -120,9 +120,9 @@ gulp.task('buildCSSProduction', function () {
 gulp.task('buildJSProduction', function () {
     return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
         .pipe(concat('main.js'))
-        // .pipe(babel({
-        //     presets: ['es2015']
-        // }))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest('./public'));
@@ -151,9 +151,9 @@ gulp.task('default', function () {
     });
 
     // Run when anything inside of browser/scss changes.
-    // gulp.watch('browser/scss/**', function () {
-    //     runSeq('buildCSS', 'reloadCSS');
-    // });
+    gulp.watch('browser/sass/**', function () {
+        runSeq('buildCSS', 'reloadCSS');
+    });
 
     gulp.watch('server/**/*.js', ['lintJS']);
 

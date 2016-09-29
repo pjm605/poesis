@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var fs = require("fs");
+var fs = require('fs');
 var dictionary = __dirname + '/cmudict.txt';
 
 function readTxtFile(file){
