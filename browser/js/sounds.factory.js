@@ -17,8 +17,7 @@ app.factory('soundsFactory', function () {
           takes in an object containing the counts of all the sounds throughout
           the poem, and returns an array of significant sounds
         */
-        //TODO
-        return
+        return ['d'];
       }
     };
 });
