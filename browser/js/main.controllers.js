@@ -1,5 +1,4 @@
 app.controller('MainCtrl', function($scope) {
-  //console.log(input);
   $scope.poem = {line: 0, word: ""};
   
   $scope.onSpace = function ($event) {
