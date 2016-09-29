@@ -8,9 +8,8 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   console.log(textar);
   var cm = CodeMirror.fromTextArea(textar, {
     mode: "lettermode",
-  //  theme: "dracula"
+    theme: "fontcolor"
   });
-
 
 
   $scope.onSpace = function ($event) {
