@@ -7,11 +7,12 @@ app.controller('MainCtrl', function($scope, $log, parse, countSounds) {
     var words = $scope.poem.input.split(' ');
     $scope.poem.word = words[words.length-1];
     console.log($scope.poem.word);
+    console.log(parse($scope.poem.word));
+
     $scope.lineEnd = false;
   }
   $scope.onEnter = function ($event) {
     console.log("onEnter event triggered");
-
     $scope.lineEnd = true;
     // do anything line-dependent here?
     $scope.onSpace();
