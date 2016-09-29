@@ -20,6 +20,7 @@
     <script src="/angular/angular.js" defer></script>
     <script src="/angular-ui-router/release/angular-ui-router.js" defer></script>
     <script src="/angular-messages/angular-messages.js" defer></script>
+    <script src="/js/module.js" defer></script>
     <script src="/js/main.controllers.js" defer></script>
 
   </head>
@@ -58,7 +59,7 @@
             <div class="fh5co-grid animate-box  text-center" >
                 <div class="work-title">
                   <h3>Input</h3>
-                  <textarea class="form-control" ng-model="$parent.input" ng-keypress="($event.which === 13 ? onSpace() : 0);"></textarea>  
+                  <textarea class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
                 </div>
               </a>
             </div>
@@ -67,7 +68,7 @@
             <div class="fh5co-grid animate-box text-center" >
                 <div class="work-title">
                   <h3>Output</h3>
-                 <textarea class="form-control" ng-model="$parent.input" ng-keypress="($event.which === 13 ? onSpace() : 0);"></textarea>
+                 <!-- <textarea ng-keypress="($event.which === 666 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea> -->
                 </div>
               </a>
             </div>
@@ -79,12 +80,12 @@
     <section>
       <div class="container">
         <div class="col-md-12 col-md-offset-2 animate-box" >
-          <h3>Suggestion</h3> 
+          <h3>Suggestion</h3>
           <button type="button" class="btn btn-primary" ">Rhyme</button>
           <button type="button" class="btn btn-primary" ">Meter</button>
             <div class="suggestion-result">
-                    THis is the result
-          
+                    This is the result
+
             </div>
           </div>
          </div>
