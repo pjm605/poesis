@@ -1,7 +1,6 @@
 app.factory('SoundcountFactory', function ($http) {
-  return {
-    getSoundcount: function (word) {
-      var newWord = word.replace(/[^A-Za-z ]+/g, '')
+    getSoundcount: function(word) {
+      var newWord = word.replace(/[^A-Za-z ]+/g, '');
       newWord = newWord.split(" ");
       var soundDic = {};
       for (var i = 0; i < newWord.length; i++) {
@@ -11,5 +10,4 @@ app.factory('SoundcountFactory', function ($http) {
       return soundDic
     }
   };
-
 });

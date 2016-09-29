@@ -39,5 +39,8 @@
     "nodemon": "^1.10.2",
     "run-sequence": "^1.2.2",
     "unirest": "^0.5.1"
+  },
+  "devDependencies": {
+    "bluebird": "^3.4.6"
   }
 }
