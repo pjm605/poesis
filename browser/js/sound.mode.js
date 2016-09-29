@@ -1,13 +1,14 @@
 CodeMirror.defineMode("lettermode", function () {
   return {
-    startState: function () {return {letter: 'd'};},
+    startState: function () {return {test: true};},
     token: function (stream, state) {
-      if (stream.peek() == letter) {
-        return 'd';
+      if (stream.next() == 'd') {
+        return 'error';
       }
       else {
         return null;
       }
+      //return 'keyword';
     }
   }
 });

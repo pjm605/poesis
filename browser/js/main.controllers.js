@@ -2,9 +2,14 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   $scope.poem = {line: 0, word: ""};
   $scope.lineEnd = false;
 
-  var textar = angular.element($document[0].querySelector('#poemarea'));
+  console.log(CodeMirror);
+  //var textar = angular.element($document[0].querySelector('#poemarea'));
+  var textar = document.getElementById('poemarea');
   console.log(textar);
-  var cm = CodeMirror.fromTextArea(textar);
+  var cm = CodeMirror.fromTextArea(textar, {
+    mode: "lettermode",
+  //  theme: "dracula"
+  });
 
 
 
