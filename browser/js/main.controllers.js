@@ -11,6 +11,7 @@ app.controller('MainCtrl', function($scope) {
   }
   $scope.onEnter = function ($event) {
     console.log("onEnter event triggered");
+
     $scope.lineEnd = true;
     // do anything line-dependent here?
     $scope.onSpace();
