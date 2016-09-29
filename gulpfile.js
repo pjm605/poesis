@@ -1,6 +1,6 @@
 // All used modules.
 var gulp = require('gulp');
-// var babel = require('gulp-babel');
+var babel = require('gulp-babel');
 var runSeq = require('run-sequence');
 var plumber = require('gulp-plumber');
 var concat = require('gulp-concat');
@@ -42,15 +42,15 @@ gulp.task('lintJS', function () {
 });
 
 gulp.task('buildJS', ['lintJS'], function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+    return gulp.src(['./browser/js/module.js', './browser/js/**/*.js'])
         .pipe(plumber())
         .pipe(sourcemaps.init())
-        .pipe(concat('main.js'))
-        // .pipe(babel({
-        //     presets: ['es2015']
-        // }))
+        .pipe(concat('bundle.js'))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./public/js'));
 });
 
 // gulp.task('testServerJS', function () {
@@ -95,7 +95,7 @@ gulp.task('buildJS', ['lintJS'], function () {
 //     var sassCompilation = sass();
 //     sassCompilation.on('error', console.error.bind(console));
 
-//     return gulp.src('./browser/scss/main.scss')
+//     return gulp.src('./public/sass/style.scss')
 //         .pipe(plumber({
 //             errorHandler: notify.onError('SASS processing failed! Check your gulp process.')
 //         }))
@@ -135,9 +135,9 @@ gulp.task('buildProduction', ['buildCSSProduction', 'buildJSProduction']);
 
 gulp.task('build', function () {
     if (process.env.NODE_ENV === 'production') {
-        runSeq(['buildJSProduction', 'buildCSSProduction']);
+        runSeq(['buildJSProduction']);
     } else {
-        runSeq(['buildJS', 'buildCSS']);
+        runSeq(['buildJS']);
     }
 });
 
@@ -151,20 +151,20 @@ gulp.task('default', function () {
     });
 
     // Run when anything inside of browser/scss changes.
-    gulp.watch('browser/scss/**', function () {
-        runSeq('buildCSS', 'reloadCSS');
-    });
+    // gulp.watch('browser/scss/**', function () {
+    //     runSeq('buildCSS', 'reloadCSS');
+    // });
 
     gulp.watch('server/**/*.js', ['lintJS']);
 
     // Reload when a template (.html) file changes.
-    gulp.watch(['browser/**/*.html', 'server/app/views/*.html'], ['reload']);
+    gulp.watch(['browser/**/*.html'], ['reload']);
 
     // Run server tests when a server file or server test file changes.
-    gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
+    // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
 
     // Run browser testing when a browser test file changes.
-    gulp.watch('tests/browser/**/*', ['testBrowserJS']);
+    // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
 
     livereload.listen();
 

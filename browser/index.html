@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="/angular/angular.js" ></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js" ></script>
+    <script src="/angular-messages/angular-messages.js" ></script>
 
     <!-- Animate.css -->
   <link rel="stylesheet" href="css/animate.css">
@@ -16,11 +19,6 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- Modernizr JS -->
   <script src="js/modernizr-2.6.2.min.js"></script>
-
-    <script src="/angular/angular.js" defer></script>
-    <script src="/angular-ui-router/release/angular-ui-router.js" defer></script>
-    <script src="/angular-messages/angular-messages.js" defer></script>
-    <script src="/js/main.controllers.js" defer></script>
 
   </head>
   <body ng-app="myApp"  ng-controller="MainCtrl">
@@ -58,7 +56,7 @@
             <div class="fh5co-grid animate-box  text-center" >
                 <div class="work-title">
                   <h3>Input</h3>
-                  <textarea class="form-control" ng-model="$parent.input" ng-keypress="($event.which === 13 ? onSpace() : 0);"></textarea>  
+                  <textarea class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
                 </div>
               </a>
             </div>
@@ -67,7 +65,7 @@
             <div class="fh5co-grid animate-box text-center" >
                 <div class="work-title">
                   <h3>Output</h3>
-                 <textarea class="form-control" ng-model="$parent.input" ng-keypress="($event.which === 13 ? onSpace() : 0);"></textarea>
+                 <!-- <textarea ng-keypress="($event.which === 666 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea> -->
                 </div>
               </a>
             </div>
@@ -79,20 +77,20 @@
     <section>
       <div class="container">
         <div class="col-md-12 col-md-offset-2 animate-box" >
-          <h3>Suggestion</h3> 
+          <h3>Suggestion</h3>
           <button type="button" class="btn btn-primary" ">Rhyme</button>
           <button type="button" class="btn btn-primary" ">Meter</button>
             <div class="suggestion-result">
-                    THis is the result
-          
+                    This is the result
+
             </div>
           </div>
          </div>
       </div>
     </section>
 
-
-
+<!-- Modernizr JS -->
+  <script src="js/modernizr-2.6.2.min.js"></script>
   <!-- jQuery -->
   <script src="js/jquery.min.js"></script>
   <!-- jQuery Easing -->
@@ -103,5 +101,7 @@
   <script src="js/jquery.waypoints.min.js"></script>
   <!-- Main JS (Do not remove) -->
   <script src="js/main.js"></script>
+  <script src="js/bundle.js"></script>
+  
   </body>
 </html>
