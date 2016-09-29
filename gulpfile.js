@@ -42,7 +42,7 @@ gulp.task('lintJS', function () {
 });
 
 gulp.task('buildJS', ['lintJS'], function () {
-    return gulp.src(['./browser/js/module.js', './browser/js/**/*.js'])
+    return gulp.src(['./browser/js/module.js', './browser/js/**/*.js', './browser/template/jquery.min.js', './browser/template/jquery.easing.1.3.js', './browser/template/bootstrap.min.js' ,'./browser/template/jquery.waypoints.min.js', './browser/template/main.js' ])
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat('bundle.js'))
@@ -118,14 +118,14 @@ gulp.task('buildCSSProduction', function () {
 });
 
 gulp.task('buildJSProduction', function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
-        .pipe(concat('main.js'))
+    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js', './browser/template/jquery.min.js', './browser/template/jquery.easing.1.3.js', './browser/template/bootstrap.min.js' ,'./browser/template/jquery.waypoints.min.js', './browser/template/main.js' ])
+        .pipe(concat('bundle.js'))
         .pipe(babel({
             presets: ['es2015']
         }))
         .pipe(ngAnnotate())
         .pipe(uglify())
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('buildProduction', ['buildCSSProduction', 'buildJSProduction']);
