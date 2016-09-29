@@ -2,7 +2,7 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var morgan = require('morgan')
+// var morgan = require('morgan')
 var port = process.env.PORT || 8080;
 
 var rootPath = path.join(__dirname, '../');
@@ -17,9 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-
-app.use('/api/result', require('./app/routes/result.js'))
-
+app.use('/api', require('./routes'));
 
 /*
      This middleware will catch any URLs resembling a file extension
