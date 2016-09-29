@@ -8,9 +8,9 @@ app.factory('SoundcountFactory', function ($http) {
 
       var soundDic = {};
 
-      for (var i = 0; i < newWord.length; i++) {
-        if(soundDic.hasOwnProperty(newWord[i]) === false) soundDic[newWord[i] = 1]
-        else soundDic[newWord] += 1  
+   for (var i = 0; i < newWord.length; i++) {
+        if(soundDic.hasOwnProperty(newWord[i]) === false) soundDic[newWord[i]] = 1
+        else soundDic[newWord[i]] += 1  
       }
 
       return soundDic
