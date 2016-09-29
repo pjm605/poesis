@@ -3,6 +3,9 @@ app.controller('MainCtrl', function($scope) {
   $scope.parent;
   $scope.onSpace = function ($event) {
     console.log("on space event triggered");
-    console.log(input);
+    //console.log(input);
+  }
+  $scope.onEnter = function ($event) {
+    console.log("onEnter event triggered");
   }
 });
