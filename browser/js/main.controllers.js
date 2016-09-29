@@ -9,6 +9,7 @@ app.controller('MainCtrl', function($scope, $log, DictionaryFactory, PhonemeFact
     console.log($scope.poem.word);
     $scope.lineEnd = false;
   };
+
   $scope.onEnter = function ($event) {
     console.log("onEnter event triggered");
     $scope.lineEnd = true;
@@ -22,3 +23,4 @@ app.controller('MainCtrl', function($scope, $log, DictionaryFactory, PhonemeFact
   }).catch($log.error);
   
 });
+
