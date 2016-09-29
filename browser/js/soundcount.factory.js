@@ -1,6 +1,6 @@
-app.factory('soundcounts', function () {
-    return {
-      countSounds: function (word) {
+app.factory('countSounds', function () {
+
+      return function (word) {
       var newWord = word.replace(/[^A-Za-z ]+/g, '');
       newWord = newWord.split(" ");
       var soundDic = {};
@@ -9,6 +9,5 @@ app.factory('soundcounts', function () {
         else soundDic[newWord[i]] += 1;
       }
       return soundDic;
-    }
   };
 });
