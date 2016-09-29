@@ -1,6 +1,17 @@
-app.controller('MainCtrl', function($scope, $log, parse, soundsFactory) {
+app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactory) {
   $scope.poem = {line: 0, word: ""};
   $scope.lineEnd = false;
+
+  console.log(CodeMirror);
+  //var textar = angular.element($document[0].querySelector('#poemarea'));
+  var textar = document.getElementById('poemarea');
+  console.log(textar);
+  var cm = CodeMirror.fromTextArea(textar, {
+    mode: "lettermode",
+  //  theme: "dracula"
+  });
+
+
 
   $scope.onSpace = function ($event) {
     console.log("on space event triggered");

@@ -9,6 +9,9 @@
     <script src="/angular/angular.js" ></script>
     <script src="/angular-ui-router/release/angular-ui-router.js" ></script>
     <script src="/angular-messages/angular-messages.js" ></script>
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <script src="/codemirror/mode/commonlisp/commonlisp.js"></script>
     <script src="/js/bundle.js"></script>
 
     <!-- Animate.css -->
@@ -57,7 +60,7 @@
             <div class="fh5co-grid animate-box  text-center" >
                 <div class="work-title">
                   <h3>Input</h3>
-                  <textarea class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
+                  <textarea id="poemarea" class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
                 </div>
               </a>
             </div>
