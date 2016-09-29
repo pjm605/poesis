@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-app.use('/api', require('./routes'));
+app.use('/api', require('./app/routes'));
 
 /*
      This middleware will catch any URLs resembling a file extension
