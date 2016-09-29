@@ -1,13 +1,19 @@
-app.controller('MainCtrl', function($scope, $log, parse, countSounds) {
+app.controller('MainCtrl', function($scope, $log, parse, soundsFactory) {
   $scope.poem = {line: 0, word: ""};
   $scope.lineEnd = false;
 
   $scope.onSpace = function ($event) {
     console.log("on space event triggered");
+
     var words = $scope.poem.input.split(' ');
     $scope.poem.word = words[words.length-1];
-    console.log($scope.poem.word);
-    console.log(parse($scope.poem.word));
+    var wordSounds = parse($scope.poem.word).then(function (p) {
+      return p;
+    })
+
+    wordSounds.then(function (sounds) {
+      console.log(soundsFactory.countSounds(sounds));
+    })
 
     $scope.lineEnd = false;
   }
