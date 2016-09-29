@@ -1,6 +1,12 @@
-app.controller('MainCtrl', function($scope, $log, parse, soundsFactory) {
+app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactory) {
   $scope.poem = {line: 0, word: ""};
   $scope.lineEnd = false;
+
+  var textar = angular.element($document[0].querySelector('#poemarea'));
+  console.log(textar);
+  var cm = CodeMirror.fromTextArea(textar);
+
+
 
   $scope.onSpace = function ($event) {
     console.log("on space event triggered");
