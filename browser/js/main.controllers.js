@@ -18,6 +18,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
     var words = $scope.poem.input.split(' ');
     $scope.poem.word = words[words.length-1];
     var wordSounds = parse($scope.poem.word).then(function (p) {
+      console.log($scope.poem.word )
       return p;
     })
 
