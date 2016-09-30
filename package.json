@@ -12,6 +12,7 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-messages": "^1.5.8",
+    "angular-ui-codemirror": "^0.3.0",
     "angular-ui-router": "0.2.18",
     "babel": "^6.5.2",
     "babel-preset-es2015": "^6.16.0",
