@@ -6,15 +6,15 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   //var textar = angular.element($document[0].querySelector('#poemarea'));
   var textar = document.getElementById('poemarea');
   //console.log(textar);
+  $scope.colorrules = [['a', 'e'], ['d', 't']];
+
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
       name: "lettermode",
-      colorletters: $scope.colorrules
+      colorrules: $scope.colorrules
     },
     theme: "fontcolor"
   });
-
-  $scope.colorrules = [[['a'], ['b, c, d, e']], [['a'], ['b, c, d, e']]];
 
   $scope.onSpace = function ($event) {
     console.log("on space event triggered");

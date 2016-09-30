@@ -1,17 +1,18 @@
 CodeMirror.defineMode("lettermode", function (parserConfig) {
   //local variables from parserConfig values go here!
-  var colorletters = parserConfig.mode.colorletters || [];
-  console.log(colorletters)
+  var colorrules = parserConfig.mode.colorrules || [];
+  console.log(colorrules)
+  var colors = ['red', 'blue', 'green', 'yellow'];
   return {
     startState: function () {return {test: true};},
     token: function (stream, state) {
-      if (colorletters.indexOf(stream.next()) > -1) {
-        return 'colored';
+      var n = stream.next();
+      for (var i = 0; i < colorrules.length; i++) {
+        if (colorrules[i].indexOf(n) > -1) {
+          return colors[i];
+        }
       }
-      else {
-        return null;
-      }
-      //return 'keyword';
+      return null;
     }
   }
 });
