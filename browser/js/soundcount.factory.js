@@ -1,5 +1,5 @@
 app.factory('countSounds', function () {
-
+  // input will be ['AH', 'B', 'SS', 'OH']
       return function (word) {
       var newWord = word.replace(/[^A-Za-z ]+/g, '');
       newWord = newWord.split(" ");
