@@ -1,8 +1,6 @@
 app.factory('soundToLetter', function() {
-
-  
   return function (sound) {
-
+    sound = sound.toLowerCase();
   	var result = [];
   	var rule = {
 	"iy" : "ea",
@@ -27,13 +25,9 @@ app.factory('soundToLetter', function() {
 	"el" : "le",
 	"em" : "om",
 	"en" : "n"
- 	}
- 
- 	
-	 if(rule.hasOwnProperty(sound))  result.push(rule[sound])
-	 else result.push(sound) 
-	 return result
-  }
-
-
+};
+	 if(rule.hasOwnProperty(sound)) result.push(rule[sound]);
+	 else result.push(sound);
+	 return result;
+ };
 });
