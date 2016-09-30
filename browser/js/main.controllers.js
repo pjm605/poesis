@@ -5,12 +5,16 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   console.log(CodeMirror);
   //var textar = angular.element($document[0].querySelector('#poemarea'));
   var textar = document.getElementById('poemarea');
-  console.log(textar);
+  //console.log(textar);
+  $scope.colorrules = [['a', 'e'], ['d', 't']];
+
   var cm = CodeMirror.fromTextArea(textar, {
-    mode: "lettermode",
+    mode: {
+      name: "lettermode",
+      colorrules: $scope.colorrules
+    },
     theme: "fontcolor"
   });
-
 
   $scope.onSpace = function ($event) {
     console.log("on space event triggered");
