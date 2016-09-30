@@ -10,4 +10,5 @@ app.factory('countSounds', function () {
       }
       return soundDic;
   };
+  // will return an array of sounds
 });

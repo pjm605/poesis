@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactory) {
+app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactory, soundToLetter) {
   $scope.poem = {line: 0, word: ""};
   $scope.lineEnd = false;
 
@@ -6,7 +6,8 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   //var textar = angular.element($document[0].querySelector('#poemarea'));
   var textar = document.getElementById('poemarea');
   //console.log(textar);
-  $scope.colorrules = [['a', 'e'], ['d', 't']];
+  $scope.colorrules = soundToLetter('AH');
+  console.log($scope.colorrules);
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
