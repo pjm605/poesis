@@ -5,9 +5,12 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   console.log(CodeMirror);
   //var textar = angular.element($document[0].querySelector('#poemarea'));
   var textar = document.getElementById('poemarea');
-  console.log(textar);
+  //console.log(textar);
   var cm = CodeMirror.fromTextArea(textar, {
-    mode: "lettermode",
+    mode: {
+      name: "lettermode",
+      colorletters: ['d', 't']
+    },
     theme: "fontcolor"
   });
 
