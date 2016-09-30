@@ -11,9 +11,6 @@
 .cm-s-night span.cm-link { color: #845dc4; }
 .cm-s-night span.cm-error { color: #9d1e15; }*/
 
-.cm-s-fontcolor span.cm-error {
+.cm-s-fontcolor span.cm-colored {
   color: green;
-}
-.cm-s-fontcolor span.cm-global {
-  color: orange;
 }

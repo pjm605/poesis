@@ -9,11 +9,12 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
       name: "lettermode",
-      colorletters: ['d', 't']
+      colorletters: $scope.colorrules
     },
     theme: "fontcolor"
   });
 
+  $scope.colorrules = [[['a'], ['b, c, d, e']], [['a'], ['b, c, d, e']]];
 
   $scope.onSpace = function ($event) {
     console.log("on space event triggered");
