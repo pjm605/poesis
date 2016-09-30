@@ -12,6 +12,7 @@ var indexHtmlPath = path.join(rootPath, './browser/index.html')
 app.use(express.static(rootPath + '/public'));
 app.use(express.static(rootPath + '/node_modules'));
 app.use(express.static(rootPath + '/browser'));
+app.use(express.static(rootPath + '/bower_components'));
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({extended: false}));
