@@ -12,3 +12,15 @@ app.run(function ($rootScope, $window) {
   };
 
 });
+
+// app.constant('_', window._);
+
+// app.run(function ($rootScope) {
+//     $rootScope._ = window._;
+// });
+
+// app.factory('_', function($window) {
+//     // place lodash include before angular
+//     return $window._;
+//   }
+// );

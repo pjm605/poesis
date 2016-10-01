@@ -1,14 +1,36 @@
-app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactory) {
+app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactory, $interval) {
   $scope.poem = {line: 0, word: ""};
   $scope.lineEnd = false;
+  $scope.textArea = null;
 
-  console.log(CodeMirror);
+  // console.log(CodeMirror);
   //var textar = angular.element($document[0].querySelector('#poemarea'));
   var textar = document.getElementById('poemarea');
-  console.log(textar);
+  // console.log(textar);
   var cm = CodeMirror.fromTextArea(textar, {
     mode: "lettermode",
     theme: "fontcolor"
+  });
+
+  // function showCode() {
+  //   $scope.textArea = cm.getValue();
+  //   // document.getElementById('poemarea').val($scope.textArea);
+  //   var poemarea = angular.element(document.querySelector('#poemarea'));
+  //   poemarea.text($scope.textArea);
+  // }
+  // $interval(showCode, 3000);
+
+
+  $scope.text = "";
+  cm.on('change', function(cm, obj) {
+    $scope.text += obj.text;
+    // console.log('CodeMirror text', obj.text);
+    // console.log('scope.text', $scope.text);
+    var text = obj.text;
+    var debounced = _.debounce(function(text) {
+      console.log('obj.text', debounced);
+    }, 5000);
+    
   });
 
 
@@ -34,4 +56,5 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
     // do anything line-dependent here?
     $scope.onSpace();
   }
+ 
 });
