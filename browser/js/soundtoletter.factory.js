@@ -1,10 +1,10 @@
 app.factory('soundToLetter', function() {
   return function (soundarr) {
-  	var result = [];
-  	var rule = {
+    var result = [];
+    var rule = {
       iy: 'ea',
 	    ih: 'i',
-    	eh: 'e',
+      eh: 'e',
 	    ae: 'a',
       aa: 'o',
       ax: 'e',
@@ -27,8 +27,8 @@ app.factory('soundToLetter', function() {
     };
     for (var i = 0; i < soundarr.length; i++) {
       var sound = soundarr[i].toLowerCase();
-      if(rule.hasOwnProperty(sound)) result.push(rule[sound]);
-   	  else result.push(sound);
+      if (rule.hasOwnProperty(sound)) result.push(rule[sound]);
+      else result.push(sound);
     }
 	  return result;
  };

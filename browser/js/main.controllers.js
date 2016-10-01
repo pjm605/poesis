@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory, soundToLetter) {
+app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -13,7 +13,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
     theme: 'fontcolor'
   });
 
-  $scope.text = "";
+  $scope.text = '';
   var debounced = _.debounce(function(codeMirror, obj) {
     $scope.text = cm.getValue();
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
