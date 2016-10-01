@@ -4,13 +4,11 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
 
   var textar = document.getElementById('poemarea');
   //console.log(textar);
-  $scope.colorrules = soundToLetter(['AH', 'D']);
-  console.log($scope.colorrules);
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
       name: 'lettermode',
-      colorrules: $scope.colorrules
+      colorrules: ['i']
     },
     theme: 'fontcolor'
   });
@@ -28,8 +26,15 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
       parsedWords.push(parse(words[w]));
     }
     Promise.all(parsedWords).then(function (parseArray) {
-      console.log(soundFactory.identifySignificant(parseArray));
+      var sig = soundFactory.identifySignificant(parseArray);
     });
+
+/*cm.setOption(option: string, value: any)
+Change the configuration of the editor. option should the name of an option, and value should be a valid value for that option.
+cm.getOption(option: string) → any
+Retrieves the current value of the given option for this editor instance.*/
+
+
 
     //could pass in the updated $scope.text to a function here after the user stops typing.
   }, 2000);
