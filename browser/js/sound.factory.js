@@ -1,27 +1,33 @@
-app.factory('soundsFactory', function () {
+app.factory('soundFactory', function () {
+
+  var countWordSounds = function (word, soundDic) {
+    var newWord = word.replace(/[^A-Za-z ]+/g, '');
+    newWord = newWord.split(' ');
+    for (var i = 0; i < newWord.length; i++) {
+      if (soundDic.hasOwnProperty(newWord[i]) === false) soundDic[newWord[i]] = 1;
+      else soundDic[newWord[i]] += 1;
+    }
+  };
 
   //helper function we do not want to expose
   var countTextSounds = function (text) {
-    var soundDic = {};
-    var countWordSounds = function (word) {
-      var newWord = word.replace(/[^A-Za-z ]+/g, '');
-      newWord = newWord.split(' ');
-      for (var i = 0; i < newWord.length; i++) {
-        if(soundDic.hasOwnProperty(newWord[i]) === false) soundDic[newWord[i]] = 1;
-        else soundDic[newWord[i]] += 1;
-      }
-    };
+    var sd = {};
+    console.log('text', text, text.length);
     for (var i = 0; i < text.length; i++) {
-      countWordSounds(words[i]);
+      countWordSounds(text[i], sd);
     }
-    return soundDic
+    return sd
   };
+
+  // var normalize = function (counts) {
+  //
+  // }
 
   return {
     //the text which is input should be an array of arrays of
     //phonetically parsed words
     identifySignificant: function (text) {
-      return countTextSounds(text);
+      var counts = countTextSounds(text);
       //temporarily commented out for the purpose of testing
       /*
       var sounds = countTextSounds(text);
