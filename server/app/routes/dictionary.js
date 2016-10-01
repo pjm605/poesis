@@ -10,10 +10,10 @@ console.log(!!dictionaryFile)
 
 function formatDictionary(dictionaryFile) {
 	var words = {};
-	var lines = dictionaryFile.toString().split("\n");
+	var lines = dictionaryFile.toString().split('\n');
 	var lineSplit;
 	lines.forEach(function (line) {
-		lineSplit = line.split("  ");
+		lineSplit = line.split('  ');
 		lineSplit[0] = lineSplit[0].toLowerCase();
 		words[lineSplit[0]] = lineSplit[1];
 	});
