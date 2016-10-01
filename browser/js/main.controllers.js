@@ -1,5 +1,4 @@
-app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactory) {
-  //$scope, $document, $log, parse, soundsFactory, soundToLetter
+app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactory, soundToLetter) {
   $scope.poem = {line: 0, word: ""};
   $scope.lineEnd = false;
 
@@ -8,7 +7,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   var textar = document.getElementById('poemarea');
   //console.log(textar);
   $scope.colorrules = soundToLetter('AH');
-  // console.log($scope.colorrules);
+  console.log($scope.colorrules);
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {

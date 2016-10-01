@@ -1,14 +1,18 @@
-CodeMirror.defineMode("lettermode", function () {
+CodeMirror.defineMode("lettermode", function (parserConfig) {
+  //local variables from parserConfig values go here!
+  var colorrules = parserConfig.mode.colorrules || [];
+  console.log(colorrules)
+  var colors = ['red', 'blue', 'green', 'yellow'];
   return {
     startState: function () {return {test: true};},
     token: function (stream, state) {
-      if (stream.next() == 'd') {
-        return 'error';
+      var n = stream.next();
+      for (var i = 0; i < colorrules.length; i++) {
+        if (colorrules[i].indexOf(n) > -1) {
+          return colors[i];
+        }
       }
-      else {
-        return null;
-      }
-      //return 'keyword';
+      return null;
     }
   }
 });
@@ -33,17 +37,17 @@ CodeMirror.defineMode("lettermode", function () {
         {
           stream.next();
           state.between = false;
+=======
+      var n = stream.next();
+      for (var i = 0; i < colorrules.length; i++) {
+        if (colorrules[i].indexOf(n) > -1) {
+          return colors[i];
+>>>>>>> c4c0070d7c3951549670b27dcc972c0a1815d244
         }
-        else {
-          stream.skipToEnd();
-        }
-        return "error"; 
       }
-      else {
-        return null;
-      }
-      //return 'keyword';
+      return null;
     }
   }
 });
+
 */
