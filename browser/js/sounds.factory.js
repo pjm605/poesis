@@ -17,7 +17,17 @@ app.factory('soundsFactory', function () {
           takes in an object containing the counts of all the sounds throughout
           the poem, and returns an array of significant sounds
         */
-        return ['d'];
+        // input: { AH: 3, JH: 1, UW: 1, D: 1, K: 1, EY: 1, SH: 1, N: 1 }
+        // output: ["AH"]
+        var significantN = 0
+        var significant = ""
+        for (var key in sounds) {
+          if(sounds[key] > significantN) {
+            significantN = sounds[key] 
+            significant = key
+          }
+        }
+        return [significant];
       }
     };
 });
