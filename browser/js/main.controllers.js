@@ -13,12 +13,12 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
     theme: 'fontcolor'
   });
 
-  //every time the user types a letter, it adds to $scope.text.
-  // console.log $scope.text when the user stops typing for more than 2 seconds.
-  $scope.text = '';
-
-  var debounced = _.debounce(function(cm, obj) {
-    console.log('obj.text', $scope.text);
+  $scope.text = "";
+  var debounced = _.debounce(function(codeMirror, obj) {
+    $scope.text = cm.getValue();
+    //$scope.text gets updated when the user stops typing for more than 2 seconds.
+    console.log('$scope.text', $scope.text);
+    //could pass in the updated $scope.text to a function here
     var words = $scope.text.split(' ');
     var parsedWords = [];
     // promise.all or whatever shit
@@ -28,21 +28,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
     Promise.all(parsedWords).then(function (parseArray) {
       var sig = soundFactory.identifySignificant(parseArray);
     });
-
-/*cm.setOption(option: string, value: any)
-Change the configuration of the editor. option should the name of an option, and value should be a valid value for that option.
-cm.getOption(option: string) → any
-Retrieves the current value of the given option for this editor instance.*/
-
-
-
-    //could pass in the updated $scope.text to a function here after the user stops typing.
   }, 2000);
 
-  var beforeDebounced = function(cm, obj){
-    $scope.text += obj.text;
-    debounced();
-  }
-
-  cm.on('change', beforeDebounced);
+  cm.on('change', debounced);
 });
