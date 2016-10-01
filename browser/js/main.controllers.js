@@ -19,19 +19,18 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   //   poemarea.text($scope.textArea);
   // }
   // $interval(showCode, 3000);
-
-
   $scope.text = "";
-  cm.on('change', function(cm, obj) {
+
+  var debounced = _.debounce(function(cm, obj) {
+    console.log('obj.text', $scope.text);
+  }, 2000);
+
+  var beforeDebounced = function(cm, obj){
     $scope.text += obj.text;
-    // console.log('CodeMirror text', obj.text);
-    // console.log('scope.text', $scope.text);
-    var text = obj.text;
-    var debounced = _.debounce(function(text) {
-      console.log('obj.text', debounced);
-    }, 5000);
-    
-  });
+    debounced();
+  }
+
+  cm.on('change', beforeDebounced);
 
 
   $scope.onSpace = function ($event) {
