@@ -7,9 +7,20 @@ CodeMirror.defineMode('lettermode', function (parserConfig) {
     token: function (stream) {
       var next = stream.next();
       for (var i = 0; i < colorrules.length; i++) {
-        if (colorrules[i].indexOf(next) > -1) {
-          return colors[i];
+        if (next == colorrules[i][0]) {
+          if (colorrules[i].length == 1) return colors[i];
+          for (var char = 1; char < colorrules[i].length; char++) {
+            if (colorrules[i][char] != stream.next()) {
+              stream.backUp(char);
+              break;
+            }
+            else return colors[i];
+          }
         }
+
+        // if (colorrules[i].indexOf(next) > -1) {
+        //   return colors[i];
+        // }
       }
       return null;
     }

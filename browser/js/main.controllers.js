@@ -8,7 +8,7 @@ app.controller('MainCtrl', function($scope, soundToLetter, $document, $log, pars
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
       name: 'lettermode',
-      colorrules: ['i']
+      colorrules: []
     },
     theme: 'fontcolor'
   });

@@ -4,6 +4,7 @@ app.factory('soundToLetter', function() {
     var rule = {
       iy: 'ea',
 	    ih: 'i',
+      hh: 'h',
       eh: 'e',
 	    ae: 'a',
       aa: 'o',
