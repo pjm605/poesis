@@ -37,19 +37,20 @@ app.factory('soundFactory', function () {
     identifySignificant: function (text) {
       var counts = countTextSounds(text);
       var n = normalize(counts);
+      console.log(n);
       //average = n;
       // input: { AH: 3, JH: 1, UW: 1, D: 1, K: 1, EY: 1, SH: 1, N: 1 }
       // output: ["AH"]
-      var significantN = 0.1
-      var significant = ""
+      var significantN = 0.1;
+      var significant = [];
       for (var key in n) {
-        if(sounds[key] > significantN) {
-          significantN = sounds[key]
-          significant = key
+        console.log(key, n[key], significantN)
+        if(n[key] > significantN) {
+          significant.push(key);
         }
       }
+      console.log('significant', significant);
       return significant;
-
     }
   };
 });
