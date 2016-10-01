@@ -2,7 +2,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   $scope.poem = {line: 0, word: ""};
   $scope.lineEnd = false;
 
-  console.log(CodeMirror);
+  // console.log(CodeMirror);
   //var textar = angular.element($document[0].querySelector('#poemarea'));
   var textar = document.getElementById('poemarea');
   //console.log(textar);
@@ -28,10 +28,10 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
     var wordSounds = parse($scope.poem.word).then(function (p) {
       console.log($scope.poem.word )
       return p;
-    })
+    });
     wordSounds.then(function (sounds) {
       console.log(soundsFactory.countSounds(sounds));
-    })
+    });
 
     $scope.lineEnd = false;
   }
@@ -41,4 +41,20 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
     // do anything line-dependent here?
     $scope.onSpace();
   }
+
+  //every time the user types a letter, it adds to $scope.text.
+  // console.log $scope.text when the user stops typing for more than 2 seconds.
+  $scope.text = "";
+
+  var debounced = _.debounce(function(cm, obj) {
+    console.log('obj.text', $scope.text);
+    //could pass in the updated $scope.text to a function here after the user stops typing. 
+  }, 2000);
+
+  var beforeDebounced = function(cm, obj){
+    $scope.text += obj.text;
+    debounced();
+  }
+
+  cm.on('change', beforeDebounced);
 });
