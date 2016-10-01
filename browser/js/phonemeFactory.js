@@ -1,5 +1,5 @@
 app.factory('PhonemeFactory', function () {
-
+//what is this??
   return {
     getPhonemeCount: function (word, dictionary) {
       var phonemes = dictionary[word.toLowerCase()];
