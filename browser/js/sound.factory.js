@@ -37,7 +37,7 @@ app.factory('soundFactory', function () {
     identifySignificant: function (text) {
       var counts = countTextSounds(text);
       var nor = normalize(counts);
-      console.log(n);
+      console.log(nor);
       //average = n;
       // input: { AH: 3, JH: 1, UW: 1, D: 1, K: 1, EY: 1, SH: 1, N: 1 }
       // output: ["AH"]
