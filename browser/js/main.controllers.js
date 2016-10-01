@@ -6,7 +6,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
   //var textar = angular.element($document[0].querySelector('#poemarea'));
   var textar = document.getElementById('poemarea');
   //console.log(textar);
-  $scope.colorrules = soundToLetter('AH', 'D');
+  $scope.colorrules = soundToLetter(['AH', 'D']);
   console.log($scope.colorrules);
 
   var cm = CodeMirror.fromTextArea(textar, {
