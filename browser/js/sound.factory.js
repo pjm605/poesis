@@ -12,37 +12,44 @@ app.factory('soundFactory', function () {
   //helper function we do not want to expose
   var countTextSounds = function (text) {
     var sd = {};
-    console.log('text', text, text.length);
+    console.log('text', text);
     for (var i = 0; i < text.length; i++) {
       countWordSounds(text[i], sd);
     }
     return sd
   };
 
-  // var normalize = function (counts) {
-  //
-  // }
+  var normalize = function (counts) {
+    console.log('normalize called');
+    var total = 0;
+    for (var k in counts) {
+      total += counts[k];
+    }
+    for (var k in counts) {
+      counts[k] = counts[k] * 1.0 / total;
+    }
+    return counts;
+  }
 
   return {
     //the text which is input should be an array of arrays of
     //phonetically parsed words
     identifySignificant: function (text) {
       var counts = countTextSounds(text);
-      //temporarily commented out for the purpose of testing
-      /*
-      var sounds = countTextSounds(text);
+      var n = normalize(counts);
+      //average = n;
       // input: { AH: 3, JH: 1, UW: 1, D: 1, K: 1, EY: 1, SH: 1, N: 1 }
       // output: ["AH"]
-      var significantN = 0
+      var significantN = 0.1
       var significant = ""
-      for (var key in sounds) {
+      for (var key in n) {
         if(sounds[key] > significantN) {
           significantN = sounds[key]
           significant = key
         }
       }
-      return [significant];
-      */
+      return significant;
+
     }
   };
 });
