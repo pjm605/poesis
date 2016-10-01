@@ -28,10 +28,10 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
     var wordSounds = parse($scope.poem.word).then(function (p) {
       console.log($scope.poem.word )
       return p;
-    })
+    });
     wordSounds.then(function (sounds) {
       console.log(soundsFactory.countSounds(sounds));
-    })
+    });
 
     $scope.lineEnd = false;
   }
@@ -48,6 +48,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
 
   var debounced = _.debounce(function(cm, obj) {
     console.log('obj.text', $scope.text);
+    //could pass in the updated $scope.text to a function here after the user stops typing. 
   }, 2000);
 
   var beforeDebounced = function(cm, obj){
