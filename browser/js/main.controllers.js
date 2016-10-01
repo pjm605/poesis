@@ -42,19 +42,15 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundsFactor
     $scope.onSpace();
   }
 
-  //every time the user types a letter, it adds to $scope.text.
-  // console.log $scope.text when the user stops typing for more than 2 seconds.
+  
   $scope.text = "";
 
-  var debounced = _.debounce(function(cm, obj) {
-    console.log('obj.text', $scope.text);
-    //could pass in the updated $scope.text to a function here after the user stops typing. 
+  var debounced = _.debounce(function(codeMirror, obj) {
+    $scope.text = cm.getValue();
+    //$scope.text gets updated when the user stops typing for more than 2 seconds. 
+    console.log('$scope.text', $scope.text);
+    //could pass in the updated $scope.text to a function here
   }, 2000);
 
-  var beforeDebounced = function(cm, obj){
-    $scope.text += obj.text;
-    debounced();
-  }
-
-  cm.on('change', beforeDebounced);
+  cm.on('change', debounced);
 });
