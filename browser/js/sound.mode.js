@@ -1,4 +1,4 @@
-CodeMirror.defineMode('lettermode', function (parserConfig) {
+CodeMirror.defineMode('consonantMode', function (parserConfig) {
   //local variables from parserConfig values go here!
   var colorrules = parserConfig.mode.colorrules || [];
   console.log(colorrules)
@@ -17,12 +17,12 @@ CodeMirror.defineMode('lettermode', function (parserConfig) {
             else return colors[i];
           }
         }
-
-        // if (colorrules[i].indexOf(next) > -1) {
-        //   return colors[i];
-        // }
       }
       return null;
     }
   }
+});
+
+CodeMirror.defineMode('lettermode', function (parserConfig) {
+  //TODO -- this will be vowelmode
 });
