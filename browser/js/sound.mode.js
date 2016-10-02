@@ -24,6 +24,7 @@ CodeMirror.defineMode('consonantMode', function (parserConfig) {
 });
 
 CodeMirror.defineMode('vowelMode', function (parserConfig) {
+  var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
   return {
     startState: function() {return {counting: [0, -1]};},
     token: function (stream, state) {
@@ -35,8 +36,15 @@ CodeMirror.defineMode('vowelMode', function (parserConfig) {
         return null;
       }
       else {
-        state.counting[1]++;
-        return 'green';
+        if (simpleVowels.indexOf(next) > -1) {
+          while (simpleVowels.indexOf(stream.peek()) > -1 || stream.peek() == 'y') {
+            stream.next();
+          }
+          state.counting[1]++;
+          console.log(state.counting);
+          return 'blue';
+        }
+        else return 'green';
       }
     }
   }
