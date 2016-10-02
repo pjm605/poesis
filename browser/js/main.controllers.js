@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, soundToLetter, $document, $log, parse, soundFactory) {
+app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -7,8 +7,8 @@ app.controller('MainCtrl', function($scope, soundToLetter, $document, $log, pars
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
-      name: 'vowelMode',
-      colorrules: []
+      name: 'consonantMode',
+      consonantRules: []
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -26,11 +26,7 @@ app.controller('MainCtrl', function($scope, soundToLetter, $document, $log, pars
       parsedWords.push(parse(words[w]));
     }
     Promise.all(parsedWords).then(function (parseArray) {
-      var sig = soundFactory.identifySignificant(parseArray);
-      var sigchars = soundToLetter(sig);
-      var modeOptions = cm.getOption('mode');
-      modeOptions.colorrules = sigchars;
-      cm.setOption('mode', modeOptions);
+      soundFactory.main(parseArray, cm);
     });
   }, 2000);
 
