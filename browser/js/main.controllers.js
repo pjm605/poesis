@@ -10,7 +10,8 @@ app.controller('MainCtrl', function($scope, soundToLetter, $document, $log, pars
       name: 'lettermode',
       colorrules: []
     },
-    theme: 'fontcolor'
+    theme: 'fontcolor',
+    lineWrapping: 'true'
   });
 
   $scope.text = '';

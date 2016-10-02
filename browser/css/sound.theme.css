@@ -1,3 +1,12 @@
+  /* added by AC to override the default style*/
+.CodeMirror {
+  height: auto;
+}
+
+.CodeMirror-scroll {
+  min-height: 500px;
+}
+
 /*.cm-s-night span.cm-comment { color: #8900d1; }
 .cm-s-night span.cm-atom { color: #845dc4; }
 .cm-s-night span.cm-number, .cm-s-night span.cm-attribute { color: #ffd500; }

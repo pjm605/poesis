@@ -2,6 +2,7 @@ app.factory('soundToLetter', function() {
   return function (soundarr) {
     var result = [];
     var rule = {
+<<<<<<< HEAD
       // iy: 'ea',
 	    // ih: 'i',
       hh: 'h',
@@ -13,6 +14,18 @@ app.factory('soundToLetter', function() {
       // uw: 'oo',
       // uh: 'oo',
       // aw: 'ou',
+=======
+      iy: 'ea',
+	    ih: 'i',
+      eh: 'e',
+	    ae: 'a',
+      aa: 'o',
+      ax: 'e',
+      ah: 'u',
+      uw: 'oo',
+      uh: 'oo',
+      aw: 'ou',
+>>>>>>> ed475bf3bbe411e3790f70490ef083a53e3f1d67
       er: 'ir',
       axr: 'er',
       // ey: 'ai',
