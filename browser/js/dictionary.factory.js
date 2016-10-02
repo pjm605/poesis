@@ -8,7 +8,7 @@ app.factory('parse', function($http) {
   return function (word) {
     return dictionary.then(function (dict) {
       if (dict[word]) return dict[word];
-      else return "hapax";
+      else return 'hapax';
     })
   }
 });
