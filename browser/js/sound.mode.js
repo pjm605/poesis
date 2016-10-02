@@ -1,7 +1,7 @@
 CodeMirror.defineMode('consonantMode', function (parserConfig) {
   //local variables from parserConfig values go here!
   var colorrules = parserConfig.mode.colorrules || [];
-  console.log(colorrules)
+  console.log(colorrules);
   var colors = ['red', 'blue', 'green', 'yellow'];
   return {
     token: function (stream) {
@@ -18,11 +18,26 @@ CodeMirror.defineMode('consonantMode', function (parserConfig) {
           }
         }
       }
-      return null;
+      return null
     }
   }
 });
 
-CodeMirror.defineMode('lettermode', function (parserConfig) {
-  //TODO -- this will be vowelmode
+CodeMirror.defineMode('vowelMode', function (parserConfig) {
+  return {
+    startState: function() {return {counting: [0, -1]};},
+    token: function (stream, state) {
+      console.log(state);
+      var next = stream.next();
+      if (next == ' ') {
+        state.counting[0]++;
+        state.counting[1] = -1;
+        return null;
+      }
+      else {
+        state.counting[1]++;
+        return 'green';
+      }
+    }
+  }
 });
