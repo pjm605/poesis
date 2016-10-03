@@ -5,8 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
+    "test": "mocha ./tests/server --watch",
     "browser-test": "karma start ./tests/browser/karma.conf.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "gulp build"
   },
   "author": "",
@@ -56,6 +56,6 @@
     "nodemon": "^1.10.2",
     "run-sequence": "^1.2.2",
     "sinon": "^1.17.6",
-    "unirest": "^0.5.1"
+    "supertest": "^2.0.0"
   }
 }

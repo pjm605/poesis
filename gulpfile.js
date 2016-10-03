@@ -59,7 +59,26 @@ gulp.task('test', ['testServerJS','testBrowserJS']);
 gulp.task('testServerJS', function () {
     return gulp.src('./tests/server/*.js', {read: false})
         .pipe(mocha({reporter: 'spec'}));
-})
+});
+
+gulp.task('testServerJSWithCoverage', function (done) {
+    //testing environment variable
+    //process.env.NODE_ENV = 'testing';
+    gulp.src('./server/*.js')
+        .pipe(istanbul({
+            includeUntested: true
+        }))
+        .pipe(istanbul.hookRequire())
+        .on('finish', function () {
+            gulp.src('./tests/server/*.js', {read: false})
+                .pipe(mocha({reporter: 'spec'}))
+                .pipe(istanbul.writeReports({
+                    dir: './coverage/server/',
+                    reporters: ['html', 'text']
+                }))
+                .on('end', done);
+        });
+});
 
 gulp.task('testBrowserJS', function (done) {
     //testing environment variable
@@ -141,7 +160,7 @@ gulp.task('default', function () {
     gulp.watch(['browser/**/*.html'], ['reload']);
 
     // Run server tests when a server file or server test file changes.
-    // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
+    gulp.watch(['tests/server/*.js', 'server/app/**/*.js'], ['testServerJS']);
 
     // Run browser testing when a browser test file changes.
      gulp.watch('tests/browser/**/*', ['testBrowserJS']);

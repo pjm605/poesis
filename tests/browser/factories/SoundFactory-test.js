@@ -1,14 +1,13 @@
-describe('SoundFactory', function () {
+describe('soundFactory', function () {
 	beforeEach(module('myApp'));
 
-	var SoundFactory;
-	beforeEach('Get tools', inject(function (_SoundFactory_) {
-		SoundFactory = _SoundFactory_;
+	var soundFactory;
+	beforeEach('Get tools', inject(function (_soundFactory_) {
+		soundFactory = _soundFactory_;
 	}));
 
 	it('is an object', function () {
-        expect(SoundFactory).to.be.an('object');
+        expect(soundFactory).to.be.an('object');
     });
-
    
 })
