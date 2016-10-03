@@ -53,42 +53,22 @@ gulp.task('buildJS', ['lintJS'], function () {
         .pipe(gulp.dest('./public/js'));
 });
 
-// gulp.task('testServerJS', function () {
-//     //require('babel-register');
-//     //testing environment variable
-//     process.env.NODE_ENV = 'testing';
-// 	return gulp.src('./tests/server/**/*.js', {
-// 		read: false
-// 	}).pipe(mocha({ reporter: 'spec' }));
-// });
 
-// gulp.task('testServerJSWithCoverage', function (done) {
-//     //testing environment variable
-//     process.env.NODE_ENV = 'testing';
-//     gulp.src('./server/**/*.js')
-//         .pipe(istanbul({
-//             includeUntested: true
-//         }))
-//         .pipe(istanbul.hookRequire())
-//         .on('finish', function () {
-//             gulp.src('./tests/server/**/*.js', {read: false})
-//                 .pipe(mocha({reporter: 'spec'}))
-//                 .pipe(istanbul.writeReports({
-//                     dir: './coverage/server/',
-//                     reporters: ['html', 'text']
-//                 }))
-//                 .on('end', done);
-//         });
-// });
+gulp.task('test', ['testServerJS','testBrowserJS']);
 
-// gulp.task('testBrowserJS', function (done) {
-//     //testing environment variable
-//     process.env.NODE_ENV = 'testing';
-//     karma.start({
-//         configFile: __dirname + '/tests/browser/karma.conf.js',
-//         singleRun: true
-//     }, done);
-// });
+gulp.task('testServerJS', function () {
+    return gulp.src('./tests/server/*.js', {read: false})
+        .pipe(mocha({reporter: 'spec'}));
+})
+
+gulp.task('testBrowserJS', function (done) {
+    //testing environment variable
+    //process.env.NODE_ENV = 'testing';
+    karma.start({
+        configFile: __dirname + '/tests/browser/karma.conf.js',
+        singleRun: true
+    }, done);
+});
 
 gulp.task('buildCSS', function () {
 
