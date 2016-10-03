@@ -70,9 +70,14 @@ app.factory('soundFactory', function () {
 
   var locateVowelsInText = function (text, vowels) {
     var locations = {};
-    for (var v = 0; v < vowels.length; v++) {
-      locations[vowels[v]] = [];
-    }
+    //console.log(vowels.length, 'vowels.length');
+    // for (var v = 0; v < vowels.length; v++) {
+    //   console.log(vowels[v]);
+    //   locations[vowels[v]] = [];
+    //   console.log('LOCATION, INITIALIZED: ' + locations);
+    //   // gives [object Object]
+    //   console.log(location.AE); // gives undefined
+    // }
 
     for (var w = 0; w < text.length; w++) {
       var word = text[w].split(' ');
@@ -80,19 +85,23 @@ app.factory('soundFactory', function () {
         var vowelCount = -1;
         var vowelSound = "";
         console.log('is it a vowel???', word[s], isVowel(word[s]));
-        if (isVowel(words[s])) {
-          vowelSound = words[s];
+        if (isVowel(word[s])) {
+          vowelSound = word[s].substring(0, word[s].length-1);
           vowelCount++;
           for (var v = 0; v < vowels.length; v++) {
-            var vow = vowels[v].toLowerCase();
+            console.log('tested vowel comparison', vow == vowels[v]);
+            var vow = vowels[v];
+            console.log('test: ', vow, vowelSound);
             if (vow == vowelSound) {
-              locations[vow].push([w, vowelCount]);
+              if (locations[vow]) locations[vow].push([w, vowelCount])
+              else locations[vow] = [[w, vowelCount]];
             }
           }
         }
       }
     }
-    return [];
+    console.log('LOCATIONS', locations);
+    return locations;
   }
 
   return {
