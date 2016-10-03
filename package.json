@@ -4,8 +4,9 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "start": "nodemon --watch server -e js,html server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "gulp build"
   },
   "author": "",
   "license": "ISC",
