@@ -53,7 +53,8 @@ app.factory('soundFactory', function () {
       dx: 'tt',
       el: 'le',
       em: 'om',
-      en: 'n'
+      en: 'n',
+      th: 'th'
     };
     for (var i = 0; i < soundarr.length; i++) {
       var sound = soundarr[i].toLowerCase();
@@ -143,10 +144,9 @@ app.factory('soundFactory', function () {
     },
     main: function (parseArray, cm) {
       var sig = this.identifySignificant(parseArray);
-      var soundLocations = locateVowelsInText(parseArray, sig[1]);
-
       var modeOptions = cm.getOption('mode');
       modeOptions.consonantRules = soundToLetter(sig[0]);
+      modeOptions.vowelLocations = locateVowelsInText(parseArray, sig[1]);
       cm.setOption('mode', modeOptions);
     }
   };
