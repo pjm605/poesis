@@ -12,7 +12,7 @@ var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var eslint = require('gulp-eslint');
-var mocha = require('gulp-mocha');
+var mocha = require('gulp-spawn-mocha'); //gulp-spawn-mocha?
 var karma = require('karma').server;
 var istanbul = require('gulp-istanbul');
 var notify = require('gulp-notify');
@@ -144,7 +144,7 @@ gulp.task('default', function () {
     // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
 
     // Run browser testing when a browser test file changes.
-    // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
+     gulp.watch('tests/browser/**/*', ['testBrowserJS']);
 
     livereload.listen();
 
