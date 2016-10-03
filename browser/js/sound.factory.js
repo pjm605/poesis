@@ -70,15 +70,6 @@ app.factory('soundFactory', function () {
 
   var locateVowelsInText = function (text, vowels) {
     var locations = {};
-    //console.log(vowels.length, 'vowels.length');
-    // for (var v = 0; v < vowels.length; v++) {
-    //   console.log(vowels[v]);
-    //   locations[vowels[v]] = [];
-    //   console.log('LOCATION, INITIALIZED: ' + locations);
-    //   // gives [object Object]
-    //   console.log(location.AE); // gives undefined
-    // }
-
     for (var w = 0; w < text.length; w++) {
       var word = text[w].split(' ');
       for (var s = 0; s < word.length; s++) {
