@@ -26,9 +26,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
             stream.next();
           }
           state.counting[1]++;
-          console.log(state.counting);
-          //return vowelMode.token(stream, state);
-          return handleVowel();
+          return 'blue';
         }
         else {
           for (var i = 0; i < consonantRules.length; i++) {
