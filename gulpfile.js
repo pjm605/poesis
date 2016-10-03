@@ -118,7 +118,7 @@ gulp.task('buildCSSProduction', function () {
 });
 
 gulp.task('buildJSProduction', function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js', './browser/template/jquery.min.js', './browser/template/jquery.easing.1.3.js', './browser/template/bootstrap.min.js' ,'./browser/template/jquery.waypoints.min.js', './browser/template/main.js' ])
+    return gulp.src(['./browser/js/module.js', './browser/js/**/*.js', './browser/template/jquery.min.js', './browser/template/jquery.easing.1.3.js', './browser/template/bootstrap.min.js' ,'./browser/template/jquery.waypoints.min.js', './browser/template/main.js' ])
         .pipe(concat('bundle.js'))
         .pipe(babel({
             presets: ['es2015']
