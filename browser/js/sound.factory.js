@@ -148,6 +148,7 @@ app.factory('soundFactory', function () {
       var modeOptions = cm.getOption('mode');
       modeOptions.consonantRules = soundToLetter(sig[0]);
       cm.setOption('mode', modeOptions);
+      console.log('sound factory ran');
     }
   };
 });
