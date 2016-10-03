@@ -16,7 +16,7 @@ app.factory('soundFactory', function () {
     for (var i = 0; i < text.length; i++) {
       countWordSounds(text[i], sd);
     }
-    return sd
+    return sd;
   };
 
   var normalize = function (counts) {
@@ -29,7 +29,77 @@ app.factory('soundFactory', function () {
       counts[key] = counts[key] * 1.0 / total;
     }
     return counts;
-  }
+  };
+
+  //sorts an array of sounds into an array of consonants and an array of vowels
+  var soundSort = function (sounds) {
+    var vowels = ['AO', 'AA', 'IY', 'UW', 'EH', 'IH', 'UH',
+                  'AH', 'AX', 'AE', 'EY', 'AY', 'AW', 'OW', 'OY'];
+    var sorted = [[], []];
+    for (var i = 0; i < sounds.length; i++) {
+      if (vowels.indexOf(sounds[i]) > -1) sorted[1].push(sounds[i]);
+      else sorted[0].push(sounds[i]);
+    }
+    return sorted;
+  };
+
+  var soundToLetter = function (soundarr) {
+    var result = [];
+    var rule = {
+      hh: 'h',
+      er: 'ir',
+      axr: 'er',
+      zh: 's',
+      dx: 'tt',
+      el: 'le',
+      em: 'om',
+      en: 'n'
+    };
+    for (var i = 0; i < soundarr.length; i++) {
+      var sound = soundarr[i].toLowerCase();
+      if (rule.hasOwnProperty(sound)) result.push(rule[sound]);
+      else result.push(sound);
+    }
+    return result;
+  };
+
+  var isVowel = function (str) {
+    if (/\d/.test(str[str.length-1])) return true;
+    else return false;
+  };
+
+  var locateVowelsInText = function (text, vowels) {
+    var locations = {};
+    //console.log(vowels.length, 'vowels.length');
+    // for (var v = 0; v < vowels.length; v++) {
+    //   console.log(vowels[v]);
+    //   locations[vowels[v]] = [];
+    //   console.log('LOCATION, INITIALIZED: ' + locations);
+    //   // gives [object Object]
+    //   console.log(location.AE); // gives undefined
+    // }
+
+    for (var w = 0; w < text.length; w++) {
+      var word = text[w].split(' ');
+      for (var s = 0; s < word.length; s++) {
+        var vowelCount = -1;
+        var vowelSound = "";
+        if (isVowel(word[s])) {
+          vowelSound = word[s].substring(0, word[s].length-1);
+          vowelCount++;
+          for (var v = 0; v < vowels.length; v++) {
+            var vow = vowels[v];
+            if (vow == vowelSound) {
+              if (locations[vow]) locations[vow].push([w, vowelCount]);
+              else locations[vow] = [[w, vowelCount]];
+            }
+          }
+        }
+      }
+    }
+    console.log('LOCATIONS', locations);
+    return locations;
+  };
 
   //sorts an array of sounds into an array of consonants and an array of vowels
   var soundSort = function (sounds) {
@@ -70,13 +140,9 @@ app.factory('soundFactory', function () {
       var counts = countTextSounds(text);
       var nor = normalize(counts);
       console.log(nor);
-      //average = n;
-      // input: { AH: 3, JH: 1, UW: 1, D: 1, K: 1, EY: 1, SH: 1, N: 1 }
-      // output: ["AH"]
       var significantN = 0.1;
       var significant = [];
       for (var key in nor) {
-        console.log(key, nor[key], significantN)
         if (nor[key] > significantN) {
           significant.push(key);
         }
@@ -86,9 +152,10 @@ app.factory('soundFactory', function () {
     },
     main: function (parseArray, cm) {
       var sig = this.identifySignificant(parseArray);
-      var sigchars = soundToLetter(sig[0]);
+      var soundLocations = locateVowelsInText(parseArray, sig[1]);
+
       var modeOptions = cm.getOption('mode');
-      modeOptions.consonantRules = sigchars;
+      modeOptions.consonantRules = soundToLetter(sig[0]);
       cm.setOption('mode', modeOptions);
     }
   };

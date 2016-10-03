@@ -7,8 +7,9 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
-      name: 'consonantMode',
-      consonantRules: []
+      name: 'vowelMode',
+      consonantRules: [],
+      vowelLocations:[]
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -20,7 +21,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
     console.log('$scope.text', $scope.text);
     //could pass in the updated $scope.text to a function here
-    var words = $scope.text.split(' ');
+    var words = $scope.text.replace(/-/g, ' ').split(' ');
     var parsedWords = [];
     for (var w = 0; w < words.length; w++) {
       parsedWords.push(parse(words[w]));
