@@ -143,12 +143,10 @@ app.factory('soundFactory', function () {
     },
     main: function (parseArray, cm) {
       var sig = this.identifySignificant(parseArray);
-      var soundLocations = locateVowelsInText(parseArray, sig[1]);
-
       var modeOptions = cm.getOption('mode');
       modeOptions.consonantRules = soundToLetter(sig[0]);
+      modeOptions.vowelLocations = locateVowelsInText(parseArray, sig[1]);
       cm.setOption('mode', modeOptions);
-      console.log('sound factory ran');
     }
   };
 });

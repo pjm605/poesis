@@ -12,7 +12,8 @@ CodeMirror.defineMode('vowelMode', function (parserConfig) {
         return null;
       }
       else {
-        if (simpleVowels.indexOf(next) > -1) {
+        if (simpleVowels.indexOf(next) > -1 ||
+        (next == 'y' && simpleVowels.indexOf(stream.peek()) < 0)) {
           while (simpleVowels.indexOf(stream.peek()) > -1 || stream.peek() == 'y') {
             stream.next();
           }
