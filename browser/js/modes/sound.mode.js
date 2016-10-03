@@ -4,16 +4,8 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
 
   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
   var consonantRules = parserConfig.consonantRules;
+  var vowelLocations = parserConfig.vowelLocations;
   var colors = ['red', 'blue', 'green', 'purple'];
-
-  var vowelMode = CodeMirror.getMode({
-    name: "vowelMode",
-    vowelLocations: config.mode.vowelLocations
-  });
-  var consonantMode = CodeMirror.getMode(config, {
-    name: 'consonantMode',
-    consonantRules: config.mode.consonantRules
-  });
 
   return {
     startState: function() {return {
