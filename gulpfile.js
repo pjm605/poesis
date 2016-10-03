@@ -12,7 +12,7 @@ var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var eslint = require('gulp-eslint');
-var mocha = require('gulp-mocha');
+var mocha = require('gulp-spawn-mocha'); //gulp-spawn-mocha?
 var karma = require('karma').server;
 var istanbul = require('gulp-istanbul');
 var notify = require('gulp-notify');
@@ -53,42 +53,41 @@ gulp.task('buildJS', ['lintJS'], function () {
         .pipe(gulp.dest('./public/js'));
 });
 
-// gulp.task('testServerJS', function () {
-//     //require('babel-register');
-//     //testing environment variable
-//     process.env.NODE_ENV = 'testing';
-// 	return gulp.src('./tests/server/**/*.js', {
-// 		read: false
-// 	}).pipe(mocha({ reporter: 'spec' }));
-// });
 
-// gulp.task('testServerJSWithCoverage', function (done) {
-//     //testing environment variable
-//     process.env.NODE_ENV = 'testing';
-//     gulp.src('./server/**/*.js')
-//         .pipe(istanbul({
-//             includeUntested: true
-//         }))
-//         .pipe(istanbul.hookRequire())
-//         .on('finish', function () {
-//             gulp.src('./tests/server/**/*.js', {read: false})
-//                 .pipe(mocha({reporter: 'spec'}))
-//                 .pipe(istanbul.writeReports({
-//                     dir: './coverage/server/',
-//                     reporters: ['html', 'text']
-//                 }))
-//                 .on('end', done);
-//         });
-// });
+gulp.task('test', ['testServerJS','testBrowserJS']);
 
-// gulp.task('testBrowserJS', function (done) {
-//     //testing environment variable
-//     process.env.NODE_ENV = 'testing';
-//     karma.start({
-//         configFile: __dirname + '/tests/browser/karma.conf.js',
-//         singleRun: true
-//     }, done);
-// });
+gulp.task('testServerJS', function () {
+    return gulp.src('./tests/server/*.js', {read: false})
+        .pipe(mocha({reporter: 'spec'}));
+});
+
+gulp.task('testServerJSWithCoverage', function (done) {
+    //testing environment variable
+    //process.env.NODE_ENV = 'testing';
+    gulp.src('./server/*.js')
+        .pipe(istanbul({
+            includeUntested: true
+        }))
+        .pipe(istanbul.hookRequire())
+        .on('finish', function () {
+            gulp.src('./tests/server/*.js', {read: false})
+                .pipe(mocha({reporter: 'spec'}))
+                .pipe(istanbul.writeReports({
+                    dir: './coverage/server/',
+                    reporters: ['html', 'text']
+                }))
+                .on('end', done);
+        });
+});
+
+gulp.task('testBrowserJS', function (done) {
+    //testing environment variable
+    //process.env.NODE_ENV = 'testing';
+    karma.start({
+        configFile: __dirname + '/tests/browser/karma.conf.js',
+        singleRun: true
+    }, done);
+});
 
 gulp.task('buildCSS', function () {
 
@@ -161,10 +160,10 @@ gulp.task('default', function () {
     gulp.watch(['browser/**/*.html'], ['reload']);
 
     // Run server tests when a server file or server test file changes.
-    // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
+    gulp.watch(['tests/server/*.js', 'server/app/**/*.js'], ['testServerJS']);
 
     // Run browser testing when a browser test file changes.
-    // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
+     gulp.watch('tests/browser/**/*', ['testBrowserJS']);
 
     livereload.listen();
 
