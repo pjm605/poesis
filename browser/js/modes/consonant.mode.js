@@ -1,8 +1,6 @@
 CodeMirror.defineMode('consonantMode', function (parserConfig) {
-  var consonantRules = parserConfig.mode.consonantRules;
-  var colors = ['red', 'blue', 'green', 'yellow'];
   return {
-    token: function (stream) {
+    token: function (stream, state) {
       var next = stream.next();
       for (var i = 0; i < consonantRules.length; i++) {
         if (next == consonantRules[i][0]) {
