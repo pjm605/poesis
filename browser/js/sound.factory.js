@@ -16,7 +16,7 @@ app.factory('soundFactory', function () {
     for (var i = 0; i < text.length; i++) {
       countWordSounds(text[i], sd);
     }
-    return sd
+    return sd;
   };
 
   var normalize = function (counts) {
@@ -29,7 +29,7 @@ app.factory('soundFactory', function () {
       counts[key] = counts[key] * 1.0 / total;
     }
     return counts;
-  }
+  };
 
   //sorts an array of sounds into an array of consonants and an array of vowels
   var soundSort = function (sounds) {
@@ -41,7 +41,7 @@ app.factory('soundFactory', function () {
       else sorted[0].push(sounds[i]);
     }
     return sorted;
-  }
+  };
 
   var soundToLetter = function (soundarr) {
     var result = [];
@@ -66,7 +66,7 @@ app.factory('soundFactory', function () {
   var isVowel = function (str) {
     if (/\d/.test(str[str.length-1])) return true;
     else return false;
-  }
+  };
 
   var locateVowelsInText = function (text, vowels) {
     var locations = {};
@@ -84,16 +84,13 @@ app.factory('soundFactory', function () {
       for (var s = 0; s < word.length; s++) {
         var vowelCount = -1;
         var vowelSound = "";
-        console.log('is it a vowel???', word[s], isVowel(word[s]));
         if (isVowel(word[s])) {
           vowelSound = word[s].substring(0, word[s].length-1);
           vowelCount++;
           for (var v = 0; v < vowels.length; v++) {
-            console.log('tested vowel comparison', vow == vowels[v]);
             var vow = vowels[v];
-            console.log('test: ', vow, vowelSound);
             if (vow == vowelSound) {
-              if (locations[vow]) locations[vow].push([w, vowelCount])
+              if (locations[vow]) locations[vow].push([w, vowelCount]);
               else locations[vow] = [[w, vowelCount]];
             }
           }
@@ -102,7 +99,7 @@ app.factory('soundFactory', function () {
     }
     console.log('LOCATIONS', locations);
     return locations;
-  }
+  };
 
   return {
     //the text which is input should be an array of arrays of
@@ -114,7 +111,6 @@ app.factory('soundFactory', function () {
       var significantN = 0.1;
       var significant = [];
       for (var key in nor) {
-        console.log(key, nor[key], significantN)
         if (nor[key] > significantN) {
           significant.push(key);
         }
