@@ -53,7 +53,8 @@ app.factory('soundFactory', function () {
       dx: 'tt',
       el: 'le',
       em: 'om',
-      en: 'n'
+      en: 'n',
+      th: 'th'
     };
     for (var i = 0; i < soundarr.length; i++) {
       var sound = soundarr[i].toLowerCase();
@@ -70,15 +71,6 @@ app.factory('soundFactory', function () {
 
   var locateVowelsInText = function (text, vowels) {
     var locations = {};
-    //console.log(vowels.length, 'vowels.length');
-    // for (var v = 0; v < vowels.length; v++) {
-    //   console.log(vowels[v]);
-    //   locations[vowels[v]] = [];
-    //   console.log('LOCATION, INITIALIZED: ' + locations);
-    //   // gives [object Object]
-    //   console.log(location.AE); // gives undefined
-    // }
-
     for (var w = 0; w < text.length; w++) {
       var word = text[w].split(' ');
       for (var s = 0; s < word.length; s++) {
@@ -152,10 +144,9 @@ app.factory('soundFactory', function () {
     },
     main: function (parseArray, cm) {
       var sig = this.identifySignificant(parseArray);
-      var soundLocations = locateVowelsInText(parseArray, sig[1]);
-
       var modeOptions = cm.getOption('mode');
       modeOptions.consonantRules = soundToLetter(sig[0]);
+      modeOptions.vowelLocations = locateVowelsInText(parseArray, sig[1]);
       cm.setOption('mode', modeOptions);
     }
   };
