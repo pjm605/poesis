@@ -1,6 +1,6 @@
 CodeMirror.defineMode('consonantMode', function (parserConfig) {
   //local variables from parserConfig values go here!
-  var consonantRules = parserConfig.mode.consonantRules || [];
+  var consonantRules = parserConfig.mode.consonantRules;
   console.log(consonantRules);
   var colors = ['red', 'blue', 'green', 'yellow'];
   return {
@@ -25,6 +25,7 @@ CodeMirror.defineMode('consonantMode', function (parserConfig) {
 
 CodeMirror.defineMode('vowelMode', function (parserConfig) {
   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
+  var vowelLocations = parserConfig.mode.vowelLocations;
   return {
     startState: function() {return {counting: [0, -1]};},
     token: function (stream, state) {

@@ -63,6 +63,38 @@ app.factory('soundFactory', function () {
     return result;
   };
 
+  var isVowel = function (str) {
+    if (/\d/.test(str[str.length-1])) return true;
+    else return false;
+  }
+
+  var locateVowelsInText = function (text, vowels) {
+    var locations = {};
+    for (var v = 0; v < vowels.length; v++) {
+      locations[vowels[v]] = [];
+    }
+
+    for (var w = 0; w < text.length; w++) {
+      var word = text[w].split(' ');
+      for (var s = 0; s < word.length; s++) {
+        var vowelCount = -1;
+        var vowelSound = "";
+        console.log('is it a vowel???', word[s], isVowel(word[s]));
+        if (isVowel(words[s])) {
+          vowelSound = words[s];
+          vowelCount++;
+          for (var v = 0; v < vowels.length; v++) {
+            var vow = vowels[v].toLowerCase();
+            if (vow == vowelSound) {
+              locations[vow].push([w, vowelCount]);
+            }
+          }
+        }
+      }
+    }
+    return [];
+  }
+
   return {
     //the text which is input should be an array of arrays of
     //phonetically parsed words
@@ -70,9 +102,6 @@ app.factory('soundFactory', function () {
       var counts = countTextSounds(text);
       var nor = normalize(counts);
       console.log(nor);
-      //average = n;
-      // input: { AH: 3, JH: 1, UW: 1, D: 1, K: 1, EY: 1, SH: 1, N: 1 }
-      // output: ["AH"]
       var significantN = 0.1;
       var significant = [];
       for (var key in nor) {
@@ -86,9 +115,10 @@ app.factory('soundFactory', function () {
     },
     main: function (parseArray, cm) {
       var sig = this.identifySignificant(parseArray);
-      var sigchars = soundToLetter(sig[0]);
+      var soundLocations = locateVowelsInText(parseArray, sig[1]);
+
       var modeOptions = cm.getOption('mode');
-      modeOptions.consonantRules = sigchars;
+      modeOptions.consonantRules = soundToLetter(sig[0]);
       cm.setOption('mode', modeOptions);
     }
   };
