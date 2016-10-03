@@ -7,8 +7,9 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
-      name: 'consonantMode',
-      consonantRules: []
+      name: 'vowelMode',
+      consonantRules: [],
+      vowelLocations:[]
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
