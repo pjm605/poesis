@@ -101,6 +101,38 @@ app.factory('soundFactory', function () {
     return locations;
   };
 
+  //sorts an array of sounds into an array of consonants and an array of vowels
+  var soundSort = function (sounds) {
+    var vowels = ['AO', 'AA', 'IY', 'UW', 'EH', 'IH', 'UH',
+                  'AH', 'AX', 'AE', 'EY', 'AY', 'AW', 'OW', 'OY'];
+    var sorted = [[], []];
+    for (var i = 0; i < sounds.length; i++) {
+      if (vowels.indexOf(sounds[i]) > -1) sorted[1].push(sounds[i]);
+      else sorted[0].push(sounds[i]);
+    }
+    return sorted;
+  }
+
+  var soundToLetter = function (soundarr) {
+    var result = [];
+    var rule = {
+      hh: 'h',
+      er: 'ir',
+      axr: 'er',
+      zh: 's',
+      dx: 'tt',
+      el: 'le',
+      em: 'om',
+      en: 'n'
+    };
+    for (var i = 0; i < soundarr.length; i++) {
+      var sound = soundarr[i].toLowerCase();
+      if (rule.hasOwnProperty(sound)) result.push(rule[sound]);
+      else result.push(sound);
+    }
+    return result;
+  };
+
   return {
     //the text which is input should be an array of arrays of
     //phonetically parsed words

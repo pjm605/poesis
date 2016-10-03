@@ -26,6 +26,7 @@ CodeMirror.defineMode('consonantMode', function (parserConfig) {
 CodeMirror.defineMode('vowelMode', function (parserConfig) {
   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
   var vowelLocations = parserConfig.mode.vowelLocations;
+
   return {
     startState: function() {return {counting: [0, -1]};},
     token: function (stream, state) {
