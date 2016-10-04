@@ -2,8 +2,6 @@ var router = require('express').Router();
 var fs = require('fs');
 var dictionary = __dirname + '/cmudict.txt';
 var request = require('request');
-var FormData = require('form-data');
-var streamBuffers = require('stream-buffers');
 
 function readTxtFile(file){
   return fs.readFileSync(file).toString();
@@ -44,7 +42,6 @@ router.get('/buffer', function(req, res, next) {
 		}
 	};
 
-	console.log('hi');
 	request.post({url: 'http://www.speech.cs.cmu.edu/cgi-bin/tools/logios/lextool.pl', formData: formData}, function(err, httpResponse, body) {
 		if (err) {
 			return console.error('upload failed', err);
