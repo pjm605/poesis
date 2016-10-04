@@ -1,6 +1,9 @@
 var router = require('express').Router();
 var fs = require('fs');
 var dictionary = __dirname + '/cmudict.txt';
+var request = require('request');
+var FormData = require('form-data');
+var streamBuffers = require('stream-buffers');
 
 function readTxtFile(file){
   return fs.readFileSync(file).toString();
@@ -21,11 +24,35 @@ function formatDictionary(dictionaryFile) {
 }
 
 var words = formatDictionary(dictionaryFile);
-//console.log(words); this works
 
 router.get('/', function(req, res, next) {
 	res.json(words);
 });
 
+router.get('/buffer', function(req, res, next) {
+
+	var bufferText = new Buffer('hello\nmy\nname\nis\nangela', 'utf-8');
+
+	var formData = {
+		wordfile: {
+			value: bufferText,
+			options: {
+				filename: 'sample.txt',
+				contentType: 'text/plain',
+				contentLength: bufferText.length
+			}
+		}
+	};
+
+	console.log('hi');
+	request.post({url: 'http://www.speech.cs.cmu.edu/cgi-bin/tools/logios/lextool.pl', formData: formData}, function(err, httpResponse, body) {
+		if (err) {
+			return console.error('upload failed', err);
+		}
+		console.log('Upload successful!  Server responded with:', body);
+		res.send(body);
+	});
+
+});
 
 module.exports = router;
