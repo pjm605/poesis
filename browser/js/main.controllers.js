@@ -29,7 +29,7 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
     Promise.all(parsedWords).then(function (parseArray) {
       soundFactory.main(parseArray, cm);
     });
-  }, 2000);
+  }, 1000);
 
   cm.on('change', debounced);
 });

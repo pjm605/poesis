@@ -2,7 +2,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   console.log('CONFIG', config);
   console.log('parserCONFIG', parserConfig);
 
-  var simpleVowels = ['a', 'e', 'i', 'o', 'u']; //add Upper Case AEIOU
+  var simpleVowels = ['a', 'e', 'i', 'o', 'u']; 
   var consonantRules = parserConfig.consonantRules;
   var vowelLocations = parserConfig.vowelLocations;
   var colors = ['red', 'blue', 'green', 'purple'];
@@ -13,9 +13,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       token: this.token
     };},
     token: function (stream, state) {
-      // var uc = stream.string.toLowerCase();
-      // stream.string = uc;
-      var next = stream.next();
+      var next = stream.next().toLoweCase();
       if (next == ' ') {
         state.counting[0]++;
         state.counting[1] = -1;
