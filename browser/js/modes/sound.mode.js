@@ -15,11 +15,13 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
     token: function (stream, state) {
       var next = stream.next();
       if (next == ' ') {
+        //next token is a space
         state.counting[0]++;
         state.counting[1] = -1;
         return null;
       }
       else {
+        //next token is a vowel
         if (simpleVowels.indexOf(next) > -1 ||
         (next == 'y' && simpleVowels.indexOf(stream.peek()) < 0)) {
           while (simpleVowels.indexOf(stream.peek()) > -1 || stream.peek() == 'y') {
@@ -29,6 +31,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
           return 'blue';
         }
         else {
+          //next token is a consonant
           for (var i = 0; i < consonantRules.length; i++) {
             if (next == consonantRules[i][0]) {
               if (consonantRules[i].length == 1) return colors[i];
