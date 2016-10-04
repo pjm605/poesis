@@ -13,7 +13,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       token: this.token
     };},
     token: function (stream, state) {
-      var next = stream.next().toLoweCase();
+      var next = stream.next().toLowerCase();
       if (next == ' ') {
         state.counting[0]++;
         state.counting[1] = -1;
