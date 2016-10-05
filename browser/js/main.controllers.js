@@ -22,7 +22,7 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     //could pass in the updated $scope.text to a function here
     var words = $scope.text.replace(/ /g, '\n');
     
-    lexicon.toLexiconTool(words)
+    lexicon(words)
     .then(function(parseArray) {
       console.log('parseArray', parseArray);
       soundFactory.main(parseArray, cm);
