@@ -26,42 +26,35 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     var parsedWords = [];
     var hapaxWords = [];
     var fromLexicon = null;
-    for (var w = 0; w < words.length; w++) {
-      parsedWords.push(parse(words[w]));
+    for (var idx = 0; idx < words.length; idx++) {
+      parsedWords.push(parse(words[idx]));
     }
 
     Promise.all(parsedWords).then(function (parseArray) {
-      for(var i = 0; i < parseArray.length; i ++) {
-        if (parseArray[i] === 'hapax') {
-          hapaxWords.push(parseArray[i]);
+      for (var i = 0; i < parseArray.length; i ++) {
+        if (parseArray[i][0] === '@') {
+          hapaxWords.push(parseArray[i].slice(1));
         }
       }
-
-      console.log('hapaxWords', hapaxWords);
+      console.log('Not in the dictionary: hapaxWords', hapaxWords);
 
       if (hapaxWords.length > 0) {
         hapaxWords = hapaxWords.join('\n');
         lexicon(hapaxWords)
         .then(function(lexiconParseArray) {
-          console.log('!!!!!!!!!', lexiconParseArray);
           fromLexicon = lexiconParseArray;
-          console.log('fromLexicon', fromLexicon);
           for(var i = 0; i < parseArray.length; i ++) {
-            console.log('is it here?', fromLexicon[0]);
-            if (parseArray[i] === 'hapax') {
-              parseArray[i] =  fromLexicon[0];
-              fromLexicon.shift();
+            if (parseArray[i][0] === '@') {
+              parseArray[i] = fromLexicon.shift();
             }
           }
-          console.log('going into the soundFactory-number111111111111');
         soundFactory.main(parseArray, cm);
 
         }).catch(function (err) {
           console.error('error', err);
         });
-        
+
       } else {
-        console.log('going into the soundFactory-number22222222222');
         soundFactory.main(parseArray, cm);
       }
     });
