@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
 					if (!resultObj[phonemes] && phonemes !== '') {
 						phonemes = phonemes.split(/\s/);
 						var keyWord = phonemes.splice(0, 1);
-						keyWord = keyWord.toString().replace(/[^a-z']+/gi, '').toLowerCase();
+						keyWord = keyWord.toString().replace(/[^a-z'#]+/gi, '').toLowerCase();
 						phonemes = phonemes.join(' ');
 						resultObj[keyWord] = phonemes;
 					}

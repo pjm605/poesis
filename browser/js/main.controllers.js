@@ -23,6 +23,7 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     var pounded = $scope.text.replace(/\n/g, ' # ');
     console.log('===> ' + pounded);
     var words = pounded.replace(/ /g, '\n');
+    console.log('===> ' + words);
 
     lexicon(words)
     .then(function(parseArray) {
