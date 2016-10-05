@@ -1,27 +1,14 @@
 app.factory('lexicon', function($http) {
+  var lexiconObject = {};
 
-  var fromLexiconTool = $http.get('/api/dictionary/buffer')
-                    .then(function(response) {
-                      return response.data;
-                    });
-
-  return function (input) {
-    return fromLexiconTool.then(function (result) {
-      return result; //an array of pronunciations
-    })
+  lexiconObject.toLexiconTool = function(data) {
+    return $http.post('/api/dictionary/buffer', {'words': data})
+            .then(function(response) {
+              return $http.get('/api/dictionary/buffer')
+                      .then(function(secondResponse) {
+                        return secondResponse.data;
+                      });
+            });
   }
-});
-
-app.factory('sendToLexicon', function($http) {
-
-  var toLexiconTool = $http.post('/api/dictionary/buffer', data)
-                    .then(function(response) {
-                      return response.data;
-                    });
-
-  return function (data) {
-    return toLexiconTool.then(function (result) {
-      return result; //an array of pronunciations
-    })
-  }
+  return lexiconObject;
 });

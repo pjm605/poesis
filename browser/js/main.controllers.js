@@ -3,7 +3,6 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
   $scope.lineEnd = false;
 
   var textar = document.getElementById('poemarea');
-  //console.log(textar);
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
@@ -23,9 +22,9 @@ app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory
     //could pass in the updated $scope.text to a function here
     var words = $scope.text.replace(/ /g, '\n');
     
-    var resultFromLexicon = lexicon(words);
-
-    Promise.all(resultFromLexicon).then(function (parseArray) {
+    lexicon.toLexiconTool(words)
+    .then(function(parseArray) {
+      console.log('parseArray', parseArray);
       soundFactory.main(parseArray, cm);
     });
 

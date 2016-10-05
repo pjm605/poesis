@@ -31,19 +31,19 @@ router.get('/', function(req, res, next) {
 var bufferText = null;
 
 router.post('/buffer', function(req, res, next) {
-	if (req.body.words) {
+	if (req.body) {
 		var words = req.body.words;
 		bufferText = new Buffer(words, 'utf-8');
-		res.sendStatus(200);
+		res.send(req.body.words).status(200);
 	} else {
-		res.send('need the input!');
+		res.send('need the input!', req.body);
 	}
 });
 
 router.get('/buffer', function(req, res, next) {
 
-	var bufferText = new Buffer('hello\nmy\nname\nis\nangela', 'utf-8');
-	var correctUrl;
+	// var bufferText = new Buffer('hello\nmy\nname\nis\nangela', 'utf-8');
+	var correctUrl = null;
 	var formData = {
 		wordfile: {
 			value: bufferText,
