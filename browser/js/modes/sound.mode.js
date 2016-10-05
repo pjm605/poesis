@@ -18,7 +18,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       //token: this.token
     };},
     token: function (stream, state) {
-      var next = stream.next();
+      var next = stream.next().toLowerCase();
       if (next == ' ' || !next) {
         //next token is a space
         state.position[0]++;
