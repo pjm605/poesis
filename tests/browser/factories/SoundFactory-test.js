@@ -9,5 +9,9 @@ describe('soundFactory', function () {
 	it('is an object', function () {
         expect(soundFactory).to.be.an('object');
     });
+
+    // describe('identifySignificant', function () {
+    	
+    // })
    
 })
