@@ -31,8 +31,4 @@ describe('Server', function () {
 			});
 		});
 	});
-
-
-
-
 })	
