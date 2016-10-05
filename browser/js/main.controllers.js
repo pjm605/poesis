@@ -25,11 +25,10 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     // var words = $scope.text.replace(/ /g, '\n');
     var parsedWords = [];
     var hapaxWords = [];
-    var fromLexicon;
+    var fromLexicon = null;
     for (var w = 0; w < words.length; w++) {
       parsedWords.push(parse(words[w]));
     }
-    console.log('parsedWords', parsedWords);
 
     Promise.all(parsedWords).then(function (parseArray) {
       for(var i = 0; i < parseArray.length; i ++) {
@@ -37,22 +36,34 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
           hapaxWords.push(parseArray[i]);
         }
       }
-      hapaxWords = hapaxWords.join('\n');
+
       console.log('hapaxWords', hapaxWords);
 
-      lexicon(hapaxWords)
-      .then(function(lexiconParseArray) {
-        fromLexicon = lexiconParseArray;
-        console.log('fromLexicon', fromLexicon);
-      });
+      if (hapaxWords.length > 0) {
+        hapaxWords = hapaxWords.join('\n');
+        lexicon(hapaxWords)
+        .then(function(lexiconParseArray) {
+          console.log('!!!!!!!!!', lexiconParseArray);
+          fromLexicon = lexiconParseArray;
+          console.log('fromLexicon', fromLexicon);
+          for(var i = 0; i < parseArray.length; i ++) {
+            console.log('is it here?', fromLexicon[0]);
+            if (parseArray[i] === 'hapax') {
+              parseArray[i] =  fromLexicon[0];
+              fromLexicon.shift();
+            }
+          }
+          console.log('going into the soundFactory-number111111111111');
+        soundFactory.main(parseArray, cm);
 
-      for(var i = 0; i < parsedWords.length; i ++) {
-        if (parsedWords[i] === fromLexicon[0]) {
-          parsedWords[i] = fromLexicon.shift();
-        }
+        }).catch(function (err) {
+          console.error('error', err);
+        });
+        
+      } else {
+        console.log('going into the soundFactory-number22222222222');
+        soundFactory.main(parseArray, cm);
       }
-      
-      soundFactory.main(parseArray, cm);
     });
 
   }, 1000);
