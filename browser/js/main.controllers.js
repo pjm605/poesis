@@ -20,8 +20,10 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
     console.log('$scope.text', $scope.text);
     //could pass in the updated $scope.text to a function here
-    var words = $scope.text.replace(/ /g, '\n');
-    
+    var pounded = $scope.text.replace(/\n/g, ' # ');
+    console.log('===> ' + pounded);
+    var words = pounded.replace(/ /g, '\n');
+
     lexicon(words)
     .then(function(parseArray) {
       console.log('parseArray', parseArray);
