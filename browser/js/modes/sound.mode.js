@@ -38,7 +38,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
             var nextVowel = vowelLocations[vow][currentPositions[vow]];
             console.log(state.position, "state.position");
             console.log(nextVowel, 'nextvowel');
-            if (state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
+            if (nextVowel && state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
               currentPositions[vow]++;
               return 'blue';
             }
