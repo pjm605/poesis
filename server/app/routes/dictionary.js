@@ -2,6 +2,7 @@ var router = require('express').Router();
 var fs = require('fs');
 var dictionary = __dirname + '/cmudict.txt';
 var request = require('request');
+var rp =  require('request-promise');
 
 function readTxtFile(file){
   return fs.readFileSync(file).toString();
@@ -54,49 +55,51 @@ router.get('/buffer', function(req, res, next) {
 		}
 	};
 
-	request.post({url: 'http://www.speech.cs.cmu.edu/cgi-bin/tools/logios/lextool.pl', formData: formData}, function(err, httpResponse, body) {
-		if (err) {
-			return console.error('upload failed', err);
-		}
-		console.log('Upload successful!  Server responded with:', body);
+	rp({method: 'POST', uri: 'http://www.speech.cs.cmu.edu/cgi-bin/tools/logios/lextool.pl', formData: formData})
+	.then(function(parsedBody) {
+		//console.log('Upload successful!  Server responded with:', parsedBody);
 
-		//new request
+		//get the URI for the second request
 		var regex = /(ht|f)tp:\/\/([^ \,\;\:\!\)\(\"\'\\f\n\r\t\v])+/g;
-		var resultUrls = body.match(regex);
+		//this returns two URI listed in the html parsedBody
+		var resultUrls = parsedBody.match(regex); 
+		//get the second URI
 		correctUrl = resultUrls[1];
+
 		console.log('correctUrl', correctUrl);
-		// res.send(correctUrl);
-	}).then(function (response) {
-		request(correctUrl, function(error, response, body) {
-			if (!error) {
-				//&& response.statusCode === 200
-				//res.send(body);
-				var newBody = body.split('\t').join(' ');
-				newBody = newBody.split('\n');
+
+		//second request
+		rp({method: 'GET', uri: correctUrl})
+		.then(function(response) {
+			if (response) {
+				var responseBody = response.split('\t').join(' ');
+				responseBody = responseBody.split('\n');
 
 				var resultObj = {};
-				newBody.forEach(function (phonemes) {
+				responseBody.forEach(function (phonemes) {
 					if (!resultObj[phonemes] && phonemes !== '') {
 						phonemes = phonemes.split(/\s/);
-						var keyWord = phonemes.splice(0,1);
+						var keyWord = phonemes.splice(0, 1);
 						keyWord = keyWord.toString().replace(/[^a-z']+/gi, '').toLowerCase();
 						phonemes = phonemes.join(' ');
 						resultObj[keyWord] = phonemes;
 					}
 				});
 				var resultArray = [];
-				for(let key in resultObj) {
-					resultArray.push(resultObj[key]);
+				for(key in resultObj) {
+					if (resultObj.hasOwnProperty(key)) resultArray.push(resultObj[key]);
 				}
+
 				console.log(resultArray);
 				res.send(resultArray);
 			} else {
 				res.sendStatus(404);
 			}
 		});
-	});
 
-	//http://www.speech.cs.cmu.edu/tools/product/1475625444_11184/1157.dict
+	}).catch(function (handleError) {
+		console.error('POST request failed', handleError);
+	});
 
 });
 
