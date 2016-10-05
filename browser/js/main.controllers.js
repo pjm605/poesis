@@ -1,34 +1,33 @@
-app.controller('MainCtrl', function($scope, $document, $log, parse, soundFactory) {
+app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexicon) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
   var textar = document.getElementById('poemarea');
-  //console.log(textar);
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
       name: 'soundMode',
       consonantRules: [],
-      vowelLocations:[]
+      vowelLocations: []
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
   });
 
   $scope.text = '';
-  var debounced = _.debounce(function(codeMirror, obj) {
+  var debounced = _.debounce(function(codeMirror) {
     $scope.text = cm.getValue();
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
     console.log('$scope.text', $scope.text);
     //could pass in the updated $scope.text to a function here
-    var words = $scope.text.replace(/-/g, ' ').split(' ');
-    var parsedWords = [];
-    for (var w = 0; w < words.length; w++) {
-      parsedWords.push(parse(words[w]));
-    }
-    Promise.all(parsedWords).then(function (parseArray) {
+    var words = $scope.text.replace(/ /g, '\n');
+    
+    lexicon(words)
+    .then(function(parseArray) {
+      console.log('parseArray', parseArray);
       soundFactory.main(parseArray, cm);
     });
+
   }, 1000);
 
   cm.on('change', debounced);
