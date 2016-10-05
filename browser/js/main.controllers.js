@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexicon) {
+app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexicon, parse) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -20,12 +20,43 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
     console.log('$scope.text', $scope.text);
     //could pass in the updated $scope.text to a function here
-    var words = $scope.text.replace(/ /g, '\n');
-    
-    lexicon(words)
-    .then(function(parseArray) {
-      console.log('parseArray', parseArray);
-      soundFactory.main(parseArray, cm);
+
+    var words = $scope.text.replace(/-/g, ' ').split(' ');
+    // var words = $scope.text.replace(/ /g, '\n');
+    var parsedWords = [];
+    var hapaxWords = [];
+    var fromLexicon = null;
+    for (var idx = 0; idx < words.length; idx++) {
+      parsedWords.push(parse(words[idx]));
+    }
+
+    Promise.all(parsedWords).then(function (parseArray) {
+      for (var i = 0; i < parseArray.length; i ++) {
+        if (parseArray[i][0] === '@') {
+          hapaxWords.push(parseArray[i].slice(1));
+        }
+      }
+      console.log('Not in the dictionary: hapaxWords', hapaxWords);
+
+      if (hapaxWords.length > 0) {
+        hapaxWords = hapaxWords.join('\n');
+        lexicon(hapaxWords)
+        .then(function(lexiconParseArray) {
+          fromLexicon = lexiconParseArray;
+          for(var i = 0; i < parseArray.length; i ++) {
+            if (parseArray[i][0] === '@') {
+              parseArray[i] = fromLexicon.shift();
+            }
+          }
+        soundFactory.main(parseArray, cm);
+
+        }).catch(function (err) {
+          console.error('error', err);
+        });
+
+      } else {
+        soundFactory.main(parseArray, cm);
+      }
     });
 
   }, 1000);

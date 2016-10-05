@@ -1,6 +1,6 @@
 CodeMirror.defineMode('soundMode', function (config, parserConfig) {
-  console.log('CONFIG', config);
-  console.log('parserCONFIG', parserConfig);
+  // console.log('CONFIG', config);
+  // console.log('parserCONFIG', parserConfig);
 
   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
   var consonantRules = parserConfig.consonantRules;
@@ -10,7 +10,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   for (var vow in vowelLocations) {
     currentPositions[vow] = 0;
   }
-  console.log('vowel locations -->', vowelLocations);
+  // console.log('vowel locations -->', vowelLocations);
 
   return {
     startState: function() {return {
@@ -36,8 +36,8 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
           state.position[1]++;
           for (var vow in vowelLocations) {
             var nextVowel = vowelLocations[vow][currentPositions[vow]];
-            console.log(state.position, "state.position");
-            console.log(nextVowel, 'nextvowel');
+            // console.log(state.position, "state.position");
+            // console.log(nextVowel, 'nextvowel');
             if (nextVowel && state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
               currentPositions[vow]++;
               return 'blue';
