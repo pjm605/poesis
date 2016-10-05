@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp', ['ui.router', 'ngMessages', 'ui.codemirror']);
+var app = angular.module('myApp', ['ui.router', 'ngMessages']);
 
 app.run(function ($rootScope, $window) {
   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
