@@ -1,33 +1,6 @@
 var router = require('express').Router();
 var fs = require('fs');
-var dictionary = __dirname + '/cmudict.txt';
-var request = require('request');
 var rp =  require('request-promise');
-
-function readTxtFile(file){
-  return fs.readFileSync(file).toString();
-}
-var dictionaryFile = readTxtFile(dictionary);
-console.log(!!dictionaryFile)
-
-function formatDictionary(dictionaryFile) {
-	var words = {};
-	var lines = dictionaryFile.toString().split('\n');
-	var lineSplit;
-	lines.forEach(function (line) {
-		lineSplit = line.split('  ');
-		lineSplit[0] = lineSplit[0].replace(/[^a-z']+/gi, '').toLowerCase();
-		if (!words[lineSplit[0]]) words[lineSplit[0]] = lineSplit[1];
-	});
-	return words;
-}
-
-var words = formatDictionary(dictionaryFile);
-
-router.get('/', function(req, res, next) {
-	res.json(words);
-});
-
 var bufferText = null;
 
 router.post('/buffer', function(req, res, next) {
@@ -40,9 +13,8 @@ router.post('/buffer', function(req, res, next) {
 	}
 });
 
-router.get('/buffer', function(req, res, next) {
+router.get('/', function(req, res, next) {
 
-	// var bufferText = new Buffer('hello\nmy\nname\nis\nangela', 'utf-8');
 	var correctUrl = null;
 	var formData = {
 		wordfile: {
@@ -62,7 +34,7 @@ router.get('/buffer', function(req, res, next) {
 		//get the URI for the second request
 		var regex = /(ht|f)tp:\/\/([^ \,\;\:\!\)\(\"\'\\f\n\r\t\v])+/g;
 		//this returns two URI listed in the html parsedBody
-		var resultUrls = parsedBody.match(regex); 
+		var resultUrls = parsedBody.match(regex);
 		//get the second URI
 		correctUrl = resultUrls[1];
 
@@ -86,7 +58,7 @@ router.get('/buffer', function(req, res, next) {
 					}
 				});
 				var resultArray = [];
-				for(key in resultObj) {
+				for (key in resultObj) {
 					if (resultObj.hasOwnProperty(key)) resultArray.push(resultObj[key]);
 				}
 
@@ -102,5 +74,34 @@ router.get('/buffer', function(req, res, next) {
 	});
 
 });
+
+//this should be kept here just in case the cmudictionary has to be used instead of the lexicon tool.
+
+// var dictionary = __dirname + '/cmudict.txt';
+// function readTxtFile(file){
+//   return fs.readFileSync(file).toString();
+// }
+// var dictionaryFile = readTxtFile(dictionary);
+// console.log(!!dictionaryFile)
+
+// function formatDictionary(dictionaryFile) {
+// 	var words = {};
+// 	var lines = dictionaryFile.toString().split('\n');
+// 	var lineSplit;
+// 	lines.forEach(function (line) {
+// 		lineSplit = line.split('  ');
+// 		lineSplit[0] = lineSplit[0].replace(/[^a-z']+/gi, '').toLowerCase();
+// 		if (!words[lineSplit[0]]) words[lineSplit[0]] = lineSplit[1];
+// 	});
+// 	return words;
+// }
+
+// var words = formatDictionary(dictionaryFile);
+
+// router.get('/cmudictionary', function(req, res, next) {
+// 	// res.json(words);
+// 	// this is for  cmudictionary
+// });
+
 
 module.exports = router;

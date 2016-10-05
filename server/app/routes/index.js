@@ -1,8 +1,8 @@
 'use strict';
 var router = require('express').Router(); // eslint-disable-line new-cap
-var dictionaryRouter = require('./dictionary');
+var lexiconRouter = require('./lexicon');
 
- router.use('/dictionary', dictionaryRouter);
+ router.use('/lexicon', lexiconRouter);
 
 
 // Make sure this is after all of
