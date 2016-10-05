@@ -1,20 +1,12 @@
 var router = require('express').Router();
 var fs = require('fs');
 var rp =  require('request-promise');
-var bufferText = null;
 
-router.post('/buffer', function(req, res, next) {
-	if (req.body) {
-		var words = req.body.words;
-		bufferText = new Buffer(words, 'utf-8');
-		res.send(req.body.words).status(200);
-	} else {
-		res.send('need the input!', req.body);
-	}
-});
 
-router.get('/', function (req, res, next) {
+router.post('/', function(req, res, next) {
 
+	var words = req.body.words;
+	var bufferText = new Buffer(words, 'utf-8');
 	var correctUrl = null;
 	var formData = {
 		wordfile: {
