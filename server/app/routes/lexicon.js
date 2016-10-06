@@ -8,15 +8,16 @@ function readTxtFile(file){
 }
 
 var dictionaryFile = readTxtFile(dictionary);
-console.log(!!dictionaryFile)
+// console.log(!!dictionaryFile)
 
 function formatDictionary(dictionaryFile) {
+	dictionaryFile = readTxtFile(dictionary);
 	var words = {};
 	var lines = dictionaryFile.toString().split('\n');
 	var lineSplit;
 	lines.forEach(function (line) {
 		lineSplit = line.split('  ');
-		lineSplit[0] = lineSplit[0].replace(/[^a-z'#]+/gi, '').toLowerCase();
+		lineSplit[0] = lineSplit[0].replace(/[^a-z']+/gi, '').toLowerCase();
 		if (!words[lineSplit[0]]) words[lineSplit[0]] = lineSplit[1];
 	});
 	return words;
