@@ -16,13 +16,14 @@ function formatDictionary(dictionaryFile) {
 	var lineSplit;
 	lines.forEach(function (line) {
 		lineSplit = line.split('  ');
-		lineSplit[0] = lineSplit[0].replace(/[^a-z']+/gi, '').toLowerCase();
+		lineSplit[0] = lineSplit[0].replace(/[^a-z'#]+/gi, '').toLowerCase();
 		if (!words[lineSplit[0]]) words[lineSplit[0]] = lineSplit[1];
 	});
 	return words;
 }
 
 var words = formatDictionary(dictionaryFile);
+
 
 router.post('/', function(req, res, next) {
 
@@ -65,7 +66,7 @@ router.post('/', function(req, res, next) {
 					if (!resultObj[phonemes] && phonemes !== '') {
 						phonemes = phonemes.split(/\s/);
 						var keyWord = phonemes.splice(0, 1);
-						keyWord = keyWord.toString().replace(/[^a-z']+/gi, '').toLowerCase();
+						keyWord = keyWord.toString().replace(/[^a-z'#]+/gi, '').toLowerCase();
 						phonemes = phonemes.join(' ');
 						resultObj[keyWord] = phonemes;
 					}
