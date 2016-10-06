@@ -70,7 +70,6 @@ app.factory('soundFactory', function () {
   };
 
   var locateVowelsInText = function (text, vowels) {
-    console.log("THESTINGGGG ", text, text.length-1)
     var locations = {};
     for (var w = 0; w < text.length; w++) {
       var word = text[w].split(' ');
