@@ -1,7 +1,11 @@
 app.factory('soundFactory', function () {
 
   var stripBreaks = function (parseArray) {
-
+    var stripped = [];
+    for (var i = 0; i < parseArray.length; i++) {
+      if (parseArray[i] != 'BREAK') stripped.push(parseArray[i]);
+    }
+    return stripped;
   };
 
   var countWordSounds = function (word, soundDic) {
@@ -163,7 +167,7 @@ app.factory('soundFactory', function () {
       var sig = this.identifySignificant(parseArray);
       var modeOptions = cm.getOption('mode');
       modeOptions.consonantRules = soundToLetter(sig[0]);
-      modeOptions.vowelLocations = locateVowelsInText(parseArray, sig[1]);
+      modeOptions.vowelLocations = locateVowelsInText(stripBreaks(parseArray), sig[1]);
       cm.setOption('mode', modeOptions);
     }
   };
