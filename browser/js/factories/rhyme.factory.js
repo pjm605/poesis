@@ -1,30 +1,36 @@
 
 app.factory('rhymeFactory', function () {
-	//parseSound => "W UH M AH N"
-	function findVowelLocation (parseSound) {
-		var vowels = ['AO', 'AA', 'IY', 'UW', 'EH', 'IH', 'UH',
-                  'AH', 'AX', 'AE', 'EY', 'AY', 'AW', 'OW', 'OY'];
-    var word = parseSound.split(" ");
-        //word = ["W", "UH", "M", "AH", "N"]
-    var vowelSound = ""
-      for (var i = 0; i < word.length; i++) {
-        if(vowels.indexOf(word[i]) >= 0) {
-          vowelSound = word[i]
-        };
-      };
-    
 
+var isVowel = function (str) {
+  if (/\d/.test(str[str.length-1])) return true;
+  else return false;
+};
 
-	};
+//parseSound = "V IH1 Z AH0 B AH0 L"
+function findVowelLocation (parseSound) {
+  var word = parseSound.split(" ");
+  //word = ["V", "IH1", "Z", "AH0", "B", "AH0", "L"]
+  var vowelStore = []
+    for (var i = 0; i < word.length; i++) {
+      if(isVowel(word[i])) {
+        vowelStore.push(word[i].replace(/[^A-Za-z]/,""))
+      }
+    }
+  // vowelStore = [ 'IH', 'AH', 'AH' ]
+  return vowelStore.length-1
+}
 
   var rf = {
- 
+    //["AH1 V", "R AA1 K", "B EH1 R L IY0", "V IH1 Z AH0 B AH0 L"]
+    rhymeLocation: function (text) {
+      var vowelLocation = findVowelLocation(text[text.length-1]);
+      var wordLocation = text.length-1
+      return [wordLocation, vowelLocation];
+      //[3,2]
+    }
   };
   return rf;
 });
 
-//take the last word in the line
-//return index of word in text & index of vowel in the word
-//
 
 
