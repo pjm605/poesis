@@ -21,7 +21,8 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     console.log('$scope.text', $scope.text);
     //could pass in the updated $scope.text to a function here
 
-    var pounded = $scope.text.replace(/\n/g, ' # ');
+    var pounded = $scope.text.replace(/\n/g, ' qzqz ');
+    console.log('replaced???', pounded);
     var words = pounded.replace(/-/g, ' ').split(' ');
     // var words = $scope.text.replace(/ /g, '\n');
     var parsedWords = [];
