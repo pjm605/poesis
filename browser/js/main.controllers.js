@@ -27,7 +27,6 @@ app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory
     var words = pounded.replace(/-/g, ' ').split(' ').filter(function (word) {
       return word !== "";
     })
-    console.log('words', words);
 
     var parsedWords = [];
     var hapaxWords = [];
@@ -41,7 +40,6 @@ app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory
         if (parseArray[i][0] === '@') {
           hapaxWords.push(parseArray[i].slice(1));
         }
-        console.log('WORD', parseArray[i]);
       }
       console.log('Not in the dictionary: hapaxWords', hapaxWords);
       if (hapaxWords.length > 0) {
@@ -60,7 +58,6 @@ app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory
         });
 
       } else {
-        console.log(parseArray);
         lines(parseArray);
         soundFactory.main(parseArray, cm);
       }
