@@ -1,24 +1,30 @@
 
 app.factory('rhymeFactory', function () {
-	//"there" => "DH EH R"
-	function vowelLocation (parseSound) {
+	//parseSound => "W UH M AH N"
+	function findVowelLocation (parseSound) {
 		var vowels = ['AO', 'AA', 'IY', 'UW', 'EH', 'IH', 'UH',
                   'AH', 'AX', 'AE', 'EY', 'AY', 'AW', 'OW', 'OY'];
-        var word = parseSound.split(" ");
-        //word = ["DH", "EH", "R"]
-        for (var i = 0; i < word.length; i++) {
-          var vowelSound = ""
-         	if(vowels.indexOf(word[i]) >= 0) {
-            vowelSound = word[i].substring(0, word[i].length-1);
-          }
-        }
+    var word = parseSound.split(" ");
+        //word = ["W", "UH", "M", "AH", "N"]
+    var vowelSound = ""
+      for (var i = 0; i < word.length; i++) {
+        if(vowels.indexOf(word[i]) >= 0) {
+          vowelSound = word[i]
+        };
+      };
+    
+
+
 	};
 
-  var rf = {};
+  var rf = {
+ 
+  };
   return rf;
 });
 
 //take the last word in the line
-//find the location of vowel (sound?) and consonant (after the vowel);
+//return index of word in text & index of vowel in the word
+//
 
 
