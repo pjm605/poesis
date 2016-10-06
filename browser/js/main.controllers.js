@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexicon, parse) {
+app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory, lexicon, parse) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -56,6 +56,7 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
 
       } else {
         console.log(parseArray);
+        lines(parseArray);
         soundFactory.main(parseArray, cm);
       }
     });
