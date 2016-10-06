@@ -10,14 +10,14 @@ app.factory('rhymeFactory', function () {
   function findVowelLocation (parseSound) {
     var word = parseSound.split(" ");
     //word = ["V", "IH1", "Z", "AH0", "B", "AH0", "L"]
-    var vowelStore = []
+    var vowelStore = [];
       for (var i = 0; i < word.length; i++) {
         if(isVowel(word[i])) {
           vowelStore.push(word[i].replace(/[^A-Za-z]/,""));
         };
       }
     // vowelStore = [ 'IH', 'AH', 'AH' ]
-    return vowelStore.length-1
+    return vowelStore.length-1;
   };
 
   var rf = {
