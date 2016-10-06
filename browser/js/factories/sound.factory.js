@@ -1,5 +1,9 @@
 app.factory('soundFactory', function () {
 
+  var stripBreaks = function (parseArray) {
+
+  };
+
   var countWordSounds = function (word, soundDic) {
     var newWord = word.replace(/[^A-Za-z ]+/g, '');
     newWord = newWord.split(' ');
@@ -85,13 +89,13 @@ app.factory('soundFactory', function () {
     var locations = {};
     for (var w = 0; w < text.length; w++) {
       var word = text[w].split(' ');
+      var vowelCount = -1;
       for (var s = 0; s < word.length; s++) {
-        var vowelCount = -1;
         var vowelSound = "";
         if (isVowel(word[s])) {
           vowelSound = unStress(word[s]);
-          console.log('vowelSound', vowelSound);
           vowelCount++;
+          console.log('vowelSound', vowelSound, w, vowelCount);
           for (var v = 0; v < vowels.length; v++) {
             var vow = vowels[v];
             if (vow == vowelSound) {
