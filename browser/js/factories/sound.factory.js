@@ -65,9 +65,22 @@ app.factory('soundFactory', function () {
   };
 
   var isVowel = function (str) {
-    if (/\d/.test(str[str.length-1])) return true;
+    var vowels = ['AO', 'AA', 'IY', 'UW', 'EH', 'IH', 'UH', 'AH', 'AX', 'AE', 'EY', 'AY', 'OW', 'AW', 'OY'];
+    if (/\d/.test(str[str.length-1]) || vowels.indexOf(str) > -1) return true;
     else return false;
   };
+
+  var unStress = function (vow) {
+    var last = vow.substring(vow.length-1, vow.length);
+    if (last == String(Number(last))) return vow.substring(0, vow.length-1);
+    else return vow;
+  }
+
+  var stress = function (vow) {
+    var last = vow.substring(vow.length-1, vow.length);
+    if (last == String(Number(last))) return vow;
+    else return vow+'9';
+  }
 
   var locateVowelsInText = function (text, vowels) {
     var locations = {};
@@ -77,7 +90,7 @@ app.factory('soundFactory', function () {
         var vowelCount = -1;
         var vowelSound = "";
         if (isVowel(word[s])) {
-          vowelSound = word[s].substring(0, word[s].length-1);
+          vowelSound = unStress(word[s]);
           console.log('vowelSound', vowelSound);
           vowelCount++;
           for (var v = 0; v < vowels.length; v++) {
