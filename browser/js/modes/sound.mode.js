@@ -5,7 +5,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
   var consonantRules = parserConfig.consonantRules;
   var vowelLocations = parserConfig.vowelLocations;
-  var colors = ['red', 'green', 'purple', 'yellow'];
+  var colors = ['red', 'green', 'blue', 'yellow'];
   var currentPositions = {};
   for (var vow in vowelLocations) {
     currentPositions[vow] = 0;
@@ -29,7 +29,6 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
         //next token is a vowel
         if (simpleVowels.indexOf(next) > -1 ||
         (next == 'y' && simpleVowels.indexOf(stream.peek()) < 0)) {
-          console.log('inithe vowel branch!!!');
           while (simpleVowels.indexOf(stream.peek()) > -1 || stream.peek() == 'y') {
             stream.next();
           }
