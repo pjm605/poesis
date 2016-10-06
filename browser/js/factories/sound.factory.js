@@ -12,9 +12,8 @@ app.factory('soundFactory', function () {
   //helper function we do not want to expose
   var countTextSounds = function (text) {
     var sd = {};
-    console.log('text', text);
     for (var i = 0; i < text.length; i++) {
-      countWordSounds(text[i], sd);
+      if (text[i] != 'BREAK') countWordSounds(text[i], sd);
     }
     return sd;
   };
