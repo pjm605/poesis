@@ -7,7 +7,10 @@ app.factory('rhymeFactory', function () {
         var word = parseSound.split(" ");
         //word = ["DH", "EH", "R"]
         for (var i = 0; i < word.length; i++) {
-        	
+          var vowelSound = ""
+         	if(vowels.indexOf(word[i]) >= 0) {
+            vowelSound = word[i].substring(0, word[i].length-1);
+          }
         }
 	};
 

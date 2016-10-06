@@ -31,6 +31,7 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     }
 
     Promise.all(parsedWords).then(function (parseArray) {
+      console.log("this is parseARray  ", parseArray)
       for (var i = 0; i < parseArray.length; i ++) {
         if (parseArray[i][0] === '@') {
           hapaxWords.push(parseArray[i].slice(1));
