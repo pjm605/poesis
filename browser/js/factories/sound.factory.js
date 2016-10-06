@@ -78,6 +78,7 @@ app.factory('soundFactory', function () {
         var vowelSound = "";
         if (isVowel(word[s])) {
           vowelSound = word[s].substring(0, word[s].length-1);
+          console.log('vowelSound', vowelSound);
           vowelCount++;
           for (var v = 0; v < vowels.length; v++) {
             var vow = vowels[v];
