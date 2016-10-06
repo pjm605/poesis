@@ -21,7 +21,8 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
     console.log('$scope.text', $scope.text);
     //could pass in the updated $scope.text to a function here
 
-    var words = $scope.text.replace(/-/g, ' ').split(' ');
+    var pounded = $scope.text.replace(/\n/g, ' # ');
+    var words = pounded.replace(/-/g, ' ').split(' ');
     // var words = $scope.text.replace(/ /g, '\n');
     var parsedWords = [];
     var hapaxWords = [];
@@ -38,7 +39,6 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
         }
       }
       console.log('Not in the dictionary: hapaxWords', hapaxWords);
-
       if (hapaxWords.length > 0) {
         hapaxWords = hapaxWords.join('\n');
         lexicon(hapaxWords)
@@ -49,18 +49,16 @@ app.controller('MainCtrl', function($scope, $document, $log, soundFactory, lexic
               parseArray[i] = fromLexicon.shift();
             }
           }
-        soundFactory.main(parseArray, cm);
-
+          soundFactory.main(parseArray, cm);
         }).catch(function (err) {
           console.error('error', err);
         });
 
       } else {
+        console.log(parseArray);
         soundFactory.main(parseArray, cm);
       }
     });
-
   }, 1000);
-
   cm.on('change', debounced);
 });
