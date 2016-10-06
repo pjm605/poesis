@@ -1,6 +1,28 @@
 var router = require('express').Router();
 var fs = require('fs');
 var rp =  require('request-promise');
+var dictionary = __dirname + '/cmudict.txt';
+
+function readTxtFile(file){
+  return fs.readFileSync(file).toString();
+}
+
+var dictionaryFile = readTxtFile(dictionary);
+console.log(!!dictionaryFile)
+
+function formatDictionary(dictionaryFile) {
+	var words = {};
+	var lines = dictionaryFile.toString().split('\n');
+	var lineSplit;
+	lines.forEach(function (line) {
+		lineSplit = line.split('  ');
+		lineSplit[0] = lineSplit[0].replace(/[^a-z'#]+/gi, '').toLowerCase();
+		if (!words[lineSplit[0]]) words[lineSplit[0]] = lineSplit[1];
+	});
+	return words;
+}
+
+var words = formatDictionary(dictionaryFile);
 
 
 router.post('/', function(req, res, next) {
@@ -67,33 +89,10 @@ router.post('/', function(req, res, next) {
 
 });
 
-//this should be kept here just in case the cmudictionary has to be used instead of the lexicon tool.
-
-// var dictionary = __dirname + '/cmudict.txt';
-// function readTxtFile(file){
-//   return fs.readFileSync(file).toString();
-// }
-// var dictionaryFile = readTxtFile(dictionary);
-// console.log(!!dictionaryFile)
-
-// function formatDictionary(dictionaryFile) {
-// 	var words = {};
-// 	var lines = dictionaryFile.toString().split('\n');
-// 	var lineSplit;
-// 	lines.forEach(function (line) {
-// 		lineSplit = line.split('  ');
-// 		lineSplit[0] = lineSplit[0].replace(/[^a-z']+/gi, '').toLowerCase();
-// 		if (!words[lineSplit[0]]) words[lineSplit[0]] = lineSplit[1];
-// 	});
-// 	return words;
-// }
-
-// var words = formatDictionary(dictionaryFile);
-
-// router.get('/cmudictionary', function(req, res, next) {
-// 	// res.json(words);
-// 	// this is for  cmudictionary
-// });
+router.get('/cmudictionary', function(req, res, next) {
+	res.json(words);
+	// this is for  cmudictionary
+});
 
 
 module.exports = router;
