@@ -8,10 +8,8 @@ function readTxtFile(file){
 }
 
 var dictionaryFile = readTxtFile(dictionary);
-// console.log(!!dictionaryFile)
 
 function formatDictionary(dictionaryFile) {
-	dictionaryFile = readTxtFile(dictionary);
 	var words = {};
 	var lines = dictionaryFile.toString().split('\n');
 	var lineSplit;
@@ -23,8 +21,7 @@ function formatDictionary(dictionaryFile) {
 	return words;
 }
 
-var words = formatDictionary(dictionaryFile);
-
+var dictionaryWords = formatDictionary(dictionaryFile);
 
 router.post('/', function(req, res, next) {
 
@@ -93,9 +90,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/cmudictionary', function(req, res, next) {
-	res.json(words);
-	// this is for  cmudictionary
+	res.json(dictionaryWords);
 });
-
 
 module.exports = router;

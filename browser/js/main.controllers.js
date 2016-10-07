@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory, lexicon, parse) {
+app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactory, lexicon, parse) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -25,7 +25,7 @@ app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory
     pounded = pounded.trim(); //strip whitespace at the end
 
     var words = pounded.replace(/-/g, ' ').split(' ').filter(function (word) {
-      return word !== "";
+      return word !== '';
     })
 
     var parsedWords = [];
