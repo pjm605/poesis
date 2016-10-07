@@ -22,8 +22,8 @@ app.factory('rhymeFactory', function () {
     else return vowelStore.length - 1;
   };
 
-  function findRhymeMatch (parseSound) {
-    var word = parseSound.split(" ");
+  function findLastVolAndCon (parseSound) {
+    var word = parseSound..join('').split(" ");
     var lastVowel = "";
     var consonants = [];
     var buffer = 0;
@@ -39,8 +39,16 @@ app.factory('rhymeFactory', function () {
     }
   
     return [lastVowel, consonants];
-    //return ['AH', ['L', 'H']]
+    //return ['AH', ['L']]
 
+  };
+
+  function findMatch(breakLines) {
+    var lastWord =[]
+    for (var i = 0; i < breakLines.length; i++) {
+      lastWord.push(findLastVolAndCon(breakLines[i]))
+    }
+    return lastWord
   }
 
   var rf = {
@@ -51,9 +59,14 @@ app.factory('rhymeFactory', function () {
       return [wordLocation, vowelLocation];
       //return [3,2]
     },
-    rhymeMatch: function (text) {
-      return findRhymeMatch(text[text.length-1])
+    lastVolAndCon: function (text) {
+      return findLastVolAndCon(text[text.length-1])
+      //return ['AH', ['L']]
+    },
+    findMatch: function () {
+
     }
+
   };
 
   return rf;
