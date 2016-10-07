@@ -7,33 +7,44 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   var clusters = ['tio', 'sh', 'th', 'ch', 'ie', 'ou', 'ei', 'oi', 'ai', 'ow', 'ea', 'oo'];
 
   for (var vow in vowelLocations) {
-      currentPositions[vow] = 0;
+    currentPositions[vow] = 0;
   }
+
+  var isVowel = function (tok) {
+    return tok && simpleVowels.indexOf(tok[0]);
+  };
 
   var findToken = function (stream) {
     var next = stream.next();
     var single = next;
     if (!next || next == ' ') return null;
     else {
+      next = next.toLowerCase();
       for (var i = 0; i < clusters.length; i++) {
         var current = "";
+        // console.log('trying....', clusters[i]);
         for (var c = 0; c < clusters[i].length; c++) {
-          // console.log('cluster: ' + clusters[i]);
-          // console.log('next', next);
+          //  console.log('cluster: ' + clusters[i][c]);
+          //  console.log('next', next);
           if (next == clusters[i][c]) {
             current += next;
-            if (c == clusters[i].length - 1) return current;
-            else if (stream.peek()) next = stream.next();
-            else break;
+            if (stream.peek()) next = stream.next().toLowerCase();
+            else {
+              //console.log('break reached');
+              stream.backUp(c);
+              break;
+            }
           }
           else {
-            stream.backUp(c);
+            stream.backUp(c+1);
+            next = stream.next();
+          //  console.log('other break reached');
             break;
           }
         }
+        if (current == clusters[i]) return current;
       }
     }
-    console.log('single letter?', single);
     return single;
   };
 
@@ -45,11 +56,20 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
     },
     token: function (stream, state) {
       var next = findToken(stream);
+      console.log('NEXT', next);
       if (!next) {
-        //next token is a space
+        //next token is a space or does not exist
         state.position[0]++;
         state.position[1] = -1;
         return null;
+      }
+      else if (isVowel(next)) {
+        //next token is a vowel
+        console.log(next, 'is a vowel!!');
+      }
+      else {
+        //next token is a consonant
+        console.log(next, 'is a consonant');
       }
     }
   };
