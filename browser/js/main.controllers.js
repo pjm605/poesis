@@ -22,7 +22,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
 
     var pounded = $scope.text.replace(/\n/g, ' qzqz ');
     pounded = pounded.trim(); //strip whitespace at the end
-    var words = pounded.replace(/-/g, ' ').replace(/[^a-z']+/gi, '').split(' ')
+    var words = pounded.replace(/-/g, ' ').replace(/[^a-z'\s]+/gi, '').split(' ')
     .filter(function (word) {
       return word !== '';
     })
