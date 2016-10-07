@@ -19,14 +19,14 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
     $scope.text = cm.getValue();
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
     console.log('$scope.text', $scope.text);
-    //could pass in the updated $scope.text to a function here
 
     var pounded = $scope.text.replace(/\n/g, ' qzqz ');
     pounded = pounded.trim(); //strip whitespace at the end
-
-    var words = pounded.replace(/-/g, ' ').split(' ').filter(function (word) {
+    var words = pounded.replace(/-/g, ' ').replace(/[^a-z']+/gi, '').split(' ')
+    .filter(function (word) {
       return word !== '';
     })
+    console.log('words', words);
 
     var parsedWords = [];
     var hapaxWords = [];
