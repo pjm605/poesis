@@ -11,7 +11,9 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   }
 
   var isVowel = function (tok) {
-    return tok && simpleVowels.indexOf(tok[0]);
+    console.log(tok);
+    console.log(tok[0]);
+    return tok && simpleVowels.indexOf(tok[0]) > -1;
   };
 
   var findToken = function (stream) {
