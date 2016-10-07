@@ -4,7 +4,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   var vowelLocations = parserConfig.vowelLocations;
   var colors = ['red', 'green', 'blue', 'yellow'];
   var currentPositions = {};
-  var clusters = ['clusters', 'sh', 'th', 'ch', 'ie', 'ou', 'ei', 'oi', 'ai', 'ow', 'ea', 'oo'];
+  var clusters = ['sh', 'th', 'ch', 'ie', 'ou', 'ei', 'oi', 'ai', 'ow', 'ea', 'oo'];
 
   for (var vow in vowelLocations) {
       currentPositions[vow] = 0;
@@ -17,10 +17,24 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
     else {
       for (var i = 0; i < clusters.length; i++) {
         for (var c = 0; c < clusters[i].length; c++) {
-          return true;
+          // console.log('cluster: ' + clusters[i]);
+          // console.log('next', next);
+          if (next == clusters[i][c]) {
+            current += next;
+            if (c == clusters[i].length - 1) return current;
+            else if (stream.peek()) next = stream.next();
+            else break;
+          }
+          else {
+            stream.backUp(c);
+            current = current.substring(0, current.length-c);
+            break;
+          }
         }
       }
     }
+    console.log('single letter?', current, next);
+    return next;
   };
 
   return {
@@ -30,6 +44,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       };
     },
     token: function (stream, state) {
+      console.log('--->', findToken(stream));
       return null;
     }
   };
