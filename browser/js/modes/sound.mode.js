@@ -24,30 +24,35 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       next = next.toLowerCase();
       for (var i = 0; i < clusters.length; i++) {
         var current = "";
-        // console.log('trying....', clusters[i]);
+         console.log('trying....', clusters[i]);
         for (var c = 0; c < clusters[i].length; c++) {
-          //  console.log('cluster: ' + clusters[i][c]);
-          //  console.log('next', next);
+            console.log('cluster: ' + clusters[i][c]);
+            console.log('next', next);
           if (next == clusters[i][c]) {
             current += next;
-            if (stream.peek()) next = stream.next().toLowerCase();
-            else {
-              //console.log('break reached');
-              stream.backUp(c);
-              break;
-            }
           }
           else {
-            stream.backUp(c+1);
-            next = stream.next();
-          //  console.log('other break reached');
+            stream.backUp(stream.current().length);
+            next = stream.next().toLowerCase();
+            break;
+          }
+          if (stream.peek()) next = stream.next().toLowerCase();
+          else if (c < clusters[i].length - 1) {
+            //console.log('break reached');
+            stream.backUp(stream.current().length);
+            next = stream.next().toLowerCase();
             break;
           }
         }
-        if (current == clusters[i]) return current;
+        if (current == clusters[i]) {
+          console.log('NEW MESSAGE', next);
+          stream.backUp(1);
+          return current;
+        }
       }
     }
     return single;
+    stream.next();
   };
 
   return {
@@ -68,40 +73,28 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       else if (isVowel(next)) {
         //next token is a vowel
         console.log(next, 'is a vowel!!');
+        state.position[1]++;
+        for (var vow in vowelLocations) {
+          var nextVowel = vowelLocations[vow][currentPositions[vow]];
+          // console.log(state.position, "state.position");
+          // console.log(nextVowel, 'nextvowel');
+          if (nextVowel && state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
+            currentPositions[vow]++;
+            return 'blue';
+          }
+        }
+        return 'green';
       }
       else {
         //next token is a consonant
         console.log(next, 'is a consonant');
+        return 'red';
       }
     }
   };
 });
 
 
-//       else {
-//       //     next.toLowerCase();
-//       // //  if (true) {
-//       //     //next token is a vowel
-//       //     stream.backUp();
-//       //     var vowelTest = stream.match(/^(ie|ou|ei|oi|ai|ow|ea|oo|[aeiou])/, false, false);
-//       //     //var vowelTest = stream.match(/[aeiou]/);
-//       //     console.log('This is what stream.match returns', (vowelTest ? vowelTest : ""));
-//       //     if (vowelTest) {
-//       //       console.log('vowel test passed!!');
-//       //       for (var i = 0; i < vowelTest[0].length; i++) {
-//       //         stream.next();
-//       //       }
-//       //       state.position[1]++;
-//       //       console.log('state position', state.position);
-//       //       for (var vow in vowelLocations) {
-//       //         var nextVowel = vowelLocations[vow][currentPositions[vow]];
-//       //         // console.log(state.position, "state.position");
-//       //         // console.log(nextVowel, 'nextvowel');
-//       //         if (nextVowel && state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
-//       //           currentPositions[vow]++;
-//       //           return 'blue';
-//       //         }
-//       //       }
 //       //     }
 //         //}
 //           // else {
