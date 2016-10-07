@@ -13,7 +13,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   var findToken = function (stream) {
     var next = stream.next();
     var single = next;
-    if (!next || next == ' ') return current;
+    if (!next || next == ' ') return null;
     else {
       for (var i = 0; i < clusters.length; i++) {
         var current = "";
@@ -22,7 +22,6 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
           // console.log('next', next);
           if (next == clusters[i][c]) {
             current += next;
-            console.log("CURRENT", current);
             if (c == clusters[i].length - 1) return current;
             else if (stream.peek()) next = stream.next();
             else break;
@@ -45,28 +44,18 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       };
     },
     token: function (stream, state) {
-      console.log('--->', findToken(stream));
-      return null;
+      var next = findToken(stream);
+      if (!next) {
+        //next token is a space
+        state.position[0]++;
+        state.position[1] = -1;
+        return null;
+      }
     }
   };
 });
 
-//
-//
-//   return {
-//     startState: function() {return {
-//       position: [0, -1],
-//       //token: this.token
-//     };},
-//     token: function (stream, state) {
-//       var next = stream.next();
-//       console.log(next, 'NEXT');
-//       if (next == ' ' || !next) {
-//         //next token is a space
-//         state.position[0]++;
-//         state.position[1] = -1;
-//         return null;
-//       }
+
 //       else {
 //       //     next.toLowerCase();
 //       // //  if (true) {
