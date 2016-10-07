@@ -4,15 +4,21 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   var vowelLocations = parserConfig.vowelLocations;
   var colors = ['red', 'green', 'blue', 'yellow'];
   var currentPositions = {};
-  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
+  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'ey', 'oy', 'ay', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
 
   for (var vow in vowelLocations) {
     currentPositions[vow] = 0;
   }
 
-  var isVowel = function (tok) {
+  var isVowel = function (tok, stream) {
     console.log(tok);
     console.log(tok[0]);
+    if (tok == 'y') {
+      if (stream.peek() && isVowel(stream.peek(), stream)) {
+        return false;
+      }
+      return true;
+    }
     return tok && simpleVowels.indexOf(tok[0]) > -1;
   };
 
@@ -36,6 +42,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
             next = stream.next().toLowerCase();
             break;
           }
+          //are we at the end of the text?
           if (stream.peek()) next = stream.next().toLowerCase();
           else if (c < clusters[i].length - 1) {
             //console.log('break reached');
@@ -43,16 +50,18 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
             next = stream.next().toLowerCase();
             break;
           }
+          else {
+            stream.next();
+            console.log('stream current', stream.current());
+          }
         }
         if (current == clusters[i]) {
-          console.log('NEW MESSAGE', next);
           stream.backUp(1);
           return current;
         }
       }
     }
     return single;
-    stream.next();
   };
 
   return {
@@ -70,14 +79,12 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
         state.position[1] = -1;
         return null;
       }
-      else if (isVowel(next)) {
+      else if (isVowel(next, stream)) {
         //next token is a vowel
         console.log(next, 'is a vowel!!');
         state.position[1]++;
         for (var vow in vowelLocations) {
           var nextVowel = vowelLocations[vow][currentPositions[vow]];
-          // console.log(state.position, "state.position");
-          // console.log(nextVowel, 'nextvowel');
           if (nextVowel && state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
             currentPositions[vow]++;
             return 'blue';
