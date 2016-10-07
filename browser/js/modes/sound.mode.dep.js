@@ -1,41 +1,15 @@
-CodeMirror.defineMode('soundMode', function (config, parserConfig) {
-  var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
-  var consonantRules = parserConfig.consonantRules;
-  var vowelLocations = parserConfig.vowelLocations;
-  var colors = ['red', 'green', 'blue', 'yellow'];
-  var currentPositions = {};
-  var clusters = ['clusters', 'sh', 'th', 'ch', 'ie', 'ou', 'ei', 'oi', 'ai', 'ow', 'ea', 'oo'];
-
-  for (var vow in vowelLocations) {
-      currentPositions[vow] = 0;
-  }
-
-  var findToken = function (stream) {
-    var current = '';
-    var next = stream.next();
-    if (!next || next == ' ') return current;
-    else {
-      for (var i = 0; i < clusters.length; i++) {
-        for (var c = 0; c < clusters[i].length; c++) {
-          return true;
-        }
-      }
-    }
-  };
-
-  return {
-    startState: function () {
-      return {
-        position: [0, -1]
-      };
-    },
-    token: function (stream, state) {
-      return null;
-    }
-  };
-});
-
+// CodeMirror.defineMode('soundMode', function (config, parserConfig) {
+//   // console.log('CONFIG', config);
+//   // console.log('parserCONFIG', parserConfig);
 //
+//   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
+//   var consonantRules = parserConfig.consonantRules;
+//   var vowelLocations = parserConfig.vowelLocations;
+//   var colors = ['red', 'green', 'blue', 'yellow'];
+//   var currentPositions = {};
+//   for (var vow in vowelLocations) {
+//     currentPositions[vow] = 0;
+//   }
 //
 //   return {
 //     startState: function() {return {
