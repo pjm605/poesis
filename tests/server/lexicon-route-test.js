@@ -12,11 +12,11 @@ describe('Server', function () {
 	var agent = supertest(app);
 
 	describe('/route', function () {
-		
+
 		var indexContents;
 		beforeEach( 'Get index.html file contents', function (done) {
 			fs.readFile(path.join(__dirname, '../../browser/index.html'), 'utf8', function (err, contents) {
-				if(err) return done(err);
+				if (err) return done(err);
 				indexContents = contents;
 				done();
 			});
@@ -31,4 +31,4 @@ describe('Server', function () {
 			});
 		});
 	});
-})	
+});
