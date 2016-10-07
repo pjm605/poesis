@@ -38,8 +38,7 @@ app.factory('rhymeFactory', function () {
       consonants.push(word[k]);
     }
   
-    return [lastVowel, consonants];
-    //return ['AH', ['L']]
+    return [parseSound.length -1,lastVowel, consonants];
 
   };
 
@@ -52,18 +51,19 @@ app.factory('rhymeFactory', function () {
   }
 
   var rf = {
-    //text = ["AH1 V", "R AA1 K", "B EH1 R L IY0", "V IH1 Z AH0 B AH0 L"]
-    rhymeLocation: function (text) {
-      var wordLocation = text.length - 1;
-      var vowelLocation = findVowelLocation(text[text.length - 1]);
-      return [wordLocation, vowelLocation];
-      //return [3,2]
-    },
-    lastVolAndCon: function (text) {
-      return findLastVolAndCon(text[text.length-1])
-      //return ['AH', ['L']]
-    },
-    findMatch: function () {
+    // //text = ["AH1 V", "R AA1 K", "B EH1 R L IY0", "V IH1 Z AH0 B AH0 L"]
+    // rhymeLocation: function (text) {
+    //   var wordLocation = text.length - 1;
+    //   var vowelLocation = findVowelLocation(text[text.length - 1]);
+    //   return [wordLocation, vowelLocation];
+    //   //return [3,2]
+    // },
+    // lastVolAndCon: function (text) {
+    //   return findLastVolAndCon(text[text.length-1])
+    //   //return ['AH', ['L']]
+    // },
+    // findMatch: function () {
+
 
     }
 
