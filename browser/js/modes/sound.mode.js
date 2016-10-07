@@ -4,7 +4,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   var vowelLocations = parserConfig.vowelLocations;
   var colors = ['red', 'green', 'blue', 'yellow'];
   var currentPositions = {};
-  var clusters = ['tio', 'sh', 'th', 'ch', 'ie', 'ou', 'ei', 'oi', 'ai', 'ow', 'ea', 'oo'];
+  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
 
   for (var vow in vowelLocations) {
     currentPositions[vow] = 0;
@@ -24,10 +24,10 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       next = next.toLowerCase();
       for (var i = 0; i < clusters.length; i++) {
         var current = "";
-         console.log('trying....', clusters[i]);
+        //  console.log('trying....', clusters[i]);
         for (var c = 0; c < clusters[i].length; c++) {
-            console.log('cluster: ' + clusters[i][c]);
-            console.log('next', next);
+            // console.log('cluster: ' + clusters[i][c]);
+            // console.log('next', next);
           if (next == clusters[i][c]) {
             current += next;
           }
@@ -83,38 +83,15 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
             return 'blue';
           }
         }
-        return 'green';
       }
       else {
         //next token is a consonant
         console.log(next, 'is a consonant');
-        return 'red';
+        for (var i = 0; i < consonantRules.length; i++) {
+          if (next == consonantRules[i]) return colors[i];
+        }
+        return null;
       }
     }
   };
 });
-
-
-//       //     }
-//         //}
-//           // else {
-//
-//           //next token is a consonant
-//           //  next = stream.next();
-//             for (var i = 0; i < consonantRules.length; i++) {
-//               if (next == consonantRules[i][0]) {
-//                 if (consonantRules[i].length == 1) return colors[i];
-//                 for (var char = 1; char < consonantRules[i].length; char++) {
-//                   if (consonantRules[i][char] != stream.next()) {
-//                     stream.backUp(char);
-//                   }
-//                   else return colors[i];
-//                 }
-//               }
-//             }
-//             return null;
-//         }
-//       }
-//     // }
-//   }
-// });
