@@ -8,10 +8,8 @@ function readTxtFile(file){
 }
 
 var dictionaryFile = readTxtFile(dictionary);
-// console.log(!!dictionaryFile)
 
 function formatDictionary(dictionaryFile) {
-	dictionaryFile = readTxtFile(dictionary);
 	var words = {};
 	var lines = dictionaryFile.toString().split('\n');
 	var lineSplit;
@@ -23,8 +21,7 @@ function formatDictionary(dictionaryFile) {
 	return words;
 }
 
-var words = formatDictionary(dictionaryFile);
-
+var dictionaryWords = formatDictionary(dictionaryFile);
 
 router.post('/', function(req, res, next) {
 
@@ -53,8 +50,6 @@ router.post('/', function(req, res, next) {
 		//get the second URI
 		correctUrl = resultUrls[1];
 
-		console.log('correctUrl', correctUrl);
-
 		//second request
 		rp({method: 'GET', uri: correctUrl})
 		.then(function(response) {
@@ -63,21 +58,25 @@ router.post('/', function(req, res, next) {
 				responseBody = responseBody.split('\n');
 
 				var resultObj = {};
+				var keyWord;
 				responseBody.forEach(function (phonemes) {
-					if (!resultObj[phonemes] && phonemes !== '') {
-						phonemes = phonemes.split(/\s/);
-						var keyWord = phonemes.splice(0, 1);
-						keyWord = keyWord.toString().replace(/[^a-z'#]+/gi, '').toLowerCase();
-						phonemes = phonemes.join(' ');
-						resultObj[keyWord] = phonemes;
+					phonemes = phonemes.split(/\s/);
+					keyWord = phonemes.splice(0, 1);
+					keyWord = keyWord.toString().replace(/[^a-z']+/gi, '').toLowerCase();
+					phonemes = phonemes.join(' ');
+					if (phonemes !== '') {
+						if (!resultObj[keyWord]) {
+							resultObj[keyWord] = phonemes;
+						} else {
+							keyWord = keyWord + Math.random();
+							resultObj[keyWord] = phonemes;
+						}
 					}
 				});
 				var resultArray = [];
 				for (key in resultObj) {
 					if (resultObj.hasOwnProperty(key)) resultArray.push(resultObj[key]);
 				}
-
-				console.log(resultArray);
 				res.send(resultArray);
 			} else {
 				res.sendStatus(404);
@@ -91,9 +90,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/cmudictionary', function(req, res, next) {
-	res.json(words);
-	// this is for  cmudictionary
+	res.json(dictionaryWords);
 });
-
 
 module.exports = router;

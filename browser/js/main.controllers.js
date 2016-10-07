@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory, lexicon, parse) {
+app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactory, lexicon, parse) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -15,16 +15,19 @@ app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory
   });
 
   $scope.text = '';
-  var debounced = _.debounce(function(codeMirror) {
+  var debounced = _.debounce(function (codeMirror) {
     $scope.text = cm.getValue();
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
     console.log('$scope.text', $scope.text);
-    //could pass in the updated $scope.text to a function here
 
     var pounded = $scope.text.replace(/\n/g, ' qzqz ');
-    console.log('replaced???', pounded);
-    var words = pounded.replace(/-/g, ' ').split(' ');
-    // var words = $scope.text.replace(/ /g, '\n');
+    pounded = pounded.trim(); //strip whitespace at the end
+    var words = pounded.replace(/-/g, ' ').replace(/[^a-z'\s]+/gi, '').split(' ')
+    .filter(function (word) {
+      return word !== '';
+    })
+    console.log('words', words);
+
     var parsedWords = [];
     var hapaxWords = [];
     var fromLexicon = null;
@@ -33,7 +36,7 @@ app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory
     }
 
     Promise.all(parsedWords).then(function (parseArray) {
-      for (var i = 0; i < parseArray.length; i ++) {
+      for (var i = 0; i < parseArray.length; i++) {
         if (parseArray[i][0] === '@') {
           hapaxWords.push(parseArray[i].slice(1));
         }
@@ -44,9 +47,9 @@ app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory
         lexicon(hapaxWords)
         .then(function(lexiconParseArray) {
           fromLexicon = lexiconParseArray;
-          for(var i = 0; i < parseArray.length; i ++) {
-            if (parseArray[i][0] === '@') {
-              parseArray[i] = fromLexicon.shift();
+          for (var j = 0; j < parseArray.length; j++) {
+            if (parseArray[j][0] === '@') {
+              parseArray[j] = fromLexicon.shift();
             }
           }
           soundFactory.main(parseArray, cm);
@@ -55,7 +58,6 @@ app.controller('MainCtrl', function($scope, $document, lines, $log, soundFactory
         });
 
       } else {
-        console.log(parseArray);
         lines(parseArray);
         soundFactory.main(parseArray, cm);
       }
