@@ -2,13 +2,21 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
   var consonantRules = parserConfig.consonantRules;
   var vowelLocations = parserConfig.vowelLocations;
-  var colors = ['red', 'green', 'blue', 'yellow'];
+  var genericVowelColors = ['green', 'blue'];
+  var vowelColors = {};
+  var consonantColors = ['red', 'yellow'];
   var currentPositions = {};
-  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'ey', 'oy', 'ay', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
+  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
 
-  for (var vow in vowelLocations) {
-    currentPositions[vow] = 0;
+  if (vowelLocations) {
+    let i = 0;
+    for (var vow in vowelLocations) {
+      currentPositions[vow] = 0;
+      vowelColors[vow] = genericVowelColors[i];
+      i++;
+    }
   }
+
 
   var isVowel = function (tok, stream) {
     // console.log(tok);
@@ -87,7 +95,8 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
           var nextVowel = vowelLocations[vow][currentPositions[vow]];
           if (nextVowel && state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
             currentPositions[vow]++;
-            return 'blue';
+            console.log(vow, vowelColors[vow]);
+            return vowelColors[vow];
           }
         }
       }
@@ -95,7 +104,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
         //next token is a consonant
         console.log(next, 'is a consonant');
         for (var i = 0; i < consonantRules.length; i++) {
-          if (next == consonantRules[i]) return colors[i];
+          if (next == consonantRules[i]) return consonantColors[i];
         }
         return null;
       }
