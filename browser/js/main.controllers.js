@@ -20,7 +20,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
     console.log('$scope.text', $scope.text);
 
-    var pounded = $scope.text.replace(/\n/g, ' qzqz ');
+    var pounded = $scope.text.replace(/\n/g, ' qzqz ').toLowerCase();
     pounded = pounded.trim(); //strip whitespace at the end
     var words = pounded.replace(/-/g, ' ').replace(/[^a-z'\s]+/gi, '').split(' ')
     .filter(function (word) {
