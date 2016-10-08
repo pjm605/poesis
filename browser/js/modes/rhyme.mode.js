@@ -22,7 +22,7 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 				state.counting[1]++;
 				for (var i = 0; i < rhymeLocations.length; i++) {
 					for (var j = 0; j < rhymeLocations[i].length; j++) {
-						if (state.counting[0] === rhymeLocations[i][j][0] && state.counting[1] === rhymeLocations[i][j][1]) {
+						if (state.counting[1] === rhymeLocations[i][j][0] && state.counting[0] === rhymeLocations[i][j][1]) {
 							rhymeLocations[i][j].shift();
 							return rhymeColors[i];
 						}
