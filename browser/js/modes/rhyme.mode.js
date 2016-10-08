@@ -29,12 +29,8 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 							console.log(rhymeLocations[i][j]);
 							return rhymeColors[i];
 						}
-						// } else {
-						// 	stream.next();
-						// }
 					}
 				}
-				// return 'yellow';
 			} else {
 				return 'green'
 			}
