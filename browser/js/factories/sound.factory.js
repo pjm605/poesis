@@ -73,8 +73,7 @@ app.factory('soundFactory', function () {
 
   var isVowel = function (str) {
     var vowels = ['AO', 'AA', 'IY', 'UW', 'EH', 'IH', 'UH', 'AH', 'AX', 'AE', 'EY', 'AY', 'OW', 'AW', 'OY'];
-    if (/\d/.test(str[str.length-1]) || vowels.indexOf(str) > -1) return true;
-    else return false;
+    return (/\d/.test(str[str.length-1]) || vowels.indexOf(str) > -1);
   };
 
   var unStress = function (vow) {
