@@ -59,26 +59,13 @@ router.post('/', function(req, res, next) {
 			var responseBody = response.split('\t').join(' ');
 			responseBody = responseBody.split('\n');
 			console.log('responseBody', responseBody);
-			var resultObj = {};
-			var keyWord;
+			var resultArray = [];
 			responseBody.forEach(function (phonemes) {
 				phonemes = phonemes.split(/\s/);
-				keyWord = phonemes.splice(0, 1);
-				keyWord = keyWord.toString().replace(/[^a-z']+/gi, '').toLowerCase();
+				phonemes.splice(0, 1);
 				phonemes = phonemes.join(' ');
-				if (phonemes !== '') {
-					if (!resultObj[keyWord]) {
-						resultObj[keyWord] = phonemes;
-					} else {
-						keyWord = keyWord + Math.random();
-						resultObj[keyWord] = phonemes;
-					}
-				}
+				if (phonemes !== '') resultArray.push(phonemes);
 			});
-			var resultArray = [];
-			for (key in resultObj) {
-				if (resultObj.hasOwnProperty(key)) resultArray.push(resultObj[key]);
-			}
 			res.send(resultArray);
 		} else {
 			res.sendStatus(404);

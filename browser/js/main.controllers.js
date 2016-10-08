@@ -57,6 +57,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
         });
 
       } else {
+        console.log('parseArray', parseArray);
         lines(parseArray);
         soundFactory.main(parseArray, cm);
       }
