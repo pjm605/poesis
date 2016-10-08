@@ -58,9 +58,11 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
 
       } else {
         console.log('parseArray', parseArray);
-        lines(parseArray);
+        var lineArray =  lines(parseArray);
         soundFactory.main(parseArray, cm);
+        rhymeFactory.findMatch(lineArray)
       }
+      
     })
     .catch(function (err) {
       console.error('error', err);
