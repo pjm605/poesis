@@ -11,8 +11,8 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   }
 
   var isVowel = function (tok, stream) {
-    console.log(tok);
-    console.log(tok[0]);
+    // console.log(tok);
+    // console.log(tok[0]);
     if (tok == 'y') {
       if (stream.peek() && isVowel(stream.peek(), stream)) {
         return false;
