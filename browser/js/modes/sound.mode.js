@@ -2,9 +2,9 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
   var consonantRules = parserConfig.consonantRules;
   var vowelLocations = parserConfig.vowelLocations;
-  var genericVowelColors = ['green', 'blue'];
-  var vowelColors = {};
   var consonantColors = ['red', 'yellow'];
+  var vowelColors = {};
+  var genericVowelColors = ['green', 'blue'];
   var currentPositions = {};
   var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
 
@@ -103,7 +103,9 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
         //next token is a consonant
         // console.log(next, 'is a consonant');
         for (var i = 0; i < consonantRules.length; i++) {
-          if (next == consonantRules[i]) return consonantColors[i];
+          for (var j = 0; j < consonantRules[i].length; j++) {
+            if (next == consonantRules[i][j]) return consonantColors[i];
+          }
         }
         return null;
       }
