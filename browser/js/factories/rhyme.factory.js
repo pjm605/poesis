@@ -6,24 +6,20 @@ app.factory('rhymeFactory', function () {
     else return false;
   };
 
-  //parseSound = "V IH1 Z AH0 B AH0 L"
   function findVowelLocation (parseSound) {
     var word = parseSound.split(" ");
-    //word = ["V", "IH1", "Z", "AH0", "B", "AH0", "L"]
     var vowelStore = [];
       for (var i = 0; i < word.length; i++) {
         if (isVowel(word[i])) {
           vowelStore.push(word[i].replace(/[^A-Za-z]/,""));
         };
       }
-    // vowelStore = [ 'IH', 'AH', 'AH' ]
-    console.log("THIS IS VOWEL STOREEEEEE, ", vowelStore)
     if(!vowelStore.length) return 0
-    else return vowelStore.length - 1;
+    else return vowelStore.length - 1
   };
 
   function findLastVolAndCon (parseSound) {
-    var word = parseSound..join('').split(" ");
+    var word = parseSound.join('').split(" ");
     var lastVowel = "";
     var consonants = [];
     var buffer = 0;
@@ -39,7 +35,7 @@ app.factory('rhymeFactory', function () {
     }
   
     return [parseSound.length -1,lastVowel, consonants];
-
+    //return [index,'AH', ['L']]
   };
 
   function findMatch(breakLines) {
@@ -50,7 +46,7 @@ app.factory('rhymeFactory', function () {
     return lastWord
   }
 
-  var rf = {
+  //var rf = {
     // //text = ["AH1 V", "R AA1 K", "B EH1 R L IY0", "V IH1 Z AH0 B AH0 L"]
     // rhymeLocation: function (text) {
     //   var wordLocation = text.length - 1;
@@ -63,12 +59,10 @@ app.factory('rhymeFactory', function () {
     //   //return ['AH', ['L']]
     // },
     // findMatch: function () {
+    // }
 
+ // };
 
-    }
-
-  };
-
-  return rf;
+ // return rf;
 
 });

@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory) {
+app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactory, lexicon, parse) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
