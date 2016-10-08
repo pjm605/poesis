@@ -11,8 +11,8 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
   }
 
   var isVowel = function (tok) {
-    console.log(tok);
-    console.log(tok[0]);
+    // console.log(tok);
+    // console.log(tok[0]);
     return tok && simpleVowels.indexOf(tok[0]) > -1;
   };
 
@@ -45,7 +45,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
           }
         }
         if (current == clusters[i]) {
-          console.log('NEW MESSAGE', next);
+          // console.log('NEW MESSAGE', next);
           stream.backUp(1);
           return current;
         }
@@ -63,7 +63,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
     },
     token: function (stream, state) {
       var next = findToken(stream);
-      console.log('NEXT', next);
+      // console.log('NEXT', next);
       if (!next) {
         //next token is a space or does not exist
         state.position[0]++;
@@ -72,7 +72,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       }
       else if (isVowel(next)) {
         //next token is a vowel
-        console.log(next, 'is a vowel!!');
+        // console.log(next, 'is a vowel!!');
         state.position[1]++;
         for (var vow in vowelLocations) {
           var nextVowel = vowelLocations[vow][currentPositions[vow]];
@@ -86,7 +86,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       }
       else {
         //next token is a consonant
-        console.log(next, 'is a consonant');
+        // console.log(next, 'is a consonant');
         for (var i = 0; i < consonantRules.length; i++) {
           if (next == consonantRules[i]) return colors[i];
         }
