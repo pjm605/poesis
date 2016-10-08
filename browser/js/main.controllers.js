@@ -52,6 +52,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
               parseArray[j] = fromLexicon.shift();
             }
           }
+          console.log('parseArray', parseArray);
           soundFactory.main(parseArray, cm);
         });
 

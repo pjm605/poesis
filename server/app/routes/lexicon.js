@@ -51,13 +51,14 @@ router.post('/', function(req, res, next) {
 		correctUrl = resultUrls[1];
 
 		//second request
+		console.log(correctUrl);
 		return rp({method: 'GET', uri: correctUrl})
 	})
 	.then(function(response) {
 		if (response) {
 			var responseBody = response.split('\t').join(' ');
 			responseBody = responseBody.split('\n');
-
+			console.log('responseBody', responseBody);
 			var resultObj = {};
 			var keyWord;
 			responseBody.forEach(function (phonemes) {
@@ -82,7 +83,8 @@ router.post('/', function(req, res, next) {
 		} else {
 			res.sendStatus(404);
 		}
-	}).catch(function (handleError) {
+	})
+	.catch(function (handleError) {
 		console.error('POST request failed', handleError);
 	});
 
