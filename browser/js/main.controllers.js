@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory) {
+app.controller('MainCtrl', function ($scope, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -8,7 +8,8 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
     mode: {
       name: 'soundMode',
       consonantRules: [],
-      vowelLocations: []
+      vowelLocations: [],
+      token: soundToken
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -60,9 +61,9 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
         console.log('parseArray', parseArray);
         var lineArray =  lines(parseArray);
         soundFactory.main(parseArray, cm);
-        rhymeFactory.findMatch(lineArray)
+        //rhymeFactory.findMatch(lineArray);
       }
-      
+
     })
     .catch(function (err) {
       console.error('error', err);

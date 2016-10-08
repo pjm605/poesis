@@ -1,33 +1,32 @@
 CodeMirror.defineMode('soundMode', function (config, parserConfig) {
-  var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
-  var consonantRules = parserConfig.consonantRules;
-  var vowelLocations = parserConfig.vowelLocations;
-  var consonantColors = ['red', 'yellow'];
-  var vowelColors = {};
+
+  // var consonantRules = parserConfig.consonantRules;
+  // var vowelLocations = parserConfig.vowelLocations;
+  // THIS IS A TERRIBLE WAY TO DO THIS
   var genericVowelColors = ['green', 'blue'];
   var currentPositions = {};
-  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
-
-  if (vowelLocations) {
-    let i = 0;
-    for (var vow in vowelLocations) {
-      currentPositions[vow] = 0;
-      vowelColors[vow] = genericVowelColors[i];
-      i++;
-    }
+  var vowelColors = {};
+  let i = 0;
+  for (var vow in parserConfig.vowelLocations) {
+    currentPositions[vow] = 0;
+    vowelColors[vow] = genericVowelColors[i];
+    i++;
   }
 
-  var isVowel = function (tok, stream) {
-    // console.log(tok);
-    // console.log(tok[0]);
-    if (tok == 'y') {
-      if (stream.peek() && isVowel(stream.peek(), stream)) {
-        return false;
-      }
-      return true;
-    }
-    return tok && simpleVowels.indexOf(tok[0]) > -1;
-  };
+
+  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
+
+
+  // var isVowel = function (tok, stream) {
+  //   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
+  //   if (tok == 'y') {
+  //     if (stream.peek() && isVowel(stream.peek(), stream)) {
+  //       return false;
+  //     }
+  //     return true;
+  //   }
+  //   return tok && simpleVowels.indexOf(tok[0]) > -1;
+  // };
 
   var findToken = function (stream) {
     var next = stream.next();
@@ -78,37 +77,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       };
     },
     token: function (stream, state) {
-      var next = findToken(stream);
-      // console.log('NEXT', next);
-      if (!next) {
-        //next token is a space or does not exist
-        state.position[0]++;
-        state.position[1] = -1;
-        return null;
-      }
-      else if (isVowel(next, stream)) {
-        //next token is a vowel
-        // console.log(next, 'is a vowel!!');
-        state.position[1]++;
-        for (var vow in vowelLocations) {
-          var nextVowel = vowelLocations[vow][currentPositions[vow]];
-          if (nextVowel && state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
-            currentPositions[vow]++;
-            console.log(vow, vowelColors[vow]);
-            return vowelColors[vow];
-          }
-        }
-      }
-      else {
-        //next token is a consonant
-        // console.log(next, 'is a consonant');
-        for (var i = 0; i < consonantRules.length; i++) {
-          for (var j = 0; j < consonantRules[i].length; j++) {
-            if (next == consonantRules[i][j]) return consonantColors[i];
-          }
-        }
-        return null;
-      }
+      return parserConfig.token(stream, state, findToken, parserConfig.consonantRules, parserConfig.vowelLocations, currentPositions, vowelColors);
     }
   };
 });
