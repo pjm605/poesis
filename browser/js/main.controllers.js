@@ -20,7 +20,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
     console.log('$scope.text', $scope.text);
 
-    var pounded = $scope.text.replace(/\n/g, ' qzqz ');
+    var pounded = $scope.text.replace(/\n/g, ' qzqz ').toLowerCase();
     pounded = pounded.trim(); //strip whitespace at the end
     var words = pounded.replace(/-/g, ' ').replace(/[^a-z'\s]+/gi, '').split(' ')
     .filter(function (word) {
@@ -44,7 +44,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
       console.log('Not in the dictionary: hapaxWords', hapaxWords);
       if (hapaxWords.length > 0) {
         hapaxWords = hapaxWords.join('\n');
-        lexicon(hapaxWords)
+        return lexicon(hapaxWords)
         .then(function(lexiconParseArray) {
           fromLexicon = lexiconParseArray;
           for (var j = 0; j < parseArray.length; j++) {
@@ -52,15 +52,20 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
               parseArray[j] = fromLexicon.shift();
             }
           }
+          console.log('parseArray', parseArray);
           soundFactory.main(parseArray, cm);
-        }).catch(function (err) {
-          console.error('error', err);
         });
 
       } else {
-        lines(parseArray);
+        console.log('parseArray', parseArray);
+        var lineArray =  lines(parseArray);
         soundFactory.main(parseArray, cm);
+        rhymeFactory.findMatch(lineArray)
       }
+      
+    })
+    .catch(function (err) {
+      console.error('error', err);
     });
   }, 1000);
   cm.on('change', debounced);
