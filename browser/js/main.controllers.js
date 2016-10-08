@@ -6,9 +6,8 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
-      name: 'soundMode',
-      consonantRules: [],
-      vowelLocations: []
+      name: 'rhymeMode',
+      rhymeLocations: []
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -34,7 +33,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
     for (var idx = 0; idx < words.length; idx++) {
       parsedWords.push(parse(words[idx]));
     }
-
+    console.log('parsedWords');
     Promise.all(parsedWords).then(function (parseArray) {
       for (var i = 0; i < parseArray.length; i++) {
         if (parseArray[i][0] === '@') {
@@ -53,14 +52,16 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
             }
           }
           console.log('parseArray', parseArray);
-          soundFactory.main(parseArray, cm);
+          var lineArray =  lines(parseArray);
+          console.log('lineArray', lineArray);
+          rhymeFactory.getTheResult(lineArray, cm);
         });
 
       } else {
         console.log('parseArray', parseArray);
         var lineArray =  lines(parseArray);
-        soundFactory.main(parseArray, cm);
-        rhymeFactory.findMatch(lineArray)
+        console.log('lineArray', lineArray);
+        rhymeFactory.getTheResult(lineArray, cm);
       }
 
     })
