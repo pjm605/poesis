@@ -51,38 +51,37 @@ router.post('/', function(req, res, next) {
 		correctUrl = resultUrls[1];
 
 		//second request
-		rp({method: 'GET', uri: correctUrl})
-		.then(function(response) {
-			if (response) {
-				var responseBody = response.split('\t').join(' ');
-				responseBody = responseBody.split('\n');
+		return rp({method: 'GET', uri: correctUrl})
+	})
+	.then(function(response) {
+		if (response) {
+			var responseBody = response.split('\t').join(' ');
+			responseBody = responseBody.split('\n');
 
-				var resultObj = {};
-				var keyWord;
-				responseBody.forEach(function (phonemes) {
-					phonemes = phonemes.split(/\s/);
-					keyWord = phonemes.splice(0, 1);
-					keyWord = keyWord.toString().replace(/[^a-z']+/gi, '').toLowerCase();
-					phonemes = phonemes.join(' ');
-					if (phonemes !== '') {
-						if (!resultObj[keyWord]) {
-							resultObj[keyWord] = phonemes;
-						} else {
-							keyWord = keyWord + Math.random();
-							resultObj[keyWord] = phonemes;
-						}
+			var resultObj = {};
+			var keyWord;
+			responseBody.forEach(function (phonemes) {
+				phonemes = phonemes.split(/\s/);
+				keyWord = phonemes.splice(0, 1);
+				keyWord = keyWord.toString().replace(/[^a-z']+/gi, '').toLowerCase();
+				phonemes = phonemes.join(' ');
+				if (phonemes !== '') {
+					if (!resultObj[keyWord]) {
+						resultObj[keyWord] = phonemes;
+					} else {
+						keyWord = keyWord + Math.random();
+						resultObj[keyWord] = phonemes;
 					}
-				});
-				var resultArray = [];
-				for (key in resultObj) {
-					if (resultObj.hasOwnProperty(key)) resultArray.push(resultObj[key]);
 				}
-				res.send(resultArray);
-			} else {
-				res.sendStatus(404);
+			});
+			var resultArray = [];
+			for (key in resultObj) {
+				if (resultObj.hasOwnProperty(key)) resultArray.push(resultObj[key]);
 			}
-		});
-
+			res.send(resultArray);
+		} else {
+			res.sendStatus(404);
+		}
 	}).catch(function (handleError) {
 		console.error('POST request failed', handleError);
 	});

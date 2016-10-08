@@ -44,7 +44,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
       console.log('Not in the dictionary: hapaxWords', hapaxWords);
       if (hapaxWords.length > 0) {
         hapaxWords = hapaxWords.join('\n');
-        lexicon(hapaxWords)
+        return lexicon(hapaxWords)
         .then(function(lexiconParseArray) {
           fromLexicon = lexiconParseArray;
           for (var j = 0; j < parseArray.length; j++) {
@@ -53,14 +53,15 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
             }
           }
           soundFactory.main(parseArray, cm);
-        }).catch(function (err) {
-          console.error('error', err);
         });
 
       } else {
         lines(parseArray);
         soundFactory.main(parseArray, cm);
       }
+    })
+    .catch(function (err) {
+      console.error('error', err);
     });
   }, 1000);
   cm.on('change', debounced);
