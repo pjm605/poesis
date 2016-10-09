@@ -31,6 +31,8 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 								// while (stream.peak() !== ' ') {
 								// 	stream.next();
 								// }
+								state.counting[0]++;
+								state.counting[1] = -1;
 								return rhymeColors[i];
 							}
 						}
