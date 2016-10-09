@@ -15,24 +15,29 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 			if (next === ' ') {
 				state.counting[0]++;
 				state.counting[1] = -1;
-				return 'null';
-			} else if (simpleVowels.indexOf(next) > -1) {
-				// while (simpleVowels.indexOf(stream.peek()) > -1 || stream.peek() === 'y') {
-				// 	stream.next();
-				// }
-				state.counting[1]++;
-				for (var i = 0; i < rhymeLocations.length; i++) {
-					for (var j = 0; j < rhymeLocations[i].length; j++) {
-						if (state.counting[0] === rhymeLocations[i][j][0] && state.counting[1] === rhymeLocations[i][j][1]) {
-							console.log('HEY', rhymeLocations[i][j]);
-							rhymeLocations[i].shift();
-							console.log(rhymeLocations[i][j]);
-							return rhymeColors[i];
+				return null;
+			} else {
+				if (simpleVowels.indexOf(next) > -1) {
+					state.counting[1]++;
+					for (var i = 0; i < rhymeLocations.length; i++) {
+						for (var j = 0; j < rhymeLocations[i].length; j++) {
+							var locations = [];
+							locations[0] = rhymeLocations[i][j][0];
+							locations[1] = rhymeLocations[i][j][1];
+							console.log('locations', locations);
+							console.log('state.counting!!!!!!!!!!!!!!!!', state.counting);
+							if (locations[0] === state.counting[0] && locations[1] === state.counting[1]){
+								console.log('HEY IT WORKS', [state.counting[0], state.counting[1]]);
+								while (stream.peak() !== ' ') {
+									stream.next();
+								}
+								return rhymeColors[i];
+							}
 						}
 					}
+					return 'yellow';
 				}
-			} else {
-				return 'green'
+				return 'orange';
 			}
 		}
 	}
