@@ -1,7 +1,6 @@
 CodeMirror.defineMode('rhymeMode', function (config, parserConfig) {
 var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
-// var simpleVowels = parserConfig.mode.simpleVowels;
-var rhymeLocations = parserConfig.rhymeLocations; //[ [ [ 5, 0 ], [ 13, 0 ] ] ]
+var rhymeLocations = parserConfig.rhymeLocations;
 var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 
 	return {
@@ -15,7 +14,7 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 			if (next === ' ') {
 				state.counting[0]++;
 				state.counting[1] = -1;
-				return 'null';
+				return null;
 			} else {
 				if (simpleVowels.indexOf(next) > -1) {
 					state.counting[1]++;
@@ -25,12 +24,13 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 							locations[0] = rhymeLocations[i][j][0];
 							locations[1] = rhymeLocations[i][j][1];
 							console.log('locations', locations);
-							console.log('state.counting!!!!!!!!!!!!!!!!', state.counting);
+							console.log('state.counting***', state.counting);
 							if (locations[0] === state.counting[0] && locations[1] === state.counting[1]){
-								console.log('HEY IT WORKS', [state.counting[0], state.counting[1]]);
-								// while (stream.peak() !== ' ') {
+								console.log('MATCHING', [state.counting[0], state.counting[1]]);
+								console.log(stream.peek());
+								// while (stream.peek() !== ' ') {
 								// 	stream.next();
-								// 	return rhymeColors[i];
+								// // 	// return rhymeColors[i];
 								// }
 								state.counting[0]++;
 								state.counting[1] = -1;
@@ -38,9 +38,8 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 							}
 						}
 					}
-					return 'null';
+					return null;
 				}
-				// return 'orange';
 			}
 		}
 	}
