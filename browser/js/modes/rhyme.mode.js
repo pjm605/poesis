@@ -30,6 +30,7 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 								console.log('HEY IT WORKS', [state.counting[0], state.counting[1]]);
 								// while (stream.peak() !== ' ') {
 								// 	stream.next();
+								// 	return rhymeColors[i];
 								// }
 								state.counting[0]++;
 								state.counting[1] = -1;
