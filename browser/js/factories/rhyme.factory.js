@@ -66,7 +66,7 @@ console.log('THIS IS FINDVOWEL', findVowelLocation('V IH1 Z AH0 B AH0 L'))
     }
   var result = []
   for (var key in output) {
-    if (output.hasOwnPropertyOf(key)) result.push(output[key]);
+    if (output.hasOwnProperty(key)) result.push(output[key]);
   }
     console.log('Result from findMatch function in RhymeFactory: ', result);
     return result;
