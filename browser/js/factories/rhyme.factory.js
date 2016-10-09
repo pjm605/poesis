@@ -31,7 +31,7 @@ var isVowel = function (str) {
     var vowelIndex = findVowelLocation(parseSound[parseSound.length-1])
     for (var i = 0; i < word.length; i++) {
       if (isVowel(word[i])) {
-        lastVowel = word[i].replace(/[^A-Za-z ]+/g, ''); 
+        lastVowel = word[i].replace(/[^A-Za-z ]+/g, '');
         buffer = i;
       }
     }
@@ -39,14 +39,14 @@ var isVowel = function (str) {
     for (var k = buffer+1; k < word.length; k++) {
       consonants.push(word[k]);
     }
-    var realIndex = offset+ parseSound.length -1; 
+    var realIndex = offset+ parseSound.length -1;
     return [realIndex, vowelIndex, lastVowel, consonants];
 
   };
-  
+
   function findMatch(breakLines) {
     var lastWords =[]
-  
+
     // get [real line number, and rhyme sign]
     var lineCount = 0;
     for (var i = 0; i < breakLines.length; i++) {
@@ -76,7 +76,11 @@ var isVowel = function (str) {
   }
 
   var rf = {
-    findMatch: findMatch
+    main: function (lineArray, cm) {
+      var modeOptions = cm.getOption('mode');
+      modeOptions.rhymeLocations = findMatch(lineArray);
+      cm.setOption('mode', modeOptions);
+    }
   };
  return rf;
 

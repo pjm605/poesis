@@ -1,4 +1,4 @@
-CodeMirror.defineMode('soundMode', function (config, parserConfig) {
+CodeMirror.defineMode('mainMode', function (config, parserConfig) {
 
   // var consonantRules = parserConfig.consonantRules;
   // var vowelLocations = parserConfig.vowelLocations;
@@ -77,7 +77,7 @@ CodeMirror.defineMode('soundMode', function (config, parserConfig) {
       };
     },
     token: function (stream, state) {
-      return parserConfig.token(stream, state, findToken, parserConfig.consonantRules, parserConfig.vowelLocations, currentPositions, vowelColors);
+      return parserConfig.token(stream, state, findToken, parserConfig, currentPositions, vowelColors);
     }
   };
 });

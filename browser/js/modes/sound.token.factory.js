@@ -13,7 +13,10 @@ app.factory('soundToken', function () {
     return tok && simpleVowels.indexOf(tok[0]) > -1;
   };
 
-  return function (stream, state, findToken, consonantRules, vowelLocations, currentPositions, vowelColors) {
+  return function (stream, state, findToken, parserConfig, currentPositions, vowelColors) {
+
+    var vowelLocations = parserConfig.vowelLocations;
+    var consonantRules = parserConfig.consonantRules;
 
     var next = findToken(stream);
     // console.log('NEXT', next);
