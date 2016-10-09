@@ -15,7 +15,7 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 			if (next === ' ') {
 				state.counting[0]++;
 				state.counting[1] = -1;
-				return null;
+				return 'null';
 			} else {
 				if (simpleVowels.indexOf(next) > -1) {
 					state.counting[1]++;
@@ -28,16 +28,16 @@ var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
 							console.log('state.counting!!!!!!!!!!!!!!!!', state.counting);
 							if (locations[0] === state.counting[0] && locations[1] === state.counting[1]){
 								console.log('HEY IT WORKS', [state.counting[0], state.counting[1]]);
-								while (stream.peak() !== ' ') {
-									stream.next();
-								}
+								// while (stream.peak() !== ' ') {
+								// 	stream.next();
+								// }
 								return rhymeColors[i];
 							}
 						}
 					}
-					return 'yellow';
+					return 'null';
 				}
-				return 'orange';
+				// return 'orange';
 			}
 		}
 	}
