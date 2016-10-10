@@ -72,18 +72,14 @@ console.log('THIS IS FINDVOWEL', findVowelLocation('V IH1 Z AH0 B AH0 L'))
     return result;
   }
 
-  function getTheResult(parseArray, cm) {
-    var modeOptions = cm.getOption('mode');
-    modeOptions.rhymeLocations = findMatch(parseArray);
-    modeOptions.simpleVowels = ['a', 'e', 'i', 'o', 'u'];
-    cm.setOption('mode', modeOptions);
-  }
-
-  var rhymeObject = {
-    findMatch: findMatch,
-    getTheResult: getTheResult
+  var rf = {
+    main: function (lineArray, cm) {
+      var modeOptions = cm.getOption('mode');
+      modeOptions.rhymeLocations = findMatch(lineArray);
+      cm.setOption('mode', modeOptions);
+    }
   };
 
- return rhymeObject;
+ return rf;
 
 });

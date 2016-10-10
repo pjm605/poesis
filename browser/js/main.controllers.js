@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory) {
+app.controller('MainCtrl', function ($scope, rhymeToken, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -6,8 +6,11 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
-      name: 'rhymeMode',
-      rhymeLocations: []
+      name: 'mainMode',
+      consonantRules: [],
+      vowelLocations: [],
+      rhymeLocations: [],
+      token: rhymeToken
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -60,8 +63,8 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
       } else {
         console.log('parseArray', parseArray);
         var lineArray =  lines(parseArray);
-        console.log('lineArray', lineArray);
-        rhymeFactory.getTheResult(lineArray, cm);
+        soundFactory.main(parseArray, cm);
+        rhymeFactory.main(lineArray, cm);
       }
 
     })
