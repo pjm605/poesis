@@ -64,9 +64,18 @@ app.factory('meterFactory', function() {
       return stresses;
     };
 
+    var flatten = function (stresses) {
+      return ''.concat(...[].concat(...stresses));
+    }
+
     var mf = {};
-    mf.main = function(lineParses) {
-        return findStresses(lineParses);
+    mf.main = function(lineParses, cm) {
+      console.log('MAIN CALLED');
+      var stresses = flatten(findStresses(lineParses));
+      console.log('are these flattened?:', stresses);
+      var modeOptions = cm.getOption('mode');
+      modeOptions.stresses = stresses;
+      cm.setOption('mode', modeOptions);
     };
     return mf;
 });

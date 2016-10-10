@@ -10,6 +10,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       consonantRules: [],
       vowelLocations: [],
       rhymeLocations: [],
+      stresses: [],
       token: meterToken
     },
     theme: 'fontcolor',
@@ -59,14 +60,15 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
           var lineArray =  lines(parseArray);
           //soundFactory.main(parseArray, cm);
           //rhymeFactory.main(lineArray, cm);
-          meterFactory.main(lineArray);
+          meterFactory.main(lineArray, cm);
         });
 
       } else {
         console.log('parseArray', parseArray);
         var lineArray =  lines(parseArray);
         // soundFactory.main(parseArray, cm);
-        rhymeFactory.main(lineArray, cm);
+        // rhymeFactory.main(lineArray, cm);
+        meterFactory.main(lineArray, cm);
       }
 
     })
