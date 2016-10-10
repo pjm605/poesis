@@ -36,7 +36,7 @@ app.controller('MainCtrl', function ($scope, rhymeToken, soundToken, $document, 
     for (var idx = 0; idx < words.length; idx++) {
       parsedWords.push(parse(words[idx]));
     }
-
+    console.log('parsedWords');
     Promise.all(parsedWords).then(function (parseArray) {
       for (var i = 0; i < parseArray.length; i++) {
         if (parseArray[i][0] === '@') {
@@ -55,7 +55,9 @@ app.controller('MainCtrl', function ($scope, rhymeToken, soundToken, $document, 
             }
           }
           console.log('parseArray', parseArray);
-          soundFactory.main(parseArray, cm);
+          var lineArray =  lines(parseArray);
+          console.log('lineArray', lineArray);
+          rhymeFactory.getTheResult(lineArray, cm);
         });
 
       } else {
