@@ -47,31 +47,30 @@ app.factory('meterFactory', function() {
     };
 
     var findLineStresses = function (line) {
-      var stresses = '';
+      var stresses = [];
       for (var w = 0; w < line.length; w++) {
+        var wordStresses = "";
         var sounds = line[w].split(' ');
         for (var s = 0; s < sounds.length; s++) {
           var sound = sounds[s];
           var stress = sound[sound.length-1];
+          console.log('shot in the dark --> this is stress')
           if (stress == String(Number(stress))) {
             // if the stress could be scanned either as long or short; 'anceps'
-            if (stress > 1) stresses += 'a';
-            else if (stress == 1) stresses += 'l';
-            else stresses += 's';
+            if (stress > 1) wordStresses += 'a';
+            else if (stress == 1) wordStresses += 'l';
+            else wordStresses += 's';
           }
+          if (wordStresses) stresses.push(wordStresses);
         }
       }
       return stresses;
     };
 
-    var flatten = function (stresses) {
-      return ''.concat(...[].concat(...stresses));
-    }
-
     var mf = {};
     mf.main = function(lineParses, cm) {
       console.log('MAIN CALLED');
-      var stresses = flatten(findStresses(lineParses));
+      var stresses = findStresses(lineParses);
       console.log('are these flattened?:', stresses);
       var modeOptions = cm.getOption('mode');
       modeOptions.stresses = stresses;
