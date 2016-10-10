@@ -60,6 +60,7 @@ app.controller('MainCtrl', function ($scope, $document, lines, $log, soundFactor
         console.log('parseArray', parseArray);
         var lineArray =  lines(parseArray);
         soundFactory.main(parseArray, cm);
+        console.log("INPUTTTTTT", lineArray)
         rhymeFactory.findMatch(lineArray)
       }
       
