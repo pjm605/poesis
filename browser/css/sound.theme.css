@@ -1,6 +1,7 @@
   /* added by AC to override the default style*/
 .CodeMirror {
   height: auto;
+  font-family: 'David Libre', serif;
 }
 
 .CodeMirror-scroll {
