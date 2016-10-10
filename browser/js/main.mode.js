@@ -18,6 +18,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
 
 
   var isVowel = function (tok, stream) {
+    // does not modify the stream
     var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
     if (tok === 'y') {
       if (stream.peek() && isVowel(stream.peek(), stream)) {
@@ -77,7 +78,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
       };
     },
     token: function (stream, state) {
-      return parserConfig.token(stream, state, findToken, parserConfig, isVowel, currentPositions, vowelColors);
+      return parserConfig.token(stream, state, findToken, isVowel, parserConfig, currentPositions, vowelColors);
     }
   };
 });

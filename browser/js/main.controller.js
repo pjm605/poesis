@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function ($scope, rhymeToken, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory) {
+app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToken, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
@@ -10,7 +10,7 @@ app.controller('MainCtrl', function ($scope, rhymeToken, soundToken, $document, 
       consonantRules: [],
       vowelLocations: [],
       rhymeLocations: [],
-      token: rhymeToken
+      token: meterToken
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -27,7 +27,7 @@ app.controller('MainCtrl', function ($scope, rhymeToken, soundToken, $document, 
     var words = pounded.replace(/-/g, ' ').replace(/[^a-z'\s]+/gi, '').split(' ')
     .filter(function (word) {
       return word !== '';
-    })
+    });
     console.log('words', words);
 
     var parsedWords = [];
@@ -54,10 +54,12 @@ app.controller('MainCtrl', function ($scope, rhymeToken, soundToken, $document, 
               parseArray[j] = fromLexicon.shift();
             }
           }
+          // YIKES
           console.log('parseArray', parseArray);
           var lineArray =  lines(parseArray);
-          // soundFactory.main(parseArray, cm);
-          rhymeFactory.getTheResult(lineArray, cm);
+          //soundFactory.main(parseArray, cm);
+          //rhymeFactory.main(lineArray, cm);
+          meterFactory.main(lineArray);
         });
 
       } else {
