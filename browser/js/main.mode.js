@@ -17,16 +17,17 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
   var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
 
 
-  // var isVowel = function (tok, stream) {
-  //   var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
-  //   if (tok == 'y') {
-  //     if (stream.peek() && isVowel(stream.peek(), stream)) {
-  //       return false;
-  //     }
-  //     return true;
-  //   }
-  //   return tok && simpleVowels.indexOf(tok[0]) > -1;
-  // };
+  var isVowel = function (tok, stream) {
+    // does not modify the stream
+    var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
+    if (tok == 'y') {
+      if (stream.peek() && isVowel(stream.peek(), stream)) {
+        return false;
+      }
+      return true;
+    }
+    return tok && simpleVowels.indexOf(tok[0]) > -1;
+  };
 
   var findToken = function (stream) {
     var next = stream.next();
@@ -77,7 +78,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
       };
     },
     token: function (stream, state) {
-      return parserConfig.token(stream, state, findToken, parserConfig, currentPositions, vowelColors);
+      return parserConfig.token(stream, state, findToken, isVowel, parserConfig, currentPositions, vowelColors);
     }
   };
 });
