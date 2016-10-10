@@ -56,14 +56,14 @@ app.controller('MainCtrl', function ($scope, rhymeToken, soundToken, $document, 
           }
           console.log('parseArray', parseArray);
           var lineArray =  lines(parseArray);
-          console.log('lineArray', lineArray);
+          // soundFactory.main(parseArray, cm);
           rhymeFactory.getTheResult(lineArray, cm);
         });
 
       } else {
         console.log('parseArray', parseArray);
         var lineArray =  lines(parseArray);
-        soundFactory.main(parseArray, cm);
+        // soundFactory.main(parseArray, cm);
         rhymeFactory.main(lineArray, cm);
       }
 
