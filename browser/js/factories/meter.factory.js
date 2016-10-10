@@ -38,7 +38,12 @@ app.factory('meterFactory', function() {
     var findStresses = function(lineParses) {
         // returns locations of vowels organized by stress level
         var annotated = annotateLineVowels(lineParses);
-        findLineStresses(annotated[0]);
+        var stresses = [];
+        for (var i = 0; i < annotated.length; i++) {
+          stresses.push(findLineStresses(annotated[i]));
+        }
+        console.log(stresses);
+        return stresses;
     };
 
     var findLineStresses = function (line) {
@@ -47,7 +52,7 @@ app.factory('meterFactory', function() {
         var sounds = line[w].split(' ');
         for (var s = 0; s < sounds.length; s++) {
           var sound = sounds[s];
-          var stress = sound[sound.length-1]
+          var stress = sound[sound.length-1];
           if (stress == String(Number(stress))) {
             // if the stress could be scanned either as long or short; 'anceps'
             if (stress > 1) stresses += 'a';
@@ -56,7 +61,6 @@ app.factory('meterFactory', function() {
           }
         }
       }
-      console.log(stresses);
       return stresses;
     };
 

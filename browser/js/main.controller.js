@@ -27,7 +27,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
     var words = pounded.replace(/-/g, ' ').replace(/[^a-z'\s]+/gi, '').split(' ')
     .filter(function (word) {
       return word !== '';
-    })
+    });
     console.log('words', words);
 
     var parsedWords = [];
