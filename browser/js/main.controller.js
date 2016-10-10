@@ -10,7 +10,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       consonantRules: [],
       vowelLocations: [],
       rhymeLocations: [],
-      token: meterToken
+      token: rhymeToken
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -58,8 +58,8 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
           console.log('parseArray', parseArray);
           var lineArray =  lines(parseArray);
           //soundFactory.main(parseArray, cm);
-          //rhymeFactory.main(lineArray, cm);
-          meterFactory.main(lineArray);
+          rhymeFactory.main(lineArray, cm);
+          // meterFactory.main(lineArray);
         });
 
       } else {
