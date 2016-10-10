@@ -54,9 +54,12 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
               parseArray[j] = fromLexicon.shift();
             }
           }
+          // YIKES
           console.log('parseArray', parseArray);
           var lineArray =  lines(parseArray);
-          console.log('lineArray', lineArray);
+          //soundFactory.main(parseArray, cm);
+          //rhymeFactory.main(lineArray, cm);
+          meterFactory.main(lineArray);
         });
 
       } else {

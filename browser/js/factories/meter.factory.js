@@ -1,6 +1,6 @@
 app.factory('meterFactory', function() {
 
-    var annotateLinesVowels = function(lineParses) {
+    var annotateLineVowels = function(lineParses) {
       var lines = [];
       for (var l = 0; l < lineParses.length; l++) {
         lines[l] = [];
@@ -12,6 +12,7 @@ app.factory('meterFactory', function() {
     };
 
     var annotateWordVowels = function (word) {
+      //console.log('Annotate Word Vowels Called');
       var annotated = "";
       var sylls = word.split(' ');
       for (var s = 0; s < sylls.length; s++) {
@@ -20,6 +21,7 @@ app.factory('meterFactory', function() {
           annotated += sylls[s] + ' ';
         }
         else if (vowelSound(sylls[s])) {
+          console.log('this is an unmarked vowelSound: ' + sylls[s]);
           annotated += sylls[s] + 9 + ' ';
         }
         else annotated += sylls[s] + ' ';
@@ -28,17 +30,14 @@ app.factory('meterFactory', function() {
     };
 
     var vowelSound = function (str) {
-      var simpleVowels = ['a', 'e', 'i', 'o', 'u', 'y'];
-      var ltrs = str.split(' ');
-      for (var i = 0; i < ltrs.length; i++) {
-        if (simpleVowels.indexOf(ltrs[i]) === -1) return false;
-      }
-      return true;
+      //console.log('vowelSound called');
+      var arpaVowels = ['AA', 'IY', 'ER'];
+      return arpaVowels.indexOf(str) > -1;
     };
 
     var findStressLocations = function(lineParses) {
         // returns locations of vowels organized by stress level
-        console.log('meter factory input', lineParses);
+        console.log('ANNOTATED PARSES', annotateLineVowels(lineParses));
     };
 
     var mf = {};
