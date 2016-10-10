@@ -15,7 +15,8 @@ body {
   font-family: "Roboto", Arial, sans-serif;
   line-height: 1.8;
   font-size: 20px;
-  background: #eeeff0;
+  background-image: url("../images/background-pattern.jpg");
+ /* background: #eeeff0;*/
   font-weight: 300;
 }
 
