@@ -20,7 +20,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
   var isVowel = function (tok, stream) {
     // does not modify the stream
     var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
-    if (tok == 'y') {
+    if (tok === 'y') {
       if (stream.peek() && isVowel(stream.peek(), stream)) {
         return false;
       }
@@ -32,16 +32,16 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
   var findToken = function (stream) {
     var next = stream.next();
     var single = next;
-    if (!next || next == ' ') return null;
+    if (!next || next === ' ') return null;
     else {
       next = next.toLowerCase();
       for (var i = 0; i < clusters.length; i++) {
-        var current = "";
+        var current = '';
         //  console.log('trying....', clusters[i]);
         for (var c = 0; c < clusters[i].length; c++) {
             // console.log('cluster: ' + clusters[i][c]);
             // console.log('next', next);
-          if (next == clusters[i][c]) {
+          if (next === clusters[i][c]) {
             current += next;
           }
           else {
@@ -62,7 +62,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
             console.log('stream current', stream.current());
           }
         }
-        if (current == clusters[i]) {
+        if (current === clusters[i]) {
           stream.backUp(1);
           return current;
         }

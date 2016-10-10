@@ -65,9 +65,8 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       } else {
         console.log('parseArray', parseArray);
         var lineArray =  lines(parseArray);
-        //soundFactory.main(parseArray, cm);
-        //rhymeFactory.main(lineArray, cm);
-        meterFactory.main(lineArray);
+        // soundFactory.main(parseArray, cm);
+        rhymeFactory.main(lineArray, cm);
       }
 
     })
