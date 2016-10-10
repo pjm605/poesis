@@ -3,7 +3,7 @@ app.factory('lines', function () {
     var lines = [[]];
     var i = 0;
     for (var p = 0; p < parseArray.length; p++) {
-      if (parseArray[p]=='BREAK') {
+      if (parseArray[p] === 'BREAK') {
         i++;
         lines[i] = [];
       }

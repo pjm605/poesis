@@ -2,18 +2,7 @@ app.factory('soundToken', function () {
 
   var consonantColors = ['red', 'yellow'];
 
-  var isVowel = function (tok, stream) {
-    var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
-    if (tok == 'y') {
-      if (stream.peek() && isVowel(stream.peek(), stream)) {
-        return false;
-      }
-      return true;
-    }
-    return tok && simpleVowels.indexOf(tok[0]) > -1;
-  };
-
-  return function (stream, state, findToken, parserConfig, currentPositions, vowelColors) {
+  return function (stream, state, findToken, parserConfig, isVowel, currentPositions, vowelColors) {
 
     var vowelLocations = parserConfig.vowelLocations;
     var consonantRules = parserConfig.consonantRules;
@@ -32,7 +21,7 @@ app.factory('soundToken', function () {
       state.position[1]++;
       for (var vow in vowelLocations) {
         var nextVowel = vowelLocations[vow][currentPositions[vow]];
-        if (nextVowel && state.position[0] == nextVowel[0] && state.position[1] == nextVowel[1]) {
+        if (nextVowel && state.position[0] === nextVowel[0] && state.position[1] === nextVowel[1]) {
           currentPositions[vow]++;
           console.log(vow, vowelColors[vow]);
           return vowelColors[vow];
@@ -44,7 +33,7 @@ app.factory('soundToken', function () {
       // console.log(next, 'is a consonant');
       for (var i = 0; i < consonantRules.length; i++) {
         for (var j = 0; j < consonantRules[i].length; j++) {
-          if (next == consonantRules[i][j]) return consonantColors[i];
+          if (next === consonantRules[i][j]) return consonantColors[i];
         }
       }
       return null;
