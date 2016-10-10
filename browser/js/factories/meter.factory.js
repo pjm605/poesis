@@ -47,6 +47,7 @@ app.factory('meterFactory', function() {
     };
 
     var findLineStresses = function (line) {
+      //console.log('FIND LINE STRESSES CALLED');
       var stresses = [];
       for (var w = 0; w < line.length; w++) {
         var wordStresses = "";
@@ -54,15 +55,15 @@ app.factory('meterFactory', function() {
         for (var s = 0; s < sounds.length; s++) {
           var sound = sounds[s];
           var stress = sound[sound.length-1];
-          console.log('shot in the dark --> this is stress')
           if (stress == String(Number(stress))) {
             // if the stress could be scanned either as long or short; 'anceps'
             if (stress > 1) wordStresses += 'a';
             else if (stress == 1) wordStresses += 'l';
             else wordStresses += 's';
+            console.log(sounds, wordStresses);
           }
-          if (wordStresses) stresses.push(wordStresses);
         }
+        if (wordStresses) stresses.push(wordStresses);
       }
       return stresses;
     };

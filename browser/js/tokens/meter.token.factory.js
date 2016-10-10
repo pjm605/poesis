@@ -3,11 +3,12 @@ app.factory('meterToken', function () {
   return function (stream, state, findToken, isVowel, parserConfig, currentPositions) {
     var next = findToken(stream);
     var stresses = parserConfig.stresses;
-    console.log('stresses', stresses);
+    //console.log('stresses', stresses);
     if (!next) {
       state.position[0]++;
       state.position[1] = -1;
     }
+    if (next == 't') return 'red';
     // if (isVowel(next, stream) && stresses.length) {
     //   state.position[1]++;
     //   switch (stresses[vowelNumber]) {
