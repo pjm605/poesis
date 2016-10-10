@@ -31,18 +31,38 @@ app.factory('meterFactory', function() {
 
     var vowelSound = function (str) {
       //console.log('vowelSound called');
-      var arpaVowels = ['AA', 'IY', 'ER'];
+      var arpaVowels = ['AA', 'IY', 'ER', 'AH'];
       return arpaVowels.indexOf(str) > -1;
     };
 
-    var findStressLocations = function(lineParses) {
+    var findStresses = function(lineParses) {
         // returns locations of vowels organized by stress level
-        console.log('ANNOTATED PARSES', annotateLineVowels(lineParses));
+        var annotated = annotateLineVowels(lineParses);
+        findLineStresses(annotated[0]);
+    };
+
+    var findLineStresses = function (line) {
+      var stresses = '';
+      for (var w = 0; w < line.length; w++) {
+        var sounds = line[w].split(' ');
+        for (var s = 0; s < sounds.length; s++) {
+          var sound = sounds[s];
+          var stress = sound[sound.length-1]
+          if (stress == String(Number(stress))) {
+            // if the stress could be scanned either as long or short; 'anceps'
+            if (stress > 1) stresses += 'a';
+            else if (stress == 1) stresses += 'l';
+            else stresses += 's';
+          }
+        }
+      }
+      console.log(stresses);
+      return stresses;
     };
 
     var mf = {};
     mf.main = function(lineParses) {
-        return findStressLocations(lineParses);
+        return findStresses(lineParses);
     };
     return mf;
 });
