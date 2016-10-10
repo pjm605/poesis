@@ -1,13 +1,5 @@
 app.factory('soundFactory', function () {
 
-  var stripBreaks = function (parseArray) {
-    var stripped = [];
-    for (var i = 0; i < parseArray.length; i++) {
-      if (parseArray[i] != 'BREAK') stripped.push(parseArray[i]);
-    }
-    return stripped;
-  };
-
   var countWordSounds = function (word, soundDic) {
     var newWord = word.replace(/[^A-Za-z ]+/g, '');
     newWord = newWord.split(' ');
@@ -20,8 +12,9 @@ app.factory('soundFactory', function () {
   //helper function we do not want to expose
   var countTextSounds = function (text) {
     var sd = {};
+    console.log('text', text);
     for (var i = 0; i < text.length; i++) {
-      if (text[i] != 'BREAK') countWordSounds(text[i], sd);
+      countWordSounds(text[i], sd);
     }
     return sd;
   };
@@ -72,33 +65,20 @@ app.factory('soundFactory', function () {
   };
 
   var isVowel = function (str) {
-    var vowels = ['AO', 'AA', 'IY', 'UW', 'EH', 'IH', 'UH', 'AH', 'AX', 'AE', 'EY', 'AY', 'OW', 'AW', 'OY'];
-    return (/\d/.test(str[str.length-1]) || vowels.indexOf(str) > -1);
+    if (/\d/.test(str[str.length-1])) return true;
+    else return false;
   };
-
-  var unStress = function (vow) {
-    var last = vow.substring(vow.length-1, vow.length);
-    if (last == String(Number(last))) return vow.substring(0, vow.length-1);
-    else return vow;
-  }
-
-  var stress = function (vow) {
-    var last = vow.substring(vow.length-1, vow.length);
-    if (last == String(Number(last))) return vow;
-    else return vow+'9';
-  }
 
   var locateVowelsInText = function (text, vowels) {
     var locations = {};
     for (var w = 0; w < text.length; w++) {
       var word = text[w].split(' ');
-      var vowelCount = -1;
       for (var s = 0; s < word.length; s++) {
+        var vowelCount = -1;
         var vowelSound = "";
         if (isVowel(word[s])) {
-          vowelSound = unStress(word[s]);
+          vowelSound = word[s].substring(0, word[s].length-1);
           vowelCount++;
-          console.log('vowelSound', vowelSound, w, vowelCount);
           for (var v = 0; v < vowels.length; v++) {
             var vow = vowels[v];
             if (vow == vowelSound) {
@@ -128,14 +108,15 @@ app.factory('soundFactory', function () {
   var soundToLetter = function (soundarr) {
     var result = [];
     var rule = {
-      hh: 'h',
-      er: 'ir',
-      axr: 'er',
-      zh: 's',
-      dx: 'tt',
-      el: 'le',
-      em: 'om',
-      en: 'n'
+      hh: ['h'],
+      er: ['ir'],
+      axr: ['er'],
+      zh: ['s'],
+      dx: ['tt'],
+      el: ['le'],
+      em: ['om'],
+      en: ['n'],
+      sh: ['sh', 'tio']
     };
     for (var i = 0; i < soundarr.length; i++) {
       var sound = soundarr[i].toLowerCase();
@@ -166,7 +147,7 @@ app.factory('soundFactory', function () {
       var sig = this.identifySignificant(parseArray);
       var modeOptions = cm.getOption('mode');
       modeOptions.consonantRules = soundToLetter(sig[0]);
-      modeOptions.vowelLocations = locateVowelsInText(stripBreaks(parseArray), sig[1]);
+      modeOptions.vowelLocations = locateVowelsInText(parseArray, sig[1]);
       cm.setOption('mode', modeOptions);
     }
   };
