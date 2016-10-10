@@ -16,6 +16,7 @@ body {
   line-height: 1.8;
   font-size: 20px;
   background-image: url("../images/background-pattern.jpg");
+ /* opacity: 0.8;*/
  /* background: #eeeff0;*/
   font-weight: 300;
 }
@@ -75,6 +76,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 0;
   margin-bottom: 80px;
 }
+
 @media screen and (max-width: 992px) {
   #fh5co-header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -217,11 +219,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #work .fh5co-grid {
-  height: 625px;
+  height: 325px;
   background-size: cover;
   margin-bottom: 30px;
   position: relative;
 }
+
 @media screen and (max-width: 480px) {
   #work .fh5co-grid {
     height: 400px;
