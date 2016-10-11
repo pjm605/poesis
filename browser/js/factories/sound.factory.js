@@ -15,7 +15,7 @@ app.factory('soundFactory', function () {
   //helper function we do not want to expose
   var countTextSounds = function (text) {
     var sd = {};
-    console.log('text', text);
+    // console.log('text', text);
     for (var i = 0; i < text.length; i++) {
       countWordSounds(text[i], sd);
     }
@@ -32,39 +32,6 @@ app.factory('soundFactory', function () {
       counts[key] = counts[key] * 1.0 / total;
     }
     return counts;
-  };
-
-  //sorts an array of sounds into an array of consonants and an array of vowels
-  var soundSort = function (sounds) {
-    var vowels = ['AO', 'AA', 'IY', 'UW', 'EH', 'IH', 'UH',
-                  'AH', 'AX', 'AE', 'EY', 'AY', 'AW', 'OW', 'OY'];
-    var sorted = [[], []];
-    for (var i = 0; i < sounds.length; i++) {
-      if (vowels.indexOf(sounds[i]) > -1) sorted[1].push(sounds[i]);
-      else sorted[0].push(sounds[i]);
-    }
-    return sorted;
-  };
-
-  var soundToLetter = function (soundarr) {
-    var result = [];
-    var rule = {
-      hh: 'h',
-      er: 'ir',
-      axr: 'er',
-      zh: 's',
-      dx: 'tt',
-      el: 'le',
-      em: 'om',
-      en: 'n',
-      th: 'th'
-    };
-    for (var i = 0; i < soundarr.length; i++) {
-      var sound = soundarr[i].toLowerCase();
-      if (rule.hasOwnProperty(sound)) result.push(rule[sound]);
-      else result.push(sound);
-    }
-    return result;
   };
 
   var isVowel = function (str) {
@@ -102,7 +69,7 @@ app.factory('soundFactory', function () {
         }
       }
     }
-    console.log('LOCATIONS', locations);
+    // console.log('LOCATIONS', locations);
     return locations;
   };
 
@@ -138,6 +105,47 @@ app.factory('soundFactory', function () {
     }
     return result;
   };
+  var frequencies = {
+    AA: 0.0145,
+    AE: 0.021,
+    AH: 0.0174,
+    AO: 0.0102,
+    AW: 0.005,
+    AY: 0.015,
+    EH: 0.0286,
+    ER: 0.1149,
+    EY: 0.0194,
+    IH: 0.0361,
+    IY: 0.0632,
+    OW: 0.0125,
+    OY: 0.001,
+    UH: 0.0043,
+    UW: 0.0193,
+    W: 0.0195,
+    Y: 0.0081,
+    B: 0.018,
+    D: 0.0421,
+    G: 0.008,
+    K: 0.0318,
+    P: 0.0215,
+    T: 0.0691,
+    CH: 0.0056,
+    JH: 0.0059,
+    DH: 0.0295,
+    F: 0.0171,
+    HH: 0.014,
+    M: 0.0276,
+    N: 0.0711,
+    NG: 0.0099,
+    L: 0.0396,
+    R: 0.0694,
+    S: 0.0475,
+    SH: 0.0097,
+    TH: 0.0041,
+    V: 0.0201,
+    Z: 0.0276,
+    ZH: 0.0007
+  }
 
   return {
     //the text which is input should be an array of arrays of
@@ -145,11 +153,11 @@ app.factory('soundFactory', function () {
     identifySignificant: function (text) {
       var counts = countTextSounds(text);
       var nor = normalize(counts);
-      console.log(nor);
-      var significantN = 0.1;
+      // console.log(nor);
+      var significantN = frequencies;
       var significant = [];
       for (var key in nor) {
-        if (nor[key] > significantN) {
+        if (nor[key] > significantN[key]) {
           significant.push(key);
         }
       }
