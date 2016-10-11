@@ -4,6 +4,7 @@ app.factory('lines', function () {
     var i = 0;
     for (var p = 0; p < parseArray.length; p++) {
       if (parseArray[p] === 'BREAK') {
+        console.log('hit a break');
         i++;
         lines[i] = [];
       }
