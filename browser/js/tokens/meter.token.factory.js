@@ -1,25 +1,24 @@
 app.factory('meterToken', function () {
   //state.position = [word#, v#]
-  return function (stream, state, findToken, isVowel, parserConfig, currentPositions) {
+  return function (stream, state, findToken, parserConfig, isVowel, currentPositions) {
     var next = findToken(stream);
-    var stresses = parserConfig.stresses;
-    //console.log('stresses', stresses);
     if (!next) {
       state.position[0]++;
       state.position[1] = -1;
     }
-    if (isVowel(next, stream) && stresses.length) {
+    if (isVowel(next, stream) && parserConfig.stresses.length) {
       state.position[1]++;
-    //  console.log(state.position, '<--- state.position, brosphine');
-      var str = stresses[state.position[0]][state.position[1]];
+      console.log('STRESSES', parserConfig.stresses)
+      console.log(state.position, '<--- state.position, brosphine');
+      //var str = stresses[state.position[0]][state.position[1]];
     //  console.log('current stress: ', str);
-      switch (str) {
+      switch ('a') {
         case 'a':
-          return 'green';
+          return 'turquoise';
         case 's':
-          return 'blue';
+          return 'green';
         case 'l':
-          return 'red';
+          return 'blue';
       }
     }
     else return null;

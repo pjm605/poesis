@@ -1,10 +1,9 @@
 app.factory('parseWordsFactory', function (meterToken, meterFactory, rhymeToken, soundToken, lexicon, parse) {
 
-  var parsedWords = [];
-  var fromLexicon = null;
-  var lineArray;
-
   return function(words) {
+    var parsedWords = [];
+    var fromLexicon = null;
+    var lineArray;
     var hapaxWords = [];
     for (var idx = 0; idx < words.length; idx++) {
       parsedWords.push(parse(words[idx]));

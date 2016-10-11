@@ -36,13 +36,14 @@
 .cm-s-fontcolor span.cm-yellow {
   color: yellow;
 }
-.cm-s-fontcolor span.cm-orange {
-  text-decoration: orange;
+.cm-s-fontcolor span.cm-turquoise {
+  color: turquoise;
 }
 .cm-s-fontcolor span.cm-short {
-  font-style: italic;
+  font-weight: 600;
+  font-size: 0.9em;
 }
 .cm-s-fontcolor span.cm-long {
-  font-style: italic;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1.1em;
 }

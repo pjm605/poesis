@@ -11,7 +11,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       vowelLocations: [],
       rhymeLocations: [],
       stresses: [],
-      token: rhymeToken
+      token: meterToken
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -35,8 +35,8 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
     .then(function (response) {
       // soundFactory.main(response, cm);
       // rhymeFactory.main(lines(response), cm);
-      // meterFactory.main(lines(response), cm);
-      return rhymeFactory.main(lines(response), cm);
+      meterFactory.main(lines(response), cm);
+      //return rhymeFactory.main(lines(response), cm);
     });
 
   }, 1000);
