@@ -2,11 +2,14 @@
 .CodeMirror {
   height: auto;
   font-family: 'David Libre', serif;
+  background-opacity: 0.8;
 }
 
 .CodeMirror-scroll {
-  min-height: 500px;
+  min-height: 400px;
 }
+
+
 
 /*.cm-s-night span.cm-comment { color: #8900d1; }
 .cm-s-night span.cm-atom { color: #845dc4; }
