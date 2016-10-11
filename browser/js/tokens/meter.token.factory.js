@@ -16,7 +16,7 @@ app.factory('meterToken', function () {
       console.log('this hopefully does exist -->', parserConfig.stresses)
       var str = parserConfig.stresses[state.position[0]][state.position[1]];
     //  console.log('current stress: ', str);
-      switch (str) {
+      switch ('a') {
         case 'a':
           return 'turquoise';
         case 's':
