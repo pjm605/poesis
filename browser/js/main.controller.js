@@ -15,7 +15,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       vowelLocations: [],
       rhymeLocations: [],
       stresses: [],
-      token: soundToken
+      token: meterToken
     },
     theme: 'fontcolor',
     lineWrapping: 'true'

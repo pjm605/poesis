@@ -1,5 +1,8 @@
 app.factory('soundFactory', function () {
 
+  //weird vowel coloring bug is likely because
+  //BREAKS are being counted as words
+
   var countWordSounds = function (word, soundDic) {
     var newWord = word.replace(/[^A-Za-z ]+/g, '');
     newWord = newWord.split(' ');
@@ -36,9 +39,19 @@ app.factory('soundFactory', function () {
     else return false;
   };
 
-  var locateVowelsInText = function (text, vowels) {
+  var stripBreaks = function (text) {
+    var stripped = [];
+    for (var i = 0; i < text.length; i++) {
+      if (text[i] != 'BREAK') stripped.push(text[i]);
+    }
+    return stripped;
+  }
+
+  var locateVowelsInText = function (brokenText, vowels) {
     var locations = {};
+    var text = stripBreaks(brokenText);
     for (var w = 0; w < text.length; w++) {
+      console.log('this should just be a string? ==>', text[w]);
       var word = text[w].split(' ');
       for (var s = 0; s < word.length; s++) {
         var vowelCount = -1;
@@ -156,6 +169,7 @@ app.factory('soundFactory', function () {
       var modeOptions = cm.getOption('mode');
       modeOptions.consonantRules = soundToLetter(sig[0]);
       modeOptions.vowelLocations = locateVowelsInText(parseArray, sig[1]);
+      console.log('FACTORY VOWEL LOCATIONS',  modeOptions.vowelLocations);
       cm.setOption('mode', modeOptions);
     }
   };

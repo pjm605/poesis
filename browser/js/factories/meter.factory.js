@@ -74,6 +74,10 @@ app.factory('meterFactory', function() {
       return stresses;
     };
 
+    var flatten = function (stresses) {
+      return ''.concat(...[].concat(...stresses));
+    }
+
     var mf = {};
     mf.main = function(lineParses, cm) {
       var stresses = findStresses(lineParses);
