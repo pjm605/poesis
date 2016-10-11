@@ -4,6 +4,8 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
 
   var textar = document.getElementById('poemarea');
 
+  $scope.currentToken = soundToken; //default
+
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
       name: 'mainMode',
@@ -11,7 +13,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       vowelLocations: [],
       rhymeLocations: [],
       stresses: [],
-      token: meterToken
+      token: soundToken
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
@@ -33,12 +35,37 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
 
     parseWordsFactory(words)
     .then(function (response) {
-      // soundFactory.main(response, cm);
-      // rhymeFactory.main(lines(response), cm);
-      meterFactory.main(lines(response), cm);
-      //return rhymeFactory.main(lines(response), cm);
+      switch ($scope.currentToken) {
+        case soundToken:
+          return soundFactory.main(response, cm);
+        case meterToken:
+          return meterFactory.main(lines(response), cm);
+        case rhymeToken:
+          return rhymeFactory.main(lines(response), cm);
+        default:
+          return null;
+      }
     });
 
   }, 1000);
+
+  $scope.toggleToken = function(token){
+    switch (token) {
+      case 'soundToken':
+        $scope.currentToken = soundToken;
+        break;
+      case 'meterToken':
+        $scope.currentToken = meterToken;
+        break;
+      case 'rhymeToken':
+        $scope.currentToken = rhymeToken;
+        break;
+      default:
+        $scope.currentToken = soundToken;
+    }
+    cm.options.mode.token = $scope.currentToken;
+    return debounced();
+  }
+
   cm.on('change', debounced);
 });
