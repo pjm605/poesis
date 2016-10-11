@@ -7,6 +7,8 @@ app.factory('rhymeFactory', function () {
 
   //parseSound = "V IH1 Z AH0 B AH0 L"
   function findVowelLocation (parseSound) {
+    console.log('parse sound!!!', parseSound);
+    if (!parseSound) return 0;
     var word = parseSound.split(' ');
     //word = ["V", "IH1", "Z", "AH0", "B", "AH0", "L"]
     var vowelStore = [];
