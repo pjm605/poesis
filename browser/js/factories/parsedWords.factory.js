@@ -1,11 +1,11 @@
 app.factory('parseWordsFactory', function (meterToken, meterFactory, rhymeToken, soundToken, lexicon, parse) {
 
   var parsedWords = [];
-  var hapaxWords = [];
   var fromLexicon = null;
   var lineArray;
 
   return function(words) {
+    var hapaxWords = [];
     for (var idx = 0; idx < words.length; idx++) {
       parsedWords.push(parse(words[idx]));
     }
@@ -13,6 +13,7 @@ app.factory('parseWordsFactory', function (meterToken, meterFactory, rhymeToken,
     return Promise.all(parsedWords).then(function (parseArray) {
       for (var i = 0; i < parseArray.length; i++) {
         if (parseArray[i][0] === '@') {
+          console.log('hapaxwords cannot push', hapaxWords);
           hapaxWords.push(parseArray[i].slice(1));
         }
       }

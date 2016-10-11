@@ -21,7 +21,7 @@ app.factory('meterFactory', function() {
           annotated += sylls[s] + ' ';
         }
         else if (vowelSound(sylls[s])) {
-          console.log('this is an unmarked vowelSound: ' + sylls[s]);
+        //  console.log('this is an unmarked vowelSound: ' + sylls[s]);
           annotated += sylls[s] + 9 + ' ';
         }
         else annotated += sylls[s] + ' ';
@@ -40,33 +40,43 @@ app.factory('meterFactory', function() {
         var annotated = annotateLineVowels(lineParses);
         var stresses = [];
         for (var i = 0; i < annotated.length; i++) {
-          stresses.push(findLineStresses(annotated[i]));
+          var ls = findLineStresses(annotated[i]);
+          if (ls.length > 0) stresses = stresses.concat(ls);
         }
-        console.log(stresses);
+        //console.log('ALL STRESSES', stresses);
         return stresses;
     };
 
     var findLineStresses = function (line) {
-      var stresses = '';
+      //console.log('FIND LINE STRESSES CALLED');
+      var stresses = [];
       for (var w = 0; w < line.length; w++) {
+        if (line[w].length === 0 || line[w][0] === 'BREAK') continue;
+        var wordStresses = [];
         var sounds = line[w].split(' ');
         for (var s = 0; s < sounds.length; s++) {
           var sound = sounds[s];
           var stress = sound[sound.length-1];
           if (stress == String(Number(stress))) {
             // if the stress could be scanned either as long or short; 'anceps'
-            if (stress > 1) stresses += 'a';
-            else if (stress == 1) stresses += 'l';
-            else stresses += 's';
+            if (stress > 1) wordStresses.push('a');
+            else if (stress == 1) wordStresses.push('l');
+            else wordStresses.push('s');
           }
         }
+        if (wordStresses) stresses.push(wordStresses);
       }
+
+      //console.log('LINESTRESSES', stresses);
       return stresses;
     };
 
     var mf = {};
-    mf.main = function(lineParses) {
-        return findStresses(lineParses);
+    mf.main = function(lineParses, cm) {
+      var stresses = findStresses(lineParses);
+      var modeOptions = cm.getOption('mode');
+      modeOptions.stresses = stresses;
+      cm.setOption('mode', modeOptions);
     };
     return mf;
 });
