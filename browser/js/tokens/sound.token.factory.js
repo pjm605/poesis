@@ -1,15 +1,16 @@
 app.factory('soundToken', function () {
 
-  var consonantColors = ['red', 'yellow'];
+  var consonantColors = ['red', 'yellow', 'green'];
 
   return function (stream, state, findToken, parserConfig, isVowel, currentPositions, vowelColors) {
 
     var vowelLocations = parserConfig.vowelLocations;
     var consonantRules = parserConfig.consonantRules;
+    console.log('VOWELLOCATIONS', vowelLocations);
 
     var next = findToken(stream);
-    // console.log('NEXT', next);
-    if (!next) {
+    console.log('NEXT', next);
+    if (stream.eol() || !next) {
       //next token is a space or does not exist
       state.position[0]++;
       state.position[1] = -1;
@@ -19,6 +20,7 @@ app.factory('soundToken', function () {
       //next token is a vowel
       // console.log(next, 'is a vowel!!');
       state.position[1]++;
+      console.log('IAMHERE', state.position);
       for (var vow in vowelLocations) {
         var nextVowel = vowelLocations[vow][currentPositions[vow]];
         if (nextVowel && state.position[0] === nextVowel[0] && state.position[1] === nextVowel[1]) {
