@@ -1,4 +1,4 @@
-;(function () {
+; window.animations = (function () {
 	
 	'use strict';
 
@@ -198,10 +198,14 @@
 
 
 		// Animations
-		contentWayPoint();
+		// contentWayPoint();
 		
 
 	});
+
+	return {
+		contentWayPoint: contentWayPoint
+	}
 
 
 }());
