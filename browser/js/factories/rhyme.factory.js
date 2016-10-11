@@ -20,9 +20,11 @@ app.factory('rhymeFactory', function () {
     else return vowelStore.length - 1;
   }
 
-console.log('THIS IS FINDVOWEL', findVowelLocation('V IH1 Z AH0 B AH0 L'))
+//console.log('THIS IS FINDVOWEL', findVowelLocation('V IH1 Z AH0 B AH0 L'))
 
   function findLastVolAndCon (offset, parseSound) {
+    console.log('this function has been called');
+    console.log('parseSound', parseSound);
     var word = parseSound.join('').split(' ');
     var lastVowel = '';
     var consonants = [];

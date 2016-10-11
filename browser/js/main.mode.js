@@ -78,7 +78,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
       };
     },
     token: function (stream, state) {
-      return parserConfig.token(stream, state, findToken, isVowel, parserConfig, currentPositions, vowelColors);
+      return parserConfig.token(stream, state, findToken, parserConfig, isVowel, currentPositions, vowelColors);
     }
   };
 });
