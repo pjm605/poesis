@@ -1,11 +1,12 @@
 app.factory('soundToken', function () {
 
-  var consonantColors = ['red', 'yellow'];
+  var consonantColors = ['red', 'yellow', 'green'];
 
   return function (stream, state, findToken, parserConfig, isVowel, currentPositions, vowelColors) {
 
     var vowelLocations = parserConfig.vowelLocations;
     var consonantRules = parserConfig.consonantRules;
+    console.log('VOWELLOCATIONS', vowelLocations);
 
     var next = findToken(stream);
     // console.log('NEXT', next);
