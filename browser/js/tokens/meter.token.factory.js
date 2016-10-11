@@ -14,15 +14,21 @@ app.factory('meterToken', function () {
       console.log('STRESSES', parserConfig.stresses)
       console.log(state.position[0], '<--- state.position, brosphine');
       console.log('this hopefully does exist -->', parserConfig.stresses)
-      var str = parserConfig.stresses[state.position[0]][state.position[1]];
+      if (state.position[0] >= parserConfig.stresses.length) {
+        console.log('slow down there buddy');
+        var str = 'waiting';
+      }
+      else var str = parserConfig.stresses[state.position[0]][state.position[1]];
     //  console.log('current stress: ', str);
-      switch ('a') {
+      switch (str) {
         case 'a':
           return 'turquoise';
         case 's':
           return 'green';
         case 'l':
           return 'blue';
+        case 'waiting':
+          return null;
       }
     }
     else return null;
