@@ -48,10 +48,13 @@ app.factory('meterFactory', function() {
     };
 
     var findLineStresses = function (line) {
-      //console.log('FIND LINE STRESSES CALLED');
+      console.log('FIND LINE STRESSES CALLED');
       var stresses = [];
       for (var w = 0; w < line.length; w++) {
-        if (line[w].length === 0 || line[w][0] === 'BREAK') continue;
+        if (line[w].length === 0 || line[w][0] === 'BREAK') {
+          console.log('DONE WITH THE LINE');
+          continue;
+        }
         var wordStresses = [];
         var sounds = line[w].split(' ');
         for (var s = 0; s < sounds.length; s++) {

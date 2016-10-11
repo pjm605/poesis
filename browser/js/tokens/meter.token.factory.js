@@ -1,24 +1,34 @@
 app.factory('meterToken', function () {
   //state.position = [word#, v#]
+  //the missing syllables bug is caused by the fact that you
+  //were too lazy to hard code things
   return function (stream, state, findToken, parserConfig, isVowel, currentPositions) {
     var next = findToken(stream);
-    if (!next) {
+    if (!next || stream.eol()) {
       state.position[0]++;
       state.position[1] = -1;
     }
     if (isVowel(next, stream) && parserConfig.stresses.length) {
       state.position[1]++;
+      console.log('NEXT I AM DEALING WITH THIS VOWEL NOW', next);
       console.log('STRESSES', parserConfig.stresses)
       console.log(state.position, '<--- state.position, brosphine');
-      //var str = stresses[state.position[0]][state.position[1]];
+      if (state.position[0] >= parserConfig.stresses.length) {
+        var str = 'waiting';
+      }
+      else {
+        var str = parserConfig.stresses[state.position[0]][state.position[1]];
+      }
     //  console.log('current stress: ', str);
-      switch ('a') {
+      switch (str) {
         case 'a':
           return 'turquoise';
         case 's':
           return 'green';
         case 'l':
           return 'blue';
+        case 'waiting':
+          return null;
       }
     }
     else return null;
