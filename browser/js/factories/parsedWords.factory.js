@@ -26,7 +26,7 @@ app.factory('parseWordsFactory', function (meterToken, meterFactory, rhymeToken,
             if (parseArray[j][0] === '@') {
               parseArray[j] = fromLexicon.shift();
             }
-          }
+          } return parseArray
         });
       }
       return parseArray;
