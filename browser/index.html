@@ -33,9 +33,9 @@
         <nav class="navbar navbar-default">
             <div class="col-md-12">
               <ul class="nav text-center">
-                <li class="active"><a href="index.html"><span>POESIS</span></a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="team.html">TEAM</a></li>
+                <li class="active"><a ui-href="poesis"><span>POESIS</span></a></li>
+                <li><a ui-sref="about">ABOUT</a></li>
+                <li><a ui-sref="team">TEAM</a></li>
               </ul>
             </div>
         </nav>
@@ -44,7 +44,7 @@
     <!-- END: header -->
 
 
-
+  
     <section id="work">
       <div class="container">
         <div class="row">
@@ -70,5 +70,7 @@
         </div>
       <div>
     </section>
+
+      <ui-view></ui-view>
   </body>
 </html>
