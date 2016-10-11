@@ -35,3 +35,10 @@
 .cm-s-fontcolor span.cm-orange {
   text-decoration: orange;
 }
+.cm-s-fontcolor span.cm-short {
+  font-style: italic;
+}
+.cm-s-fontcolor span.cm-long {
+  font-style: italic;
+  font-weight: bold;
+}

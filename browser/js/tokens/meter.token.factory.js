@@ -8,18 +8,20 @@ app.factory('meterToken', function () {
       state.position[0]++;
       state.position[1] = -1;
     }
-    if (next == 't') return 'red';
-    // if (isVowel(next, stream) && stresses.length) {
-    //   state.position[1]++;
-    //   switch (stresses[vowelNumber]) {
-    //     case 'a':
-    //       return 'green';
-    //     case 's':
-    //       return 'blue';
-    //     case 'l':
-    //       return 'red';
-    //   }
-    // }
+    if (isVowel(next, stream) && stresses.length) {
+      state.position[1]++;
+    //  console.log(state.position, '<--- state.position, brosphine');
+      var str = stresses[state.position[0]][state.position[1]];
+    //  console.log('current stress: ', str);
+      switch (str) {
+        case 'a':
+          return 'green';
+        case 's':
+          return 'blue';
+        case 'l':
+          return 'red';
+      }
+    }
     else return null;
   };
 });
