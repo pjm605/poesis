@@ -14,7 +14,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
   }
 
 
-  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
+  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'au', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
 
 
   var isVowel = function (tok, stream) {
@@ -78,7 +78,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
       };
     },
     token: function (stream, state) {
-      return parserConfig.token(stream, state, findToken, isVowel, parserConfig, currentPositions, vowelColors);
+      return parserConfig.token(stream, state, findToken, parserConfig, isVowel, currentPositions, vowelColors);
     }
   };
 });

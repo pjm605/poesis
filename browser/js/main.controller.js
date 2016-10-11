@@ -1,8 +1,10 @@
-app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToken, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory) {
+app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToken, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory, parseWordsFactory) {
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 
   var textar = document.getElementById('poemarea');
+
+  $scope.currentToken = soundToken; //default
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
@@ -31,50 +33,39 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
     });
     console.log('words', words);
 
-    var parsedWords = [];
-    var hapaxWords = [];
-    var fromLexicon = null;
-    for (var idx = 0; idx < words.length; idx++) {
-      parsedWords.push(parse(words[idx]));
-    }
-    console.log('parsedWords');
-    Promise.all(parsedWords).then(function (parseArray) {
-      for (var i = 0; i < parseArray.length; i++) {
-        if (parseArray[i][0] === '@') {
-          hapaxWords.push(parseArray[i].slice(1));
-        }
+    parseWordsFactory(words)
+    .then(function (response) {
+      switch ($scope.currentToken) {
+        case soundToken:
+          return soundFactory.main(response, cm);
+        case meterToken:
+          return meterFactory.main(lines(response), cm);
+        case rhymeToken:
+          return rhymeFactory.main(lines(response), cm);
+        default:
+          return null;
       }
-      console.log('Not in the dictionary: hapaxWords', hapaxWords);
-      if (hapaxWords.length > 0) {
-        hapaxWords = hapaxWords.join('\n');
-        return lexicon(hapaxWords)
-        .then(function(lexiconParseArray) {
-          fromLexicon = lexiconParseArray;
-          for (var j = 0; j < parseArray.length; j++) {
-            if (parseArray[j][0] === '@') {
-              parseArray[j] = fromLexicon.shift();
-            }
-          }
-          // YIKES
-          console.log('parseArray', parseArray);
-          var lineArray =  lines(parseArray);
-          //soundFactory.main(parseArray, cm);
-          //rhymeFactory.main(lineArray, cm);
-          meterFactory.main(lineArray, cm);
-        });
-
-      } else {
-        console.log('parseArray', parseArray);
-        var lineArray =  lines(parseArray);
-        // soundFactory.main(parseArray, cm);
-        // rhymeFactory.main(lineArray, cm);
-        meterFactory.main(lineArray, cm);
-      }
-
-    })
-    .catch(function (err) {
-      console.error('error', err);
     });
+
   }, 1000);
+
+  $scope.toggleToken = function(token){
+    switch (token) {
+      case 'soundToken':
+        $scope.currentToken = soundToken;
+        break;
+      case 'meterToken':
+        $scope.currentToken = meterToken;
+        break;
+      case 'rhymeToken':
+        $scope.currentToken = rhymeToken;
+        break;
+      default:
+        $scope.currentToken = soundToken;
+    }
+    cm.options.mode.token = $scope.currentToken;
+    return debounced();
+  }
+
   cm.on('change', debounced);
 });

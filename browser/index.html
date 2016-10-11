@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
     <script src="/lodash/lodash.js"></script>
     <script src="/js/bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=David+Libre" rel="stylesheet">
 
     <link rel="stylesheet" href="css/sound.theme.css">
     <!-- Animate.css -->
@@ -32,9 +33,9 @@
         <nav class="navbar navbar-default">
             <div class="col-md-12">
               <ul class="nav text-center">
-                <li class="active"><a href="index.html"><span>Home</span></a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="team.html">Team</a></li>
+                <li class="active"><a href="index.html"><span>POESIS</span></a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
               </ul>
             </div>
         </nav>
@@ -49,9 +50,9 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <div class="intro animate-box text-center">
-              <input type="phonetics" id="phonetics" class="btn btn-primary" value="Phonetics">
-              <input type="rhyme" id="rhyme" class="btn btn-primary" value="Rhmye">
-              <input type="meter" id="meter" class="btn btn-primary" value="Meter">
+              <input type="phonetics" id="phonetics" class="btn btn-primary" value="Phonetics" ng-click="toggleToken('soundToken')">
+              <input type="rhyme" id="rhyme" class="btn btn-primary" value="Rhmye" ng-click="toggleToken('rhymeToken')">
+              <input type="meter" id="meter" class="btn btn-primary" value="Meter" ng-click="toggleToken('meterToken')">
               <p><br></p>
             </div>
           </div>
