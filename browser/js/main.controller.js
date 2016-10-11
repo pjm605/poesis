@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToken, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory, parseWordsFactory, $window) {
+app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToken, soundToken, $document, linesFactory, $log, soundFactory, lexiconFactory, parseFactory, rhymeFactory, parseWordsFactory, $window) {
   $window.animations.contentWayPoint();
 
   $scope.poem = {line: 0, word: ''};
@@ -41,9 +41,9 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
         case soundToken:
           return soundFactory.main(response, cm);
         case meterToken:
-          return meterFactory.main(lines(response), cm);
+          return meterFactory.main(linesFactory.returnLines(response), cm);
         case rhymeToken:
-          return rhymeFactory.main(lines(response), cm);
+          return rhymeFactory.main(linesFactory.returnLines(response), cm);
         default:
           return null;
       }

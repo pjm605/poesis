@@ -76,14 +76,11 @@ app.factory('rhymeFactory', function () {
     return result;
   }
 
-  var rf = {
+  return {
     main: function (lineArray, cm) {
       var modeOptions = cm.getOption('mode');
       modeOptions.rhymeLocations = findMatch(lineArray);
       cm.setOption('mode', modeOptions);
     }
   };
-
- return rf;
-
 });
