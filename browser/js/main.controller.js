@@ -10,6 +10,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       consonantRules: [],
       vowelLocations: [],
       rhymeLocations: [],
+      stresses: [],
       token: rhymeToken
     },
     theme: 'fontcolor',
@@ -37,7 +38,6 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       // meterFactory.main(lines(response), cm);
       return rhymeFactory.main(lines(response), cm);
     });
-
 
   }, 1000);
   cm.on('change', debounced);
