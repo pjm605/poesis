@@ -1,4 +1,4 @@
-app.factory('parseWordsFactory', function(meterToken, meterFactory, rhymeToken, soundToken, lines, lexicon, parse) {
+app.factory('parseWordsFactory', function (meterToken, meterFactory, rhymeToken, soundToken, lexicon, parse) {
 
   var parsedWords = [];
   var hapaxWords = [];
@@ -27,13 +27,9 @@ app.factory('parseWordsFactory', function(meterToken, meterFactory, rhymeToken, 
               parseArray[j] = fromLexicon.shift();
             }
           }
-          lineArray =  lines(parseArray);
         });
-
-      } else {
-        lineArray =  lines(parseArray);
       }
-      return lineArray;
+      return parseArray;
     })
     .catch(function (err) {
       console.error('error', err);

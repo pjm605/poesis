@@ -35,7 +35,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       // soundFactory.main(response, cm);
       // rhymeFactory.main(lines(response), cm);
       // meterFactory.main(lines(response), cm);
-      return rhymeFactory.main(response, cm);
+      return rhymeFactory.main(lines(response), cm);
     });
 
 
