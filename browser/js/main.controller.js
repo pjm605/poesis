@@ -1,4 +1,6 @@
-app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToken, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory, parseWordsFactory) {
+app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToken, soundToken, $document, lines, $log, soundFactory, lexicon, parse, rhymeFactory, parseWordsFactory, $window) {
+  $window.animations.contentWayPoint();
+
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
 

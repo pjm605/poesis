@@ -26,6 +26,7 @@ var app = angular.module('myApp', ['ui.router', 'ngMessages']);
 // );
 
 
-// app.config(function ($locationProvider, $urlRouterProvider) {
-//   $urlRouterProvider.otherwise('/poesis');
-// });
+app.config(function ($locationProvider, $urlRouterProvider) {
+	// $urlRouterProvider.when('/', '/poesis')
+ $urlRouterProvider.otherwise('/poesis');
+});

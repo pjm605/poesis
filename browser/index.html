@@ -17,23 +17,23 @@
 
     <link rel="stylesheet" href="css/sound.theme.css">
     <!-- Animate.css -->
-  <link rel="stylesheet" href="css/animate.css">
-  <!-- Icomoon Icon Fonts-->
-  <link rel="stylesheet" href="css/icomoon.css">
-  <!-- Bootstrap  -->
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/style.css">
-  <!-- Modernizr JS -->
-  <script src="/template/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Modernizr JS -->
+    <script src="/template/modernizr-2.6.2.min.js"></script>
 
   </head>
-  <body ng-app="myApp"  ng-controller="MainCtrl">
-  <header role="banner" id="fh5co-header">
+  <body ng-app="myApp">
+    <header role="banner" id="fh5co-header">
       <div class="container">
         <nav class="navbar navbar-default">
             <div class="col-md-12">
               <ul class="nav text-center">
-                <li class="active"><a ui-sref="poesis"><span>POESIS</span></a></li>
+                <li><a ui-sref="poesis"><span>POESIS</span></a></li>
                 <li><a ui-sref="about">ABOUT</a></li>
                 <li><a ui-sref="team">TEAM</a></li>
               </ul>
@@ -42,35 +42,6 @@
       </div>
     </header>
     <!-- END: header -->
-
-
-  
-    <section id="work">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <div class="intro animate-box text-center">
-              <input type="phonetics" id="phonetics" class="btn btn-primary" value="Phonetics" ng-click="toggleToken('soundToken')">
-              <input type="rhyme" id="rhyme" class="btn btn-primary" value="Rhmye" ng-click="toggleToken('rhymeToken')">
-              <input type="meter" id="meter" class="btn btn-primary" value="Meter" ng-click="toggleToken('meterToken')">
-              <p><br></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="fh5co-grid animate-box  text-center" >
-                <div class="work-title">
-                  <textarea id="poemarea" class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      <div>
-    </section>
-
-      <ui-view></ui-view>
+    <ui-view></ui-view>
   </body>
 </html>

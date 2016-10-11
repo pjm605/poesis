@@ -1,6 +1,7 @@
 app.config(function ($stateProvider) {
 	$stateProvider.state('team', {
 		url: '/team',
-	    templateUrl: 'team.html'
+	    templateUrl: 'team.html',
+	    controller: 'AnimationCtrl'
 	})
 })
