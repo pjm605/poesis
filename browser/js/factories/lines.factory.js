@@ -11,7 +11,7 @@ app.factory('lines', function () {
         lines[i].push(parseArray[p]);
       }
     }
-    //console.log('LINES', lines);
+    console.log('LINES', lines);
     return lines;
   };
 });
