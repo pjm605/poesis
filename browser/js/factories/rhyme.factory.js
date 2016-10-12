@@ -44,7 +44,7 @@ app.factory('rhymeFactory', function () {
     var lastWords = [];
     var lineCount = 0;
     for (var i = 0; i < breakLines.length; i++) {
-      lastWords.push(findLastVolAndCon(lineCount, breakLines[i]))
+      lastWords.push(findLastVolAndCon(lineCount, breakLines[i]));
       lineCount += breakLines[i].length;
     }
 
@@ -58,10 +58,12 @@ app.factory('rhymeFactory', function () {
         output[key] = [lastWords[i].slice(0, 2)];
       }
     }
-  var result = []
-  for (var key in output) {
-    if (output.hasOwnProperty(key)) result.push(output[key]);
-  }
+    //delete the key ',' to get rid of the 'BREAK' edgecase
+    delete output[','];
+    var result = []
+    for (var key in output) {
+      if (output.hasOwnProperty(key)) result.push(output[key]);
+    }
     console.log('Result from findMatch function in RhymeFactory: ', result);
     return result;
   }
