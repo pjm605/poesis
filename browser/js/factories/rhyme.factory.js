@@ -19,8 +19,6 @@ app.factory('rhymeFactory', function () {
   }
 
   function findLastVolAndCon (offset, parseSound) {
-    console.log('parseSound from rhyme factory', parseSound);
-    var word = parseSound.join('').split(' ');
     var lastVowel = '';
     var consonants = [];
     var buffer = 0;
@@ -47,7 +45,6 @@ app.factory('rhymeFactory', function () {
       lastWords.push(findLastVolAndCon(lineCount, breakLines[i]));
       lineCount += breakLines[i].length;
     }
-
     var output = {};
     for (var i = 0; i < lastWords.length; i++) {
       var key = lastWords[i].slice(2);
