@@ -13,10 +13,12 @@ app.factory('meterFactory', function() {
 
     var annotateWordVowels = function (word) {
       var annotated = "";
+      var lastCharStr = null;
       var sylls = word.split(' ');
       for (var s = 0; s < sylls.length; s++) {
         var lastChar = sylls[s][sylls[s].length-1];
-        if (lastChar === String(Number(lastChar))) {
+        lastCharStr = String(Number(lastChar));
+        if (lastChar === lastCharStr) {
           annotated += sylls[s] + ' ';
         }
         else if (vowelSound(sylls[s])) {
@@ -48,6 +50,7 @@ app.factory('meterFactory', function() {
 
     var findLineStresses = function (line) {
       var stresses = [];
+      var stressStr = null;
       for (var w = 0; w < line.length; w++) {
         if (line[w].length === 0 || line[w][0] === 'BREAK') {
           continue;
@@ -57,10 +60,11 @@ app.factory('meterFactory', function() {
         for (var s = 0; s < sounds.length; s++) {
           var sound = sounds[s];
           var stress = sound[sound.length-1];
-          if (stress === String(Number(stress))) {
+          stressStr = String(Number(stress));
+          if (stress === stressStr) {
             // if the stress could be scanned either as long or short; 'anceps'
-            if (stress > 1) wordStresses.push('a');
-            else if (stress === 1) wordStresses.push('l');
+            if (+stress > 1) wordStresses.push('a');
+            else if (stress === '1') wordStresses.push('l');
             else wordStresses.push('s');
           }
         }
