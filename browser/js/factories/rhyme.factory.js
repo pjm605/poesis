@@ -19,6 +19,7 @@ app.factory('rhymeFactory', function () {
   }
 
   function findLastVolAndCon (offset, parseSound) {
+    var word = parseSound.join(' ').split(' ');
     var lastVowel = '';
     var consonants = [];
     var buffer = 0;
