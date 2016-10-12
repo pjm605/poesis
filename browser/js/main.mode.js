@@ -1,8 +1,5 @@
 CodeMirror.defineMode('mainMode', function (config, parserConfig) {
 
-  // var consonantRules = parserConfig.consonantRules;
-  // var vowelLocations = parserConfig.vowelLocations;
-  // THIS IS A TERRIBLE WAY TO DO THIS
   var genericVowelColors = ['green', 'blue'];
   var currentPositions = {};
   var vowelColors = {};
@@ -37,10 +34,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
       next = next.toLowerCase();
       for (var i = 0; i < clusters.length; i++) {
         var current = '';
-        //  console.log('trying....', clusters[i]);
         for (var c = 0; c < clusters[i].length; c++) {
-            // console.log('cluster: ' + clusters[i][c]);
-            // console.log('next', next);
           if (next === clusters[i][c]) {
             current += next;
           }
@@ -52,14 +46,12 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
           //are we at the end of the text?
           if (stream.peek()) next = stream.next().toLowerCase();
           else if (c < clusters[i].length - 1) {
-            //console.log('break reached');
             stream.backUp(stream.current().length);
             next = stream.next().toLowerCase();
             break;
           }
           else {
             stream.next();
-            console.log('stream current', stream.current());
           }
         }
         if (current === clusters[i]) {

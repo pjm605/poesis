@@ -5,28 +5,21 @@ app.factory('rhymeFactory', function () {
     else return false;
   };
 
-  //parseSound = "V IH1 Z AH0 B AH0 L"
   function findVowelLocation (parseSound) {
-    console.log('parse sound!!!', parseSound);
     if (!parseSound) return 0;
     var word = parseSound.split(' ');
-    //word = ["V", "IH1", "Z", "AH0", "B", "AH0", "L"]
     var vowelStore = [];
       for (var i = 0; i < word.length; i++) {
         if (isVowel(word[i])) {
           vowelStore.push(word[i].replace(/[^A-Za-z]/, ''));
         }
       }
-    // vowelStore = [ 'IH', 'AH', 'AH' ]
     if (!vowelStore.length) return 0
     else return vowelStore.length - 1;
   }
 
-//console.log('THIS IS FINDVOWEL', findVowelLocation('V IH1 Z AH0 B AH0 L'))
-
   function findLastVolAndCon (offset, parseSound) {
-    console.log('this function has been called');
-    console.log('parseSound', parseSound);
+    console.log('parseSound from rhyme factory', parseSound);
     var word = parseSound.join('').split(' ');
     var lastVowel = '';
     var consonants = [];
@@ -49,8 +42,6 @@ app.factory('rhymeFactory', function () {
 
   function findMatch(breakLines) {
     var lastWords = [];
-
-    // get [real line number, and rhyme sign]
     var lineCount = 0;
     for (var i = 0; i < breakLines.length; i++) {
       lastWords.push(findLastVolAndCon(lineCount, breakLines[i]))
@@ -60,7 +51,6 @@ app.factory('rhymeFactory', function () {
     var output = {};
     for (var i = 0; i < lastWords.length; i++) {
       var key = lastWords[i].slice(2);
-      //console.log(lastWords[i].slice(1));
       if (key in output) {
         output[key].push(lastWords[i].slice(0, 2));
       }
