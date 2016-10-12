@@ -24,6 +24,15 @@
 .cm-s-night span.cm-link { color: #845dc4; }
 .cm-s-night span.cm-error { color: #9d1e15; }*/
 
+.cm-s-fontcolor span.cm-short {
+  font-weight: 600;
+  font-size: 0.9em;
+}
+.cm-s-fontcolor span.cm-long {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
 .cm-s-fontcolor span.cm-green {
   color: green;
 }
@@ -39,11 +48,31 @@
 .cm-s-fontcolor span.cm-turquoise {
   color: turquoise;
 }
-.cm-s-fontcolor span.cm-short {
-  font-weight: 600;
-  font-size: 0.9em;
+
+.cm-s-fontcolor span.cm-1A554F {
+  color: #1A554F;
 }
-.cm-s-fontcolor span.cm-long {
-  font-weight: 600;
-  font-size: 1.1em;
+.cm-s-fontcolor span.cm-900C27 {
+  color: #900C27;
+}
+.cm-s-fontcolor span.cm-C70039 {
+  color: #C70039;
+}
+.cm-s-fontcolor span.cm-9660DE {
+  color: #9660DE;
+}
+.cm-s-fontcolor span.cm-F40968 {
+  color: #F40968;
+}
+.cm-s-fontcolor span.cm-01A7A3 {
+  color: #01A7A3
+}
+.cm-s-fontcolor span.cm-F87D09 {
+  color: #F87D09;
+}
+.cm-s-fontcolor span.cm-E47676 {
+  color: #E47676;
+}
+.cm-s-fontcolor span.cm-3F72AF {
+  color: #3F72AF;
 }
