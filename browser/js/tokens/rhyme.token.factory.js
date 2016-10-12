@@ -1,6 +1,6 @@
 app.factory('rhymeToken', function () {
 
-	var rhymeColors = ['blue', 'red', 'green', 'orange', 'yellow'];
+	var rhymeColors = ['tiffanyblue', 'lightpink', 'cranberry', 'softblue', 'lilac', 'burgundy', 'orange', 'red', 'green', 'lightgreen'];
 	var locations = [];
 
 	return function (stream, state, findToken, parserConfig, isVowel) {

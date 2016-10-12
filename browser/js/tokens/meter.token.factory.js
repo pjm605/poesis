@@ -21,11 +21,11 @@ app.factory('meterToken', function () {
       }
       switch (str) {
         case 'a':
-          return 'turquoise';
+          return 'lightgreen';
         case 's':
-          return 'green';
+          return 'lightpink';
         case 'l':
-          return 'blue';
+          return 'softblue';
         case 'waiting':
           return null;
       }
