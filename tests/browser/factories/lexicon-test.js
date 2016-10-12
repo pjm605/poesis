@@ -1,44 +1,47 @@
-// describe('dictionaryFactory', function () {
-// 	beforeEach(module('myApp'));
+describe('lexiconFactory', function () {
+	beforeEach(module('myApp'));
 
-// 	var dictionaryFactory;
-// 	beforeEach('Get tools', inject(function (_$httpBackend_, _parse_) {
-// 		$httpBackend = _$httpBackend_;
-// 		dictionaryFactory = _parse_;
-// 	}));
+	var lexiconFactory;
+	beforeEach('Get tools', inject(function (_$httpBackend_, _lexiconFactory_) {
+		$httpBackend = _$httpBackend_;
+		lexiconFactory = _lexiconFactory_;
+	}));
 
-// 	describe('parseFromdictionary', function () {
-// 		var word;
-// 		var responseData;
+	describe('fromLexiconServer', function () {
+		var data;
+		var responseData;
 
-// 		beforeEach(function () {
-// 			word = 'AABBDDCC';
-// 			responseData = 'hapax';
+		beforeEach(function () {
+			data =  "aabbcc"
+			responseData = ["AA B K"];
 
-// 			$httpBackend
-// 				.expectGET('/api/dictionary')
-// 				.respond(responseData);
-// 		});
+			$httpBackend
+				.expectPOST('/api/lexicon', { "words": data })
+				.respond(responseData);
+		});
 
-// 		afterEach(function () {
-// 			 $httpBackend.verifyNoOutstandingExpectation();
-// 		});
+		afterEach(function () {
+			 $httpBackend.verifyNoOutstandingExpectation();
+		});
 
-// 		it('makes the expected request when called', function () {
-//             dictionaryFactory();
-//             $httpBackend.flush();
-//         });
+		it('makes the expected POST request with expected data', function () {
+            lexiconFactory.fromLexiconServer(data);
+            $httpBackend.flush();
+        });
 
-//         it('returns a promise that resolves to the data of the response', function (done) {
-//             dictionaryFactory(word).then(function (dict) {
-//             	expect(dict).to.be.deep.equal(responseData);
-//             	done();
-//             });
-//             $httpBackend.flush();             
-//         });
+        it('returns a promise that resolves to the data of the response', function (done) {
+            lexiconFactory.fromLexiconServer(data).then(function (dict) {
+            	expect(dict).to.be.deep.equal(responseData);
+            })
+            .catch(done)
+            $httpBackend.flush();      
+            done();       
+        });
 
 
-// 	})
+	})
 	
-   
-// })
+})
+
+
+
