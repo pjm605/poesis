@@ -41,7 +41,5 @@ describe('lexiconFactory', function () {
 
 	})
 	
-})
-
-
+});
 
