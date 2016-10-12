@@ -49,30 +49,27 @@
   color: turquoise;
 }
 
-.cm-s-fontcolor span.cm-1A554F {
-  color: #1A554F;
-}
-.cm-s-fontcolor span.cm-900C27 {
+.cm-s-fontcolor span.cm-burgundy {
   color: #900C27;
 }
-.cm-s-fontcolor span.cm-C70039 {
-  color: #C70039;
-}
-.cm-s-fontcolor span.cm-9660DE {
+.cm-s-fontcolor span.cm-lilac {
   color: #9660DE;
 }
-.cm-s-fontcolor span.cm-F40968 {
+.cm-s-fontcolor span.cm-cranberry {
   color: #F40968;
 }
-.cm-s-fontcolor span.cm-01A7A3 {
+.cm-s-fontcolor span.cm-tiffanyblue {
   color: #01A7A3
 }
-.cm-s-fontcolor span.cm-F87D09 {
+.cm-s-fontcolor span.cm-orange {
   color: #F87D09;
 }
-.cm-s-fontcolor span.cm-E47676 {
+.cm-s-fontcolor span.cm-lightpink {
   color: #E47676;
 }
-.cm-s-fontcolor span.cm-3F72AF {
+.cm-s-fontcolor span.cm-softblue {
   color: #3F72AF;
+}
+.cm-s-fontcolor span.cm-lightgreen {
+  color: #7BC74D;
 }
