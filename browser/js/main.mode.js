@@ -1,6 +1,6 @@
 CodeMirror.defineMode('mainMode', function (config, parserConfig) {
 
-  var genericVowelColors = ['green', 'blue'];
+  var genericVowelColors = ['lightpink', 'red', 'burgundy', 'cranberry', 'orange'];
   var currentPositions = {};
   var vowelColors = {};
   let i = 0;
@@ -10,9 +10,7 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
     i++;
   }
 
-
-  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'au', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
-
+  var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'gh', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'au', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
 
   var isVowel = function (tok, stream) {
     // does not modify the stream

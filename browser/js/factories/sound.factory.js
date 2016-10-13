@@ -21,7 +21,7 @@ app.factory('soundFactory', function () {
   };
 
   var normalize = function (counts) {
-    console.log('normalize called');
+    //console.log('normalize called');
     var total = 0;
     for (var k in counts) {
       total += counts[k];
@@ -49,7 +49,7 @@ app.factory('soundFactory', function () {
     var locations = {};
     var text = stripBreaks(brokenText);
     for (var w = 0; w < text.length; w++) {
-      console.log('this should just be a string? ==>', text[w]);
+      //console.log('this should just be a string? ==>', text[w]);
       var word = text[w].split(' ');
       for (var s = 0; s < word.length; s++) {
         var vowelCount = -1;
@@ -154,7 +154,7 @@ app.factory('soundFactory', function () {
       var significantN = frequencies;
       var significant = [];
       for (var key in nor) {
-        if (nor[key] > significantN[key]) {
+        if (nor[key] > significantN[key] * 2) {
           significant.push(key);
         }
       }
@@ -166,7 +166,7 @@ app.factory('soundFactory', function () {
       var modeOptions = cm.getOption('mode');
       modeOptions.consonantRules = soundToLetter(sig[0]);
       modeOptions.vowelLocations = locateVowelsInText(parseArray, sig[1]);
-      console.log('FACTORY VOWEL LOCATIONS',  modeOptions.vowelLocations);
+      //console.log('FACTORY VOWEL LOCATIONS',  modeOptions.vowelLocations);
       cm.setOption('mode', modeOptions);
     }
   };

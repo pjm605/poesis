@@ -1,5 +1,7 @@
 app.factory('meterFactory', function() {
 
+    var meters = [];
+
     var annotateLineVowels = function(lineParses) {
       var lines = [];
       for (var l = 0; l < lineParses.length; l++) {
@@ -42,9 +44,11 @@ app.factory('meterFactory', function() {
         var stresses = [];
         for (var i = 0; i < annotated.length; i++) {
           var ls = findLineStresses(annotated[i]);
+          ls = generalizeMeter(ls, scan(ls));
+          meters.push([scan(ls), flatten(ls).length]);
           if (ls.length > 0) stresses = stresses.concat(ls);
         }
-        //console.log('ALL STRESSES', stresses);
+        console.log(meters, 'METERS');
         return stresses;
     };
 
@@ -70,6 +74,7 @@ app.factory('meterFactory', function() {
         }
         if (wordStresses) stresses.push(wordStresses);
       }
+      console.log('line stresses', stresses)
       return stresses;
     };
 
@@ -77,12 +82,112 @@ app.factory('meterFactory', function() {
       return ''.concat(...[].concat(...stresses));
     }
 
+    // this should be called with the overall meter if more than half of the
+    // syllables are 'a'
+    var generalizeMeter = function (stresses, foot) {
+      var syl = 0;
+      for (var i = 0; i < stresses.length; i++) {
+        for (var j = 0; j < stresses[i].length; j++) {
+          if (stresses[i][j] != foot[syl] && stresses[i][j] == 'a') {
+            stresses[i][j] = foot[syl];
+          }
+          if (syl == foot.length-1) syl = 0;
+          else syl++;
+        }
+      }
+      return stresses;
+    }
+
+    var scan = function (line) {
+      var feet = ['sl', 'ls', 'lss', 'ssl'];
+      var footcounts = Array(4).fill(0);
+      var flattened = flatten(line);
+      for (var i = 0; i < feet.length; i++) {
+        for (var j = 0; j < flattened.length; j++) {
+          var match = true;
+          for (var k = 0; k < feet[i].length; k++) {
+            if (flattened[j+k] !== feet[i][k] && flattened[j+k] !== 'a') {
+              match = false;
+            }
+          }
+          if (match) {
+            footcounts[i]++;
+          }
+        }
+      }
+      var maxfoot = [-1, -1];
+      for (var i = 0; i < footcounts.length; i++) {
+        if (footcounts[i] > maxfoot[1]) {
+          maxfoot = [i, footcounts[i]];
+        }
+      }
+      //console.log('SCANNING', feet, footcounts)
+      return feet[maxfoot[0]];
+    }
+
+    var nameMeter = function (meterArray) {
+      var footNames = {
+        'sl': 'Iambic',
+        'ls': 'Trochaic',
+        'lss': 'Dactylic',
+        'ssl': 'Anapestic'
+      };
+      var lengthNames = [null, null, null, 'Trimeter', 'Tetrameter', 'Pentameter', 'Hexameter',
+    'Heptameter', 'Octameter', 'Nonameter', 'Decameter']
+      //console.log('METER ARRAY', meterArray);
+
+      var footFrequencies = {
+        'sl': 0,
+        'ls': 0,
+        'lss': 0,
+        'ssl': 0
+      }
+
+      var lengthFrequencies = Array(10).fill(0);
+
+      for (var i = 0; i < meterArray.length; i++) {
+        footFrequencies[meterArray[i][0]]++;
+        lengthFrequencies[meterArray[i][1]]++;
+      }
+
+      var maxF = 0;
+      var maxFName = '';
+      var maxL = 0;
+      var maxLName = 0;
+
+      //console.log('FREQUENCIES', footFrequencies, lengthFrequencies);
+
+      for (var key in footFrequencies) {
+        if (footFrequencies[key] > maxF) {
+          maxF = footFrequencies[key];
+          maxFName = key;
+        }
+      }
+
+      for (var i = 0; i < lengthFrequencies.length; i++) {
+        if (lengthFrequencies[i] > maxL) {
+          maxL = lengthFrequencies[i];
+          maxLName = i;
+        }
+      }
+
+      console.log(maxL, maxLName, maxFName, maxFName.length, 'length stuff');
+
+      var name = "";
+      name += footNames[maxFName] + ' ';
+      name += lengthNames[Math.ceil(maxLName * 1.0 / maxFName.length)];
+      return name;
+    }
+
     var mf = {};
     mf.main = function(lineParses, cm) {
       var stresses = findStresses(lineParses);
+      var name = nameMeter(meters);
+      console.log('NAME', name);
       var modeOptions = cm.getOption('mode');
       modeOptions.stresses = stresses;
       cm.setOption('mode', modeOptions);
+      return name;
     };
     return mf;
 });
