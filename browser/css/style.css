@@ -255,6 +255,14 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
+#clipboard {
+  text-align: right;
+}
+
+#clipboard #clip-input {
+  opacity: 0;
+}
+
 #product .post-entry .post {
   float: left;
   position: relative;
