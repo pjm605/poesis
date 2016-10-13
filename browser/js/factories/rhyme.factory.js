@@ -71,6 +71,7 @@ app.factory('rhymeFactory', function () {
       var modeOptions = cm.getOption('mode');
       modeOptions.rhymeLocations = findMatch(lineArray);
       cm.setOption('mode', modeOptions);
+      return null;
     }
   };
 });

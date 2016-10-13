@@ -3,9 +3,12 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
 
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
+  $scope.meterName = 'Meter';
 
   var textar = document.getElementById('poemarea');
+
   new Clipboard('.savebtn');
+  
   $scope.currentToken = nullToken; //default
 
   var cm = CodeMirror.fromTextArea(textar, {
@@ -48,6 +51,15 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
         case nullToken:
           return nullFactory.main(linesFactory.returnLines(response), cm);
       }
+    })
+    .then( function (meterName) {
+      console.log('this is returned:', meterName);
+      if (meterName) {
+        $scope.meterName = meterName;
+        $scope.$digest();
+      }
+      else $scope.meterName = "Meter";
+      $scope.$digest();
     });
 
   }, 1000);
