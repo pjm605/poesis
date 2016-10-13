@@ -132,7 +132,7 @@ app.factory('meterFactory', function() {
         'lss': 'Dactylic',
         'ssl': 'Anapestic'
       };
-      var lengthNames = [null, null, null, 'Trimeter', 'Tetrameter', 'Pentameter', 'Hexameter',
+      var lengthNames = ["", "", "", 'Trimeter', 'Tetrameter', 'Pentameter', 'Hexameter',
     'Heptameter', 'Octameter', 'Nonameter', 'Decameter']
       //console.log('METER ARRAY', meterArray);
 
