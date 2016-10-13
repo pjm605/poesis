@@ -154,7 +154,7 @@ app.factory('soundFactory', function () {
       var significantN = frequencies;
       var significant = [];
       for (var key in nor) {
-        if (nor[key] > significantN[key]) {
+        if (nor[key] > significantN[key] * 2) {
           significant.push(key);
         }
       }
