@@ -1,6 +1,6 @@
 CodeMirror.defineMode('mainMode', function (config, parserConfig) {
 
-  var genericVowelColors = ['green', 'blue'];
+  var genericVowelColors = ['lightpink', 'red', 'burgundy', 'cranberry', 'orange'];
   var currentPositions = {};
   var vowelColors = {};
   let i = 0;

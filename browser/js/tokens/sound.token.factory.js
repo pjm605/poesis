@@ -1,6 +1,6 @@
 app.factory('soundToken', function () {
 
-  var consonantColors = ['tiffanyblue', 'lightpink', 'cranberry', 'softblue', 'lilac', 'burgundy', 'orange', 'red', 'green', 'lightgreen'];
+  var consonantColors = ['tiffanyblue', 'lilac', 'lightgreen', 'green', 'blue', 'turquoise', 'softblue'];
   
 
   return function (stream, state, findToken, parserConfig, isVowel, currentPositions, vowelColors) {
