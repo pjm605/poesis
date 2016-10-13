@@ -14,7 +14,6 @@ app.factory('parseWordsFactory', function (meterToken, meterFactory, rhymeToken,
           hapaxWords.push(parseArray[i].slice(1));
         }
       }
-      console.log('Not in the dictionary: ', hapaxWords);
       if (hapaxWords.length > 0) {
         hapaxWords = hapaxWords.join('\n');
         return lexiconFactory.fromLexiconServer(hapaxWords)

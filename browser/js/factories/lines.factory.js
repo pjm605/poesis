@@ -5,7 +5,6 @@ app.factory('linesFactory', function () {
       var i = 0;
       for (var p = 0; p < parseArray.length; p++) {
         if (parseArray[p] === 'BREAK') {
-          console.log('hit a break');
           i++;
           lines[i] = [];
         }
@@ -13,7 +12,6 @@ app.factory('linesFactory', function () {
           lines[i].push(parseArray[p]);
         }
       }
-      console.log('LINES', lines);
       return lines;
     }
   }
