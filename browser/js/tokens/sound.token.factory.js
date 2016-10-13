@@ -1,13 +1,14 @@
 app.factory('soundToken', function () {
 
   var consonantColors = ['tiffanyblue', 'lilac', 'lightgreen', 'green', 'blue', 'turquoise', 'softblue'];
-  
+
+
   return function (stream, state, findToken, parserConfig, isVowel, currentPositions, vowelColors) {
 
     var vowelLocations = parserConfig.vowelLocations;
     var consonantRules = parserConfig.consonantRules;
-
     var next = findToken(stream);
+
     if (stream.eol() || !next) {
       //next token is a space or does not exist
       state.position[0]++;

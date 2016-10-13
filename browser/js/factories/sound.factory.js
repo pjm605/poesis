@@ -32,6 +32,7 @@ app.factory('soundFactory', function () {
   };
 
   var isVowel = function (str) {
+    console.log('is this a vowel?', str);
     if (/\d/.test(str[str.length-1])) return true;
     else return false;
   };
@@ -49,12 +50,16 @@ app.factory('soundFactory', function () {
     var text = stripBreaks(brokenText);
     for (var w = 0; w < text.length; w++) {
       var word = text[w].split(' ');
+      var vowelCount = -1;
       for (var s = 0; s < word.length; s++) {
-        var vowelCount = -1;
+
         var vowelSound = "";
+        //console.log('answer: ', isVowel(word[s]));
         if (isVowel(word[s])) {
           vowelSound = word[s].substring(0, word[s].length-1);
           vowelCount++;
+          console.log('!!!!!vowelCount', vowelCount);
+          //this is not being incremented, which makes me very sad
           for (var v = 0; v < vowels.length; v++) {
             var vow = vowels[v];
             if (vow == vowelSound) {
@@ -91,7 +96,8 @@ app.factory('soundFactory', function () {
       el: ['le'],
       em: ['om'],
       en: ['n'],
-      sh: ['sh', 'tio']
+      sh: ['sh', 'tio'],
+      w: ['w', 'wh']
     };
     for (var i = 0; i < soundarr.length; i++) {
       var sound = soundarr[i].toLowerCase();
