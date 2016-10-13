@@ -10,9 +10,9 @@ app.factory('meterToken', function () {
     }
     if (isVowel(next, stream) && parserConfig.stresses.length) {
       state.position[1]++;
-      console.log('NEXT I AM DEALING WITH THIS VOWEL NOW', next);
-      console.log('STRESSES', parserConfig.stresses)
-      console.log(state.position, '<--- state.position, brosphine');
+      // console.log('NEXT I AM DEALING WITH THIS VOWEL NOW', next);
+      // console.log('STRESSES', parserConfig.stresses)
+      // console.log(state.position, '<--- state.position, brosphine');
       if (state.position[0] >= parserConfig.stresses.length) {
         var str = 'waiting';
       }

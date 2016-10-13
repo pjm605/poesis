@@ -42,6 +42,9 @@ app.factory('meterFactory', function() {
         var stresses = [];
         for (var i = 0; i < annotated.length; i++) {
           var ls = findLineStresses(annotated[i]);
+          console.log('METERS', scan(ls));
+          ls = generalizeMeter(ls, scan(ls));
+          console.log('GENERALIZED', ls);
           if (ls.length > 0) stresses = stresses.concat(ls);
         }
         //console.log('ALL STRESSES', stresses);
@@ -70,11 +73,53 @@ app.factory('meterFactory', function() {
         }
         if (wordStresses) stresses.push(wordStresses);
       }
+      console.log('line stresses', stresses)
       return stresses;
     };
 
     var flatten = function (stresses) {
       return ''.concat(...[].concat(...stresses));
+    }
+
+    var generalizeMeter = function (stresses, foot) {
+      var syl = 0;
+      for (var i = 0; i < stresses.length; i++) {
+        for (var j = 0; j < stresses[i].length; j++) {
+          if (stresses[i][j] != foot[syl] && stresses[i][j] == 'a') {
+            stresses[i][j] = foot[syl];
+          }
+          if (syl == foot.length-1) syl = 0;
+          else syl++;
+        }
+      }
+      return stresses;
+    }
+
+    var scan = function (line) {
+      var feet = ['sl', 'ls', 'lss', 'ssl'];
+      var footcounts = Array(4).fill(0);
+      var flattened = flatten(line);
+      for (var i = 0; i < feet.length; i++) {
+        for (var j = 0; j < flattened.length; j++) {
+          var match = true;
+          for (var k = 0; k < feet[i].length; k++) {
+            if (flattened[j+k] !== feet[i][k] && flattened[j+k] !== 'a') {
+              match = false;
+            }
+          }
+          if (match) {
+            footcounts[i]++;
+          }
+        }
+      }
+      var maxfoot = [-1, -1];
+      for (var i = 0; i < footcounts.length; i++) {
+        if (footcounts[i] > maxfoot[1]) {
+          maxfoot = [i, footcounts[i]];
+        }
+      }
+      console.log('SCANNING', feet, footcounts)
+      return feet[maxfoot[0]];
     }
 
     var mf = {};
