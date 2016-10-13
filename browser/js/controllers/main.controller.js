@@ -5,7 +5,7 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
   $scope.lineEnd = false;
 
   var textar = document.getElementById('poemarea');
-
+  new Clipboard('.savebtn');
   $scope.currentToken = nullToken; //default
 
   var cm = CodeMirror.fromTextArea(textar, {
