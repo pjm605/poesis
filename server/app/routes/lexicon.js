@@ -15,7 +15,7 @@ function formatDictionary(dictionaryFile) {
 	var lineSplit;
 	lines.forEach(function (line) {
 		lineSplit = line.split('  ');
-		lineSplit[0] = lineSplit[0].replace(/[^a-z']+/gi, '').toLowerCase();
+		lineSplit[0] = lineSplit[0].replace(/[^a-z'-]+/gi, '').toLowerCase();
 		if (!words[lineSplit[0]]) words[lineSplit[0]] = lineSplit[1];
 	});
 	return words;

@@ -29,7 +29,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
 
     var pounded = $scope.text.replace(/\n/g, ' qzqz ').toLowerCase();
     pounded = pounded.trim(); //strip whitespace at the end
-    var words = pounded.replace(/-/g, ' ').replace(/[^a-z'\s]+/gi, '').split(' ')
+    var words = pounded.replace(/[^a-z'\s]+/gi, '').split(' ')
     .filter(function (word) {
       return word !== '';
     });
