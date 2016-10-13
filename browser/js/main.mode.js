@@ -12,7 +12,6 @@ CodeMirror.defineMode('mainMode', function (config, parserConfig) {
 
   var clusters = ['tio', 'sh', 'th', 'ng', 'ch', 'gh', 'ie', 'ou', 'ei', 'qu', 'ey', 'oy', 'ay', 'au', 'uy', 'oi', 'ee', 'ai', 'ow', 'ea', 'oo'];
 
-
   var isVowel = function (tok, stream) {
     // does not modify the stream
     var simpleVowels = ['a', 'e', 'i', 'o', 'u'];
