@@ -22,6 +22,10 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
   });
 
   $scope.text = '';
+  $scope.clear = function() {
+    cm.setValue("");
+  };
+
   var debounced = _.debounce(function (codeMirror) {
     $scope.text = cm.getValue();
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
