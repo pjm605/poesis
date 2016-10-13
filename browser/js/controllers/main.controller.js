@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToken, soundToken, $document, linesFactory, $log, soundFactory, lexiconFactory, parseFactory, rhymeFactory, parseWordsFactory, $window) {
+app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory, meterFactory, rhymeToken, soundToken, $document, linesFactory, $log, soundFactory, lexiconFactory, parseFactory, rhymeFactory, parseWordsFactory, $window) {
   $window.animations.contentWayPoint();
 
   $scope.poem = {line: 0, word: ''};
@@ -6,7 +6,7 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
 
   var textar = document.getElementById('poemarea');
 
-  $scope.currentToken = soundToken; //default
+  $scope.currentToken = nullToken; //default
 
   var cm = CodeMirror.fromTextArea(textar, {
     mode: {
@@ -15,16 +15,13 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
       vowelLocations: [],
       rhymeLocations: [],
       stresses: [],
-      token: meterToken
+      token: $scope.currentToken
     },
     theme: 'fontcolor',
     lineWrapping: 'true'
   });
 
   $scope.text = '';
-  $scope.clear = function() {
-    cm.setValue("");
-  };
 
   var debounced = _.debounce(function (codeMirror) {
     $scope.text = cm.getValue();
@@ -48,13 +45,14 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
           return meterFactory.main(linesFactory.returnLines(response), cm);
         case rhymeToken:
           return rhymeFactory.main(linesFactory.returnLines(response), cm);
-        default:
-          return null;
+        case nullToken:
+          return nullFactory.main(linesFactory.returnLines(response), cm);
       }
     });
 
   }, 1000);
 
+//this probably does not need a switch statement
   $scope.toggleToken = function(token){
     switch (token) {
       case 'soundToken':
@@ -65,6 +63,9 @@ app.controller('MainCtrl', function ($scope, meterToken, meterFactory, rhymeToke
         break;
       case 'rhymeToken':
         $scope.currentToken = rhymeToken;
+        break;
+      case 'nullToken':
+        $scope.currentToken = nullToken;
         break;
       default:
         $scope.currentToken = soundToken;
