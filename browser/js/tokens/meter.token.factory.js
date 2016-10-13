@@ -19,14 +19,13 @@ app.factory('meterToken', function () {
       else {
         var str = parserConfig.stresses[state.position[0]][state.position[1]];
       }
-    //  console.log('current stress: ', str);
       switch (str) {
         case 'a':
-          return 'turquoise';
+          return 'lightgreen';
         case 's':
-          return 'green';
+          return 'lightpink';
         case 'l':
-          return 'blue';
+          return 'softblue';
         case 'waiting':
           return null;
       }

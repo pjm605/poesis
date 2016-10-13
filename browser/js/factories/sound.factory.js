@@ -12,10 +12,8 @@ app.factory('soundFactory', function () {
     }
   };
 
-  //helper function we do not want to expose
   var countTextSounds = function (text) {
     var sd = {};
-    // console.log('text', text);
     for (var i = 0; i < text.length; i++) {
       countWordSounds(text[i], sd);
     }
@@ -42,7 +40,7 @@ app.factory('soundFactory', function () {
   var stripBreaks = function (text) {
     var stripped = [];
     for (var i = 0; i < text.length; i++) {
-      if (text[i] != 'BREAK') stripped.push(text[i]);
+      if (text[i] !== 'BREAK') stripped.push(text[i]);
     }
     return stripped;
   }
@@ -69,7 +67,6 @@ app.factory('soundFactory', function () {
         }
       }
     }
-    // console.log('LOCATIONS', locations);
     return locations;
   };
 
@@ -161,7 +158,7 @@ app.factory('soundFactory', function () {
           significant.push(key);
         }
       }
-      console.log('significant', significant);
+      console.log('significant from sound.factory', significant);
       return soundSort(significant);
     },
     main: function (parseArray, cm) {
