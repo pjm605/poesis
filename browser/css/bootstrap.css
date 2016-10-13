@@ -142,6 +142,7 @@ textarea {
 
 button {
   overflow: visible;
+  width: 200px;
 }
 
 button,
@@ -149,21 +150,21 @@ select {
   text-transform: none;
 }
 
-button,
+/*button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
-}
+}*/
 
-button[disabled],
+/*button[disabled],
 html input[disabled] {
   cursor: default;
-}
+}*/
 
-button::-moz-focus-inner,
-input::-moz-focus-inner {
+button::-moz-focus-inner
+/*input::-moz-focus-inner*/ {
   border: 0;
   padding: 0;
 }
@@ -172,7 +173,7 @@ input {
   line-height: normal;
 }
 
-input[type="checkbox"],
+/*input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
@@ -191,7 +192,7 @@ input[type="search"] {
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
-}
+}*/
 
 fieldset {
   border: 1px solid #c0c0c0;
