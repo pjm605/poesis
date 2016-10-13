@@ -16,6 +16,10 @@
           <div class="col-md-12">
             <div class="fh5co-grid animate-box  text-center" >
                 <div class="work-title">
+                <div style="text-align: right">
+                  <input id="input" value="{{text}}" style="opacity: 0">
+                  <button class="savebtn" data-clipboard-target="#input">Copy to clipboard</button>
+                </div>
                   <textarea id="poemarea" class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
                 </div>
               </a>
