@@ -86,16 +86,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   margin: 0;
 }
-#fh5co-header .fh5co-navbar-brand {
-  width: 100%;
-  margin: 0;
-}
-#fh5co-header .fh5co-navbar-brand .fh5co-logo {
-  width: 52px;
-  height: 30px;
-  padding: 0;
-  font-size: 18px;
-}
+
 @media screen and (max-width: 992px) {
   #fh5co-header .fh5co-navbar-brand {
     text-align: center;
@@ -442,45 +433,6 @@ footer .social {
 }
 .btn.btn-default:hover, .btn.btn-default:focus, .btn.btn-default:active {
   border-color: transparent;
-}
-
-.social {
-  padding: 0;
-  margin: 0;
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  text-align: right;
-}
-.social li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: inline-block;
-}
-.social li a {
-  font-size: 24px;
-  display: table;
-  width: 24px;
-  height: 24px;
-  margin: 0 4px;
-  color: #000;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-}
-.social li a:hover, .social li a:focus {
-  color: #52d3aa;
-  text-decoration: none;
-}
-.social li a i {
-  display: table-cell;
-  vertical-align: middle;
-}
-@media screen and (max-width: 992px) {
-  .social {
-    text-align: center;
-  }
 }
 
 .js .animate-box {
