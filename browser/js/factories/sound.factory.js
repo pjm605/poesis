@@ -93,7 +93,8 @@ app.factory('soundFactory', function () {
       el: ['le'],
       em: ['om'],
       en: ['n'],
-      sh: ['sh', 'tio']
+      sh: ['sh', 'tio'],
+      w: ['w', 'wh']
     };
     for (var i = 0; i < soundarr.length; i++) {
       var sound = soundarr[i].toLowerCase();
