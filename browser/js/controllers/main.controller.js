@@ -51,11 +51,13 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
       }
     })
     .then( function (meterName) {
+      console.log('this is returned:', meterName);
       if (meterName) {
         $scope.meterName = meterName;
         $scope.$digest();
       }
       else $scope.meterName = "Meter";
+      $scope.$digest();
     });
 
   }, 1000);
