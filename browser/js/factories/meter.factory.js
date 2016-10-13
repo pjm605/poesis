@@ -187,6 +187,7 @@ app.factory('meterFactory', function() {
       var modeOptions = cm.getOption('mode');
       modeOptions.stresses = stresses;
       cm.setOption('mode', modeOptions);
+      return name;
     };
     return mf;
 });

@@ -3,6 +3,7 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
 
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
+  $scope.meterName = 'Meter';
 
   var textar = document.getElementById('poemarea');
 
@@ -48,6 +49,13 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
         case nullToken:
           return nullFactory.main(linesFactory.returnLines(response), cm);
       }
+    })
+    .then( function (meterName) {
+      if (meterName) {
+        $scope.meterName = meterName;
+        $scope.$digest();
+      }
+      else $scope.meterName = "Meter";
     });
 
   }, 1000);
