@@ -4,11 +4,12 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
   $scope.poem = {line: 0, word: ''};
   $scope.lineEnd = false;
   $scope.meterName = 'Meter';
+  $scope.descr = '';
 
   var textar = document.getElementById('poemarea');
 
   new Clipboard('.savebtn');
-  
+
   $scope.currentToken = nullToken; //default
 
   var cm = CodeMirror.fromTextArea(textar, {
@@ -41,12 +42,17 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
     .then(function (response) {
       switch ($scope.currentToken) {
         case soundToken:
+          $scope.descr = "Colored sounds are significantly more frequent than they are in standard English prose";
+          $scope.$digest();
           return soundFactory.main(response, cm);
         case meterToken:
+          $scope.descr = "Matching colors indicate rhyming soundss";
           return meterFactory.main(linesFactory.returnLines(response), cm);
         case rhymeToken:
+          $scope.descr = "Blue vowels are stressed; pink vowels are unstressed";
           return rhymeFactory.main(linesFactory.returnLines(response), cm);
         case nullToken:
+          $scope.descr = "";
           return nullFactory.main(linesFactory.returnLines(response), cm);
       }
     })
