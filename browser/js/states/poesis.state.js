@@ -1,8 +1,8 @@
-app.config(function ($stateProvider) {
+app.config(function ($stateProvider, $locationProvider) {
 	$stateProvider.state('poesis', {
 		url: '/poesis',
 	    templateUrl: 'poesis.html',
 	    controller: 'MainCtrl'
+	});
 
-	})
-})
+});
