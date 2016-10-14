@@ -3,5 +3,6 @@
 var app = angular.module('myApp', ['ui.router', 'ngMessages', 'ngclipboard']);
 
 app.config(function ($locationProvider, $urlRouterProvider) {
- $urlRouterProvider.otherwise('/poesis');
+	$locationProvider.html5Mode(true);
+	$urlRouterProvider.otherwise('/poesis');
 });
