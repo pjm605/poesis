@@ -1,8 +1,10 @@
+
     <section id="work">
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
             <div class="intro animate-box text-center">
+              <p>short description</p>
               <button type="phonetics" id="phonetics" class="btn btn-primary" value="Phonetics" ng-click="toggleToken('soundToken')">phonetics</button>
               <button type="rhyme" id="rhyme" class="btn btn-primary" value="Rhmye" ng-click="toggleToken('rhymeToken')">Rhmye</button>
               <button type="meter" id="meter" class="btn btn-primary" value="Meter" ng-click="toggleToken('meterToken')">{{meterName}}</button>
@@ -22,9 +24,10 @@
                   </div>
                   <textarea id="poemarea" class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
                 </div>
-              </a>
             </div>
           </div>
         </div>
       <div>
     </section>
+
+

@@ -3,5 +3,5 @@ app.config(function ($stateProvider) {
 		url: '/team',
 	    templateUrl: 'team.html',
 	    controller: 'AnimationCtrl'
-	})
-})
+	});
+});

@@ -3,6 +3,5 @@ app.config(function ($stateProvider) {
 		url: '/poesis',
 	    templateUrl: 'poesis.html',
 	    controller: 'MainCtrl'
-
-	})
-})
+	});
+});

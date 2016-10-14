@@ -3,6 +3,7 @@
   height: auto;
   font-family: 'David Libre', serif;
   background-opacity: 0.8;
+  margin-bottom: 100px;
 }
 
 .CodeMirror-scroll {
