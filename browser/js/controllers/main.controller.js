@@ -29,7 +29,6 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
   var debounced = _.debounce(function (codeMirror) {
     $scope.text = cm.getValue();
     //$scope.text gets updated when the user stops typing for more than 2 seconds.
-    console.log('$scope.text', $scope.text);
 
     var pounded = $scope.text.replace(/\n/g, ' qzqz ').toLowerCase();
     pounded = pounded.trim(); //strip whitespace at the end
@@ -37,7 +36,6 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
     .filter(function (word) {
       return word !== '';
     });
-    console.log('words', words);
 
     parseWordsFactory(words)
     .then(function (response) {
@@ -53,7 +51,6 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
       }
     })
     .then( function (meterName) {
-      console.log('this is returned:', meterName);
       if (meterName) {
         $scope.meterName = meterName;
         $scope.$digest();

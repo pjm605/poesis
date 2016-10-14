@@ -41,24 +41,19 @@ router.post('/', function(req, res, next) {
 
 	rp({method: 'POST', uri: 'http://www.speech.cs.cmu.edu/cgi-bin/tools/logios/lextool.pl', formData: formData})
 	.then(function(parsedBody) {
-		//console.log('Upload successful!  Server responded with:', parsedBody);
-
 		//get the URI for the second request
 		var regex = /(ht|f)tp:\/\/([^ \,\;\:\!\)\(\"\'\\f\n\r\t\v])+/g;
 		//this returns two URI listed in the html parsedBody
 		var resultUrls = parsedBody.match(regex);
 		//get the second URI
 		correctUrl = resultUrls[1];
-
 		//second request
-		console.log(correctUrl);
 		return rp({method: 'GET', uri: correctUrl})
 	})
 	.then(function(response) {
 		if (response) {
 			var responseBody = response.split('\t').join(' ');
 			responseBody = responseBody.split('\n');
-			console.log('responseBody', responseBody);
 			var resultArray = [];
 			responseBody.forEach(function (phonemes) {
 				phonemes = phonemes.split(/\s/);
