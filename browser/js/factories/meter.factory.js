@@ -32,7 +32,7 @@ app.factory('meterFactory', function() {
     };
 
     var vowelSound = function (str) {
-      var arpaVowels = ['AA', 'IY', 'ER', 'AH'];
+      var arpaVowels = ['AA', 'AXR', 'IY', 'ER', 'AH', 'AO', 'UW', 'EH', 'IH', 'UH', 'EY', 'AW', 'OY', 'OW', 'AY', 'AX', 'AE'];
       return arpaVowels.indexOf(str) > -1;
     };
 
