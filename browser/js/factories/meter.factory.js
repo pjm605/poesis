@@ -24,7 +24,6 @@ app.factory('meterFactory', function() {
           annotated += sylls[s] + ' ';
         }
         else if (vowelSound(sylls[s])) {
-        //  console.log('this is an unmarked vowelSound: ' + sylls[s]);
           annotated += sylls[s] + 9 + ' ';
         }
         else annotated += sylls[s] + ' ';
@@ -33,7 +32,6 @@ app.factory('meterFactory', function() {
     };
 
     var vowelSound = function (str) {
-      //console.log('vowelSound called');
       var arpaVowels = ['AA', 'IY', 'ER', 'AH'];
       return arpaVowels.indexOf(str) > -1;
     };
@@ -48,7 +46,6 @@ app.factory('meterFactory', function() {
           meters.push([scan(ls), flatten(ls).length]);
           if (ls.length > 0) stresses = stresses.concat(ls);
         }
-        console.log(meters, 'METERS');
         return stresses;
     };
 
@@ -74,7 +71,6 @@ app.factory('meterFactory', function() {
         }
         if (wordStresses) stresses.push(wordStresses);
       }
-      console.log('line stresses', stresses)
       return stresses;
     };
 
@@ -121,7 +117,6 @@ app.factory('meterFactory', function() {
           maxfoot = [i, footcounts[i]];
         }
       }
-      //console.log('SCANNING', feet, footcounts)
       return feet[maxfoot[0]];
     }
 
@@ -132,7 +127,7 @@ app.factory('meterFactory', function() {
         'lss': 'Dactylic',
         'ssl': 'Anapestic'
       };
-      var lengthNames = [null, null, null, 'Trimeter', 'Tetrameter', 'Pentameter', 'Hexameter',
+      var lengthNames = ["", "", "", 'Trimeter', 'Tetrameter', 'Pentameter', 'Hexameter',
     'Heptameter', 'Octameter', 'Nonameter', 'Decameter']
       //console.log('METER ARRAY', meterArray);
 
@@ -155,8 +150,6 @@ app.factory('meterFactory', function() {
       var maxL = 0;
       var maxLName = 0;
 
-      //console.log('FREQUENCIES', footFrequencies, lengthFrequencies);
-
       for (var key in footFrequencies) {
         if (footFrequencies[key] > maxF) {
           maxF = footFrequencies[key];
@@ -171,8 +164,6 @@ app.factory('meterFactory', function() {
         }
       }
 
-      console.log(maxL, maxLName, maxFName, maxFName.length, 'length stuff');
-
       var name = "";
       name += footNames[maxFName] + ' ';
       name += lengthNames[Math.ceil(maxLName * 1.0 / maxFName.length)];
@@ -183,7 +174,6 @@ app.factory('meterFactory', function() {
     mf.main = function(lineParses, cm) {
       var stresses = findStresses(lineParses);
       var name = nameMeter(meters);
-      console.log('NAME', name);
       var modeOptions = cm.getOption('mode');
       modeOptions.stresses = stresses;
       cm.setOption('mode', modeOptions);
