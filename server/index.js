@@ -2,7 +2,6 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-// var morgan = require('morgan')
 var port = process.env.PORT || 8080;
 
 var rootPath = path.join(__dirname, '../');
@@ -45,6 +44,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Successfully connected! ' + port);
 
 module.exports = app;
