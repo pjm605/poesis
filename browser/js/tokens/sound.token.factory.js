@@ -23,7 +23,7 @@ app.factory('soundToken', function () {
       for (var vow in vowelLocations) {
         var nextVowel = vowelLocations[vow][currentPositions[vow]];
         if (nextVowel && state.position[0] === nextVowel[0] && state.position[1] === nextVowel[1]) {
-          console.log('IAMHERE', state.position);
+          // console.log('IAMHERE', state.position);
           currentPositions[vow]++;
           return vowelColors[vow];
         }
