@@ -49,7 +49,7 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
           $scope.descr = "Matching colors indicate rhyming soundss";
           return meterFactory.main(linesFactory.returnLines(response), cm);
         case rhymeToken:
-          $scope.descr = "Blue vowels are stressed; pink vowels are unstressed";
+          $scope.descr = "Blue vowels are stressed - pink vowels are unstressed";
           return rhymeFactory.main(linesFactory.returnLines(response), cm);
         case nullToken:
           $scope.descr = "";

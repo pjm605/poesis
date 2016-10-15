@@ -177,6 +177,12 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.5em;
 }
 
+#intro .container {
+  background-color: white;
+  opacity: 0.8;
+  padding: 20px;
+}
+
 #services .service {
   text-align: center;
   padding: 0 2em;
