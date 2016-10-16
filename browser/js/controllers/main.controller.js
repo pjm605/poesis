@@ -46,10 +46,10 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
           $scope.$digest();
           return soundFactory.main(response, cm);
         case meterToken:
-          $scope.descr = 'Matching colors indicate rhyming soundss';
+          $scope.descr = 'Blue vowels are stressed - pink vowels are unstressed';
           return meterFactory.main(linesFactory.returnLines(response), cm);
         case rhymeToken:
-          $scope.descr = 'Blue vowels are stressed - pink vowels are unstressed';
+          $scope.descr = 'Matching colors indicate rhyming sounds';
           return rhymeFactory.main(linesFactory.returnLines(response), cm);
         case nullToken:
           $scope.descr = '';
@@ -61,7 +61,7 @@ app.controller('MainCtrl', function ($scope, meterToken, nullToken, nullFactory,
         $scope.meterName = meterName;
         $scope.$digest();
       }
-      else $scope.meterName = "Meter";
+      else $scope.meterName = 'Meter';
       $scope.$digest();
     });
 
