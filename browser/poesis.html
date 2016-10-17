@@ -1,31 +1,30 @@
-
-    <section id="work">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <div class="intro animate-box text-center">
-              <h4>{{descr}}</h4>
-              <button type="phonetics" id="phonetics" class="btn btn-primary" value="Phonetics" ng-click="toggleToken('soundToken')">phonetics</button>
-              <button type="rhyme" id="rhyme" class="btn btn-primary" value="Rhmye" ng-click="toggleToken('rhymeToken')">Rhmye</button>
-              <button type="meter" id="meter" class="btn btn-primary" value="Meter" ng-click="toggleToken('meterToken')">{{meterName}}</button>
-              <button type="clean" id="clean" class="btn btn-primary" value="Clear" ng-click="toggleToken('nullToken')">Clear</button>
-              <p><br></p>
-            </div>
-          </div>
+<section id="work">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="intro animate-box text-center">
+          <h4>{{descr}}</h4>
+          <button type="phonetics" id="phonetics" class="btn btn-primary" value="Phonetics" ng-click="toggleToken('soundToken')">phonetics</button>
+          <button type="rhyme" id="rhyme" class="btn btn-primary" value="Rhmye" ng-click="toggleToken('rhymeToken')">Rhmye</button>
+          <button type="meter" id="meter" class="btn btn-primary" value="Meter" ng-click="toggleToken('meterToken')">{{meterName}}</button>
+          <button type="clean" id="clean" class="btn btn-primary" value="Clear" ng-click="toggleToken('nullToken')">Clear</button>
+          <p><br></p>
         </div>
+      </div>
+    </div>
 
-        <div class="row">
-          <div class="col-md-12">
-            <div class="fh5co-grid animate-box  text-center" >
-                <div class="work-title">
-                  <div id="clipboard">
-                    <input id="clip-input" value="{{text}}">
-                    <button class="savebtn btn btn-primary" data-clipboard-target="#clip-input">Copy to clipboard</button>
-                  </div>
-                  <textarea id="poemarea" class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
-                </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="fh5co-grid animate-box  text-center" >
+            <div class="work-title">
+              <div id="clipboard">
+                <input id="clip-input" value="{{text}}">
+                <button class="savebtn btn btn-primary" data-clipboard-target="#clip-input">Copy to clipboard</button>
+              </div>
+              <textarea id="poemarea" class="form-control" ng-model="poem.input" ng-keypress="($event.which === 32 ? onSpace() : ($event.which === 13 ? onEnter() : 0));"></textarea>
             </div>
-          </div>
         </div>
-      <div>
-    </section>
+      </div>
+    </div>
+  <div>
+</section>
