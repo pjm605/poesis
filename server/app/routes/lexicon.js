@@ -43,7 +43,7 @@ router.post('/', function(req, res, next) {
 	.then(function(parsedBody) {
 		//get the URI for the second request
 		var regex = /(ht|f)tp:\/\/([^ \,\;\:\!\)\(\"\'\\f\n\r\t\v])+/g;
-		//this returns two URI listed in the html parsedBody
+		//this returns two URIs in the html parsedBody
 		var resultUrls = parsedBody.match(regex);
 		//get the second URI
 		correctUrl = resultUrls[1];
@@ -52,9 +52,8 @@ router.post('/', function(req, res, next) {
 	})
 	.then(function(response) {
 		if (response) {
-			var responseBody = response.split('\t').join(' ');
-			responseBody = responseBody.split('\n');
 			var resultArray = [];
+			var responseBody = response.split('\t').join(' ').split('\n');
 			responseBody.forEach(function (phonemes) {
 				phonemes = phonemes.split(/\s/);
 				phonemes.splice(0, 1);

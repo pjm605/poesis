@@ -62,7 +62,7 @@ app.factory('rhymeFactory', function () {
     for (var key in output) {
       if (output.hasOwnProperty(key)) result.push(output[key]);
     }
-    console.log('Result from findMatch function in RhymeFactory: ', result);
+    // console.log('Result from findMatch function in RhymeFactory: ', result);
     return result;
   }
 

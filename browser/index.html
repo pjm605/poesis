@@ -1,50 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" >
-  <head>
-    <base href="/" />
-    <title>Poesis</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <script src="/angular/angular.js" ></script>
-    <script src="/angular-ui-router/release/angular-ui-router.js" ></script>
-    <script src="/angular-messages/angular-messages.js" ></script>
-    <script src="/codemirror/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
-    <script src="/lodash/lodash.js"></script>
-    <script src="/js/bundle.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=David+Libre" rel="stylesheet">
-    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
-    <script src="/ngclipboard/dist/ngclipboard.min.js"></script>
+<html lang="en">
 
-    <link rel="stylesheet" href="css/sound.theme.css">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- Bootstrap  -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Modernizr JS -->
-    <script src="/template/modernizr-2.6.2.min.js"></script>
+<head>
+  <base href="/" />
+  <title>Poesis</title>
+  <link rel="shortcut icon" href="/images/fav.png">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <script src="/angular/angular.js"></script>
+  <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/angular-messages/angular-messages.js"></script>
+  <script src="/codemirror/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+  <script src="/lodash/lodash.js"></script>
+  <script src="/js/bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=David+Libre" rel="stylesheet">
+  <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+  <script src="/ngclipboard/dist/ngclipboard.min.js"></script>
+  <link rel="stylesheet" href="css/sound.theme.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="css/animate.css">
+  <!-- Bootstrap  -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Modernizr JS -->
+  <script src="/template/modernizr-2.6.2.min.js"></script>
+</head>
 
-  </head>
-  <body ng-app="myApp">
-    <header role="banner" id="fh5co-header">
-      <div class="container">
-        <nav class="navbar navbar-default">
-            <div class="col-md-12">
-              <ul class="nav text-center">
-                <li><a ui-sref="poesis"><span>POESIS</span></a></li>
-                <li><a ui-sref="about">ABOUT</a></li>
-                <li><a ui-sref="team">TEAM</a></li>
-              </ul>
-            </div>
-        </nav>
-      </div>
-    </header>
-    <!-- END: header -->
-    <ui-view></ui-view>
+<body ng-app="myApp">
+  <header role="banner" id="fh5co-header">
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="col-md-12">
+          <ul class="nav text-center">
+            <li><a ui-sref="poesis"><span>POESIS</span></a></li>
+            <li><a ui-sref="about">ABOUT</a></li>
+            <li><a ui-sref="team">TEAM</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- END: header -->
+  <ui-view></ui-view>
+</body>
 
-  </body>
 </html>

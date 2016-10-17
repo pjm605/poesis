@@ -32,7 +32,7 @@ app.factory('soundFactory', function () {
   };
 
   var isVowel = function (str) {
-    console.log('is this a vowel?', str);
+    // console.log('is this a vowel?', str);
     if (/\d/.test(str[str.length-1])) return true;
     else return false;
   };
@@ -58,7 +58,7 @@ app.factory('soundFactory', function () {
         if (isVowel(word[s])) {
           vowelSound = word[s].substring(0, word[s].length-1);
           vowelCount++;
-          console.log('!!!!!vowelCount', vowelCount);
+          // console.log('!!!!!vowelCount', vowelCount);
           //this is not being incremented, which makes me very sad
           for (var v = 0; v < vowels.length; v++) {
             var vow = vowels[v];

@@ -18,7 +18,7 @@ app.factory('rhymeToken', function () {
 						locations[0] = rhymeLocations[i][j][0];
 						locations[1] = rhymeLocations[i][j][1];
 						if (locations[0] === state.position[0] && locations[1] === state.position[1]){
-							console.log('MATCHING', [state.position[0], state.position[1]]);
+							// console.log('MATCHING', [state.position[0], state.position[1]]);
 							if (stream.peek() !== ' ') {
 								stream.skipToEnd();
 							}
